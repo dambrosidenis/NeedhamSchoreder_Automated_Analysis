@@ -1,0 +1,119 @@
+\begin{thebibliography}{MBP19}
+
+\bibitem[AC]{satmc}
+A.~Armando and L.~Compagna.
+\newblock Satmc: A sat-based model checker for security protocols.
+\newblock volume 3229, pages 730--733, 09.
+
+\bibitem[Bla16]{proverifIntroduction}
+B.~Blanchet.
+\newblock Modeling and verifying security protocols with the applied pi
+  calculus and proverif.
+\newblock {\em Foundations and Trends in Privacy and Security}, 1:1--135, 10
+  2016.
+
+\bibitem[Bru]{BBSecurityProtocolVerification}
+B.~Bruno.
+\newblock Security protocol verification: Symbolic and computational models.
+\newblock In Pierpaolo Degano and Joshua~D. Guttman, editors, {\em Principles
+  of Security and Trust}, pages 3--29, Berlin, Heidelberg. Springer Berlin
+  Heidelberg.
+
+\bibitem[BSB12]{TamarinFoundations}
+C.~Cremers B.~Schmidt, S.~Meier and D.~Basin.
+\newblock Automated analysis of diffie-hellman protocols and advanced security
+  properties.
+\newblock In {\em 2012 IEEE 25th Computer Security Foundations Symposium},
+  pages 78--94, 2012.
+
+\bibitem[CD09]{traceObservableProperties}
+V.~Cortier and S.~Delaune.
+\newblock A method for proving observational equivalence.
+\newblock pages 266--276, 07 2009.
+
+\bibitem[DBS]{tamarinObsEquivalences}
+J.~Dreier D.~Basin and R.~Sasse.
+\newblock Automated symbolic proofs of observational equivalence.
+\newblock pages 1144--1155, 10.
+
+\bibitem[DBV05]{ofmc}
+S.~Mödersheim D.~Basin and L.~Vigano.
+\newblock Ofmc: A symbolic model checker for security protocols.
+\newblock {\em International Journal of Information Security}, 4:181--208, 01
+  2005.
+
+\bibitem[DY83]{DolevYao}
+D.~Dolev and A.~Yao.
+\newblock On the security of public key protocols.
+\newblock {\em IEEE Transactions on Information Theory}, 29(2):198--208, 1983.
+
+\bibitem[git]{github}
+
+
+\bibitem[JDS]{xorCompleteness}
+S.~Radomirovic J.~Dreier, L.~Hirschi and R.~Sasse.
+\newblock Automated unbounded verification of stateful cryptographic protocols
+  with exclusive or.
+\newblock pages 359--373, 07.
+
+\bibitem[MBP19]{SoK}
+K.~Bhargavan B. Blanchet C. Cremers K.~Liao M.~Barbosa, G.~Barthe and B.~Parno.
+\newblock Sok: Computer-aided cryptography.
+\newblock Cryptology ePrint Archive, Paper 2019/1393, 2019.
+
+\bibitem[Mei13]{meierThesis}
+S.~Meier.
+\newblock {\em Advancing automated security protocol verification}.
+\newblock PhD thesis, ETH, 2013.
+
+\bibitem[NDM]{ComplexityOfBoundedSecurity}
+P.~Lincoln N.~Durgin and J.~Mitchell.
+\newblock Multiset rewriting and the complexity of bounded security protocols.
+\newblock {\em Journal of Computer Security}, 12:247--311, 02.
+
+\bibitem[NS78]{needhamschroeder}
+Roger~M. Needham and Michael~D. Schroeder.
+\newblock Using encryption for authentication in large networks of computers.
+\newblock {\em Commun. ACM}, 21(12):993--999, Dec 1978.
+
+\bibitem[Sch12]{schmidtThesis}
+B.~Schmidt.
+\newblock {\em Formal analysis of key exchange protocols and physical
+  protocols}.
+\newblock PhD thesis, ETH", 2012.
+
+\bibitem[SMB]{tamarinIntroduction}
+C.~Cremers S.~Meier, B.~Schmidt and D.~Basin.
+\newblock The tamarin prover for the symbolic analysis of security protocols.
+\newblock volume 8044, pages 696--701, 07.
+
+\bibitem[SS89]{unificationUndecidability}
+M.~Schmidt-Schauss.
+\newblock Unification in permutative equational theories is undecidable.
+\newblock {\em Journal of Symbolic Computation}, 8(4):415--421, 1989.
+
+\bibitem[Tea22]{tamarinManual}
+The~Tamarin Team.
+\newblock {\em Tamarin-Prover Manual: Security Protocol Analysis in the
+  Symbolic Model}, 2022.
+
+\bibitem[Tur06]{clAtse}
+M.~Turuani.
+\newblock The cl-atse protocol analyser.
+\newblock volume 4098, pages 277--286, 08 2006.
+
+\bibitem[VCD]{autosources}
+S.~Delaune V.~Cortier and J.~Dreier.
+\newblock {\em Automatic Generation of Sources Lemmas in Tamarin: Towards
+  Automatic Proofs of Security Protocols}, pages 3--22.
+\newblock 09.
+
+\bibitem[Vit21]{PresentazioneVitacolonna}
+N.~Vitacolonna.
+\newblock Symbolic verification of security protocols with tamarin.
+\newblock
+  \url{http://users.dimi.uniud.it/~angelo.montanari/SymbolicVerificationWithTamarin.pdf},
+  May 2021.
+\newblock Accessed: 2022-07-30.
+
+\end{thebibliography}

@@ -1,0 +1,32 @@
+\begin{msc}{Needham Schroeder Symmetric Protocol with timestamps}
+    \declinst{alice}{}{Alice}
+    \declinst{server}{}{Server}
+    \declinst{bob}{}{Bob}
+    \action*{ \begin{minipage}{1cm}\centering $K_A$ \end{minipage} }{alice}
+    \action*{ \begin{minipage}{1cm}\centering $K_A, K_B$ \end{minipage} }{server}
+    \action*{ \begin{minipage}{1cm}\centering $K_B$ \end{minipage} }{bob}
+    \nextlevel[2]
+    \action*{ \begin{minipage}{1cm}\centering $N_A$ \end{minipage} }{alice}
+    \nextlevel[2]
+    \mess{Send $A, B, N_A$}{alice}{server}
+    \nextlevel[2]
+    \action*{ \begin{minipage}{1cm}\centering $N_A$ \end{minipage} }{server}
+    \nextlevel[2]
+    \action*{ \begin{minipage}{1cm}\centering $Sk$ \end{minipage} }{server}
+    \nextlevel[2]
+    \mess{Send $\{N_A, B, Sk, \{Sk, \textrm{timestamp}, A\}_{K_B} \}_{K_A}$}{server}{alice}
+    \nextlevel[2]
+    \action*{ \begin{minipage}{1cm}\centering $Sk$ \end{minipage} }{alice}
+    \nextlevel[2]
+    \mess{Send $\{Sk, \textrm{timestamp}, A\}_{K_B}$}{alice}{bob}
+    \nextlevel[2]
+    \action*{ \begin{minipage}{1cm}\centering $Sk$ \end{minipage} }{bob}
+    \nextlevel[2]
+    \action*{ \begin{minipage}{1cm}\centering $N_B$ \end{minipage} }{bob}
+    \nextlevel[2]
+    \mess{Send $\{N_B\}_{Sk}$}{bob}{alice}
+    \nextlevel[2]
+    \action*{ \begin{minipage}{1cm}\centering $N_B$ \end{minipage} }{alice}
+    \nextlevel[2]
+    \mess{Send $\{N_B-1\}_{Sk}$}{alice}{bob}
+\end{msc}

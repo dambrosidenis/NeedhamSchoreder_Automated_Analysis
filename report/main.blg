@@ -1,0 +1,86 @@
+This is BibTeX, Version 0.99d (TeX Live 2022)
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: main.aux
+A level-1 auxiliary file: needhamschroeder.aux
+The style file: alpha.bst
+Database file #1: references.bib
+I was expecting a `,' or a `}'---line 177 of file references.bib
+ :   
+ :   title = {Computer Network Security Seminar},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+Too many commas in name 1 of "M. Barbosa, G. Barthe, K. Bhargavan, B. Blanchet, C. Cremers, K. Liao and B. Parno" for entry SoK
+while executing---line 1185 of file alpha.bst
+Too many commas in name 1 of "M. Barbosa, G. Barthe, K. Bhargavan, B. Blanchet, C. Cremers, K. Liao and B. Parno" for entry SoK
+while executing---line 1185 of file alpha.bst
+Too many commas in name 1 of "M. Barbosa, G. Barthe, K. Bhargavan, B. Blanchet, C. Cremers, K. Liao and B. Parno" for entry SoK
+while executing---line 1185 of file alpha.bst
+Too many commas in name 1 of "M. Barbosa, G. Barthe, K. Bhargavan, B. Blanchet, C. Cremers, K. Liao and B. Parno" for entry SoK
+while executing---line 1185 of file alpha.bst
+Too many commas in name 1 of "M. Barbosa, G. Barthe, K. Bhargavan, B. Blanchet, C. Cremers, K. Liao and B. Parno" for entry SoK
+while executing---line 1185 of file alpha.bst
+Too many commas in name 1 of "M. Barbosa, G. Barthe, K. Bhargavan, B. Blanchet, C. Cremers, K. Liao and B. Parno" for entry SoK
+while executing---line 1185 of file alpha.bst
+Warning--to sort, need author or key in github
+Warning--empty booktitle in satmc
+Warning--there's a month but no year in satmc
+Warning--empty year in BBSecurityProtocolVerification
+Warning--empty booktitle in traceObservableProperties
+Warning--empty booktitle in tamarinObsEquivalences
+Warning--there's a month but no year in tamarinObsEquivalences
+Warning--empty booktitle in xorCompleteness
+Warning--there's a month but no year in xorCompleteness
+Too many commas in name 1 of "M. Barbosa, G. Barthe, K. Bhargavan, B. Blanchet, C. Cremers, K. Liao and B. Parno" for entry SoK
+while executing---line 1250 of file alpha.bst
+Too many commas in name 1 of "M. Barbosa, G. Barthe, K. Bhargavan, B. Blanchet, C. Cremers, K. Liao and B. Parno" for entry SoK
+while executing---line 1250 of file alpha.bst
+Too many commas in name 1 of "M. Barbosa, G. Barthe, K. Bhargavan, B. Blanchet, C. Cremers, K. Liao and B. Parno" for entry SoK
+while executing---line 1250 of file alpha.bst
+Warning--there's a month but no year in ComplexityOfBoundedSecurity
+Warning--empty booktitle in tamarinIntroduction
+Warning--there's a month but no year in tamarinIntroduction
+Warning--empty booktitle in clAtse
+Warning--empty publisher in autosources
+Warning--there's a month but no year in autosources
+You've used 21 entries,
+            2543 wiz_defined-function locations,
+            698 strings with 7815 characters,
+and the built_in function-call counts, 8358 in all, are:
+= -- 829
+> -- 301
+< -- 20
++ -- 93
+- -- 90
+* -- 533
+:= -- 1272
+add.period$ -- 62
+call.type$ -- 21
+change.case$ -- 111
+chr.to.int$ -- 21
+cite$ -- 37
+duplicate$ -- 377
+empty$ -- 678
+format.name$ -- 117
+if$ -- 1811
+int.to.chr$ -- 1
+int.to.str$ -- 0
+missing$ -- 16
+newline$ -- 106
+num.names$ -- 62
+pop$ -- 159
+preamble$ -- 1
+purify$ -- 137
+quote$ -- 0
+skip$ -- 338
+stack$ -- 0
+substring$ -- 497
+swap$ -- 99
+text.length$ -- 20
+text.prefix$ -- 7
+top$ -- 0
+type$ -- 164
+warning$ -- 15
+while$ -- 77
+width$ -- 24
+write$ -- 262
+(There were 10 error messages)
