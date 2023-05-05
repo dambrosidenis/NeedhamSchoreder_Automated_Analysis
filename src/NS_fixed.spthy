@@ -28,7 +28,7 @@ rule Alice_sends_request :
 
 rule Server_answers_request :
     let
-        message_to_bob = senc(<~sk, alice>, kb)
+        message_to_bob = senc(<~sk, ~timestamp, alice>, kb)
         message_to_alice = senc(<nonce, bob, ~sk, message_to_bob>, ka)
     in
     [
@@ -36,7 +36,8 @@ rule Server_answers_request :
         !Client(alice, ka),
         !Client(bob, kb),
         In(<alice, bob, nonce>),
-        Fr(~sk)
+        Fr(~sk),
+        Fr(~timestamp)
     ]
     --[ ServerSendsToAlice(message_to_alice),
         Secret(~sk) ]->
@@ -46,7 +47,7 @@ rule Server_answers_request :
 
 rule Alice_receives_answer :
     let
-        message_to_bob = senc(<sk, ~timestamp, alice>, kb)
+        message_to_bob = senc(<sk1, timestamp, alice>, k)
         message_to_alice = senc(<nonce, bob, sk, message_to_bob>, ka)
     in
     [
@@ -65,7 +66,7 @@ rule Alice_receives_answer :
 
 rule Bob_responds_to_Alice :
     let
-        message_from_alice = senc(<sk, ~timestamp, alice>, kb)
+        message_from_alice = senc(<sk, timestamp, alice>, kb)
         encrypted_nonce = senc(~nonce, sk)
     in
     [
@@ -76,7 +77,7 @@ rule Bob_responds_to_Alice :
         !Server(bob, kb)
     ]
     --[ BobReceivesFromAlice(message_from_alice, sk, kb),
-        SecretEstablished(bob, alice, sk),
+        SecretEstablishedWithTimestamp(bob, alice, sk, timestamp),
         BobSendsNonce(encrypted_nonce) ]->
     [
         SessionPending(bob, alice, ~nonce, sk),
@@ -132,6 +133,12 @@ restriction EachClientCanBeInitialisedOnce :
 restriction NoSendingPrivateKeys :
     "All client key #t . ClientInitialised(client, key) @ #t ==> not(Ex #t1 . KU(key) @ #t1)"
 
+restriction CheckingTimestamps :
+    "All alice bob sk timestamp #t1 #t2 .
+        SecretEstablishedWithTimestamp(bob, alice, sk, timestamp) @ #t1 &
+        SecretEstablishedWithTimestamp(bob, alice, sk, timestamp) @ #t2
+            ==> #t1 = #t2"
+
 lemma types [sources] :
     "(All #t sk kb message . BobReceivesFromAlice(message, sk, kb) @ #t ==>
     (Ex #t1 . AliceSendsToBob(message) @ #t1)
@@ -149,17 +156,18 @@ lemma types [sources] :
         (Ex #t1 . AliceSendsNonce(encnonce) @ #t1)
         | (Ex #t1 . KU(sk) @ #t1 & KU(nonce) @ #t1))"
 
+
 lemma Sanity :
     exists-trace
-    "Ex alice bob sk #t1 . SecretConfirmed(alice, bob, sk) @ #t1"
+    "Ex alice bob sk #t1 #t2 . SecretEstablished(alice, bob, sk) @ #t2 & SecretConfirmed(alice, bob, sk) @ #t1"
 
 lemma Confidentiality :
-    "(All #t alice bob key .
-        SecretConfirmed(alice, bob, key) @ #t
-        & not(Ex #t1 . SecretReveal(key) @ #t1)
+    "(All alice bob key #t1 #t2 .
+        SecretEstablished(alice, bob, key) @ #t1 &
+        SecretConfirmed(alice, bob, key) @ #t2 &
+        not(Ex #t3 . SecretReveal(key) @ #t3)
         ==>
-            not(Ex #t1 . KU(key) @ #t1)
-    )"
+            not(Ex #t3 . KU(key) @ #t3))"
 
 lemma Attack :
     exists-trace
@@ -167,6 +175,6 @@ lemma Attack :
         SecretConfirmed(alice, bob, key) @ #t &
         SecretConfirmed(alice, bob, key) @ #t1 &
         #t < #t1 &
-        not(Ex #t2 . SecretEstablished(bob, alice, key) @ #t2 & #t < #t2)"
+        not(Ex #t2 . SecretEstablished(alice, bob, key) @ #t2 & #t < #t2)"
 
 end

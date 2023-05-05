@@ -33,25 +33,24 @@ rule Server_answers_request :
     in
     [
         !Server(alice, ka),
+        !Server(bob, kb),
         !Client(alice, ka),
         !Client(bob, kb),
         In(<alice, bob, nonce>),
         Fr(~sk)
     ]
-    --[ ServerSendsToAlice(message_to_alice),
-        Secret(~sk) ]->
+    --[ ServerSendsToAlice(message_to_alice) ]->
     [
         Out(message_to_alice)
     ]
 
 rule Alice_receives_answer :
     let
-        message_to_bob = senc(<sk, alice>, kb)
+        message_to_bob = senc(<sk1, alice>, k)
         message_to_alice = senc(<nonce, bob, sk, message_to_bob>, ka)
     in
     [
         !Client(alice, ka),
-        !Client(bob, kb),
         AliceQueriesServer(alice, bob, nonce),
         In(message_to_alice)
     ]
@@ -122,11 +121,13 @@ rule Secret_reveal :
     --[ SecretReveal(sk) ]->
     [ Out(sk) ]
 
-restriction NoSelfComunication:
+restriction NoSelfCommunication:
     "All client #t . RequestToConnect(client, client) @ #t ==> F"
 
 restriction EachClientCanBeInitialisedOnce :
-    "All client key1 key2 #t1 #t2 . ClientInitialised(client, key1) @ #t1 & ClientInitialised(client, key2) @ #t2
+    "All client key1 key2 #t1 #t2 .
+    ClientInitialised(client, key1) @ #t1 &
+    ClientInitialised(client, key2) @ #t2
         ==> #t1 = #t2"
 
 restriction NoSendingPrivateKeys :
@@ -137,7 +138,8 @@ lemma types [sources] :
     (Ex #t1 . AliceSendsToBob(message) @ #t1)
     | (Ex #t1 . KU(sk) @ #t1 & KU(kb) @ #t1))
     &
-    (All #t sk ka message nonce message_bob . AliceReceivesAnswer(message, nonce, message_bob, sk, ka) @ #t ==>
+    (All #t sk ka message nonce message_bob . 
+        AliceReceivesAnswer(message, nonce, message_bob, sk, ka) @ #t ==>
         (Ex #t1 . ServerSendsToAlice(message) @ #t1)
         | (Ex #t1 . KU(sk) @ #t1 & KU(ka) @ #t1 & KU(nonce) @ #t1 & KU(message_bob) @ #t1))
     &
@@ -151,15 +153,15 @@ lemma types [sources] :
 
 lemma Sanity :
     exists-trace
-    "Ex alice bob sk #t1 . SecretConfirmed(alice, bob, sk) @ #t1"
+    "Ex alice bob sk #t1 #t2 . SecretEstablished(alice, bob, sk) @ #t2 & SecretConfirmed(alice, bob, sk) @ #t1"
 
 lemma Confidentiality :
-    "(All #t alice bob key .
-        SecretConfirmed(alice, bob, key) @ #t
-        & not(Ex #t1 . SecretReveal(key) @ #t1)
+    "(All alice bob key #t1 #t2 .
+        SecretEstablished(alice, bob, key) @ #t1 &
+        SecretConfirmed(alice, bob, key) @ #t2 &
+        not(Ex #t3 . SecretReveal(key) @ #t3)
         ==>
-            not(Ex #t1 . KU(key) @ #t1)
-    )"
+            not(Ex #t3 . KU(key) @ #t3))"
 
 lemma Attack :
     exists-trace
@@ -167,6 +169,6 @@ lemma Attack :
         SecretConfirmed(alice, bob, key) @ #t &
         SecretConfirmed(alice, bob, key) @ #t1 &
         #t < #t1 &
-        not(Ex #t2 . SecretEstablished(bob, alice, key) @ #t2 & #t < #t2)"
+        not(Ex #t2 . SecretEstablished(alice, bob, key) @ #t2 & #t < #t2)"
 
 end
