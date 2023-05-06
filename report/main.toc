@@ -4,29 +4,32 @@
 \contentsline {subsection}{\numberline {1.1}Limits of the symbolic model}{2}{subsection.1.1}%
 \contentsline {section}{\numberline {2}Tamarin Prover Overview}{2}{section.2}%
 \contentsline {subsection}{\numberline {2.1}Basic definitions}{2}{subsection.2.1}%
-\contentsline {subsection}{\numberline {2.2}Term algebra}{4}{subsection.2.2}%
-\contentsline {subsection}{\numberline {2.3}Default facts and rules}{5}{subsection.2.3}%
+\contentsline {subsection}{\numberline {2.2}Term algebra}{3}{subsection.2.2}%
+\contentsline {subsection}{\numberline {2.3}Default facts and rules}{4}{subsection.2.3}%
 \contentsline {subsection}{\numberline {2.4}Trace properties}{5}{subsection.2.4}%
 \contentsline {subsection}{\numberline {2.5}Observational equivalence properties}{5}{subsection.2.5}%
 \contentsline {subsection}{\numberline {2.6}Aiding termination}{6}{subsection.2.6}%
 \contentsline {subsubsection}{\numberline {2.6.1}Source lemmas}{6}{subsubsection.2.6.1}%
 \contentsline {subsubsection}{\numberline {2.6.2}Oracles}{6}{subsubsection.2.6.2}%
-\contentsline {subsubsection}{\numberline {2.6.3}Restrictions}{6}{subsubsection.2.6.3}%
-\contentsline {subsubsection}{\numberline {2.6.4}Re-use lemmas}{6}{subsubsection.2.6.4}%
+\contentsline {subsubsection}{\numberline {2.6.3}Interactive mode}{6}{subsubsection.2.6.3}%
+\contentsline {subsubsection}{\numberline {2.6.4}Restrictions}{6}{subsubsection.2.6.4}%
+\contentsline {subsubsection}{\numberline {2.6.5}Re-use lemmas}{6}{subsubsection.2.6.5}%
 \contentsline {section}{\numberline {3}The Needham-Schroeder Protocol}{6}{section.3}%
-\contentsline {subsection}{\numberline {3.1}Tamarin Formalization}{9}{subsection.3.1}%
-\contentsline {subsubsection}{\numberline {3.1.1}The protocol}{9}{subsubsection.3.1.1}%
-\contentsline {paragraph}{Initialisation}{9}{paragraph*.2}%
-\contentsline {paragraph}{$A \to S: A,B,N_A$}{9}{paragraph*.3}%
-\contentsline {paragraph}{$S \to A: \{N_A, B, Sk, \{Sk, A\}_{K_B} \}_{K_A}$}{9}{paragraph*.4}%
-\contentsline {paragraph}{$A \to B: \{Sk, A\}_{K_B}$}{9}{paragraph*.5}%
-\contentsline {paragraph}{$B \to A: \{N_B\}_{Sk}$}{10}{paragraph*.6}%
-\contentsline {paragraph}{$A \to B: \{N_B - 1\}$}{10}{paragraph*.7}%
-\contentsline {paragraph}{Conclusion}{10}{paragraph*.8}%
-\contentsline {paragraph}{Modelling the attacker}{11}{paragraph*.9}%
-\contentsline {subsubsection}{\numberline {3.1.2}Termination and properties}{11}{subsubsection.3.1.2}%
-\contentsline {paragraph}{Enforcing termination}{11}{paragraph*.10}%
-\contentsline {paragraph}{Properties}{11}{paragraph*.11}%
-\contentsline {paragraph}{The attack}{11}{paragraph*.12}%
-\contentsline {section}{References}{14}{section*.13}%
+\contentsline {subsection}{\numberline {3.1}Tamarin Formalization}{7}{subsection.3.1}%
+\contentsline {subsubsection}{\numberline {3.1.1}The protocol}{7}{subsubsection.3.1.1}%
+\contentsline {paragraph}{Initialisation}{7}{paragraph*.4}%
+\contentsline {paragraph}{$A \to S: A,B,N_A$}{8}{paragraph*.5}%
+\contentsline {paragraph}{$S \to A: \{N_A, B, Sk, \{Sk, A\}_{K_B} \}_{K_A}$}{8}{paragraph*.6}%
+\contentsline {paragraph}{$A \to B: \{Sk, A\}_{K_B}$}{8}{paragraph*.7}%
+\contentsline {paragraph}{$B \to A: \{N_B\}_{Sk}$}{9}{paragraph*.8}%
+\contentsline {paragraph}{$A \to B: \{N_B - 1\}$}{9}{paragraph*.9}%
+\contentsline {paragraph}{Conclusion}{9}{paragraph*.10}%
+\contentsline {paragraph}{Modelling the attacker}{10}{paragraph*.11}%
+\contentsline {subsubsection}{\numberline {3.1.2}Termination and properties}{10}{subsubsection.3.1.2}%
+\contentsline {paragraph}{Enforcing termination}{10}{paragraph*.12}%
+\contentsline {paragraph}{Properties}{10}{paragraph*.13}%
+\contentsline {paragraph}{The attack}{10}{paragraph*.14}%
+\contentsline {subsubsection}{\numberline {3.1.3}Perfomance metrics}{12}{subsubsection.3.1.3}%
+\contentsline {section}{\numberline {4}Conclusions}{14}{section.4}%
+\contentsline {section}{References}{14}{section*.18}%
 \contentsfinish 

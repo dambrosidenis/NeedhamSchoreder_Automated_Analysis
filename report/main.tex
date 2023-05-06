@@ -27,26 +27,16 @@
 
 \usepackage{lipsum} % Required to insert dummy text. To be removed otherwise
 
-\usepackage{inconsolata}
-\usepackage{listings}
+\usepackage{epigraph}
 
-\lstset{
-  xleftmargin=10pt,
-  xrightmargin=0pt,
-  framexleftmargin=0pt,
-  framexrightmargin=0pt,
-  basicstyle={\fontsize{8pt}{10pt}\ttfamily},
-  columns=flexible,
-  numbers=left,
-  numbersep=10pt,
-  numberstyle={\tiny\selectfont\color[rgb]{0.5,0.5,0.5}},
-  keepspaces=true,
-  showstringspaces=false,
-  commentstyle= \color{comments},
-  stringstyle= \color{strings},
-}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage[table,xcdraw]{xcolor}
+\usepackage{adjustbox}
+\usepackage{tablefootnote}
+\newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
 
-\usepackage{msc}
+\usepackage{./msc}
 
 %----------------------------------------------------------------------------------------
 %	COLUMNS
@@ -61,6 +51,14 @@
 
 \definecolor{color1}{RGB}{0,0,90} % Color of the article title and sections
 \definecolor{color2}{RGB}{0,20,20} % Color of the boxes behind the abstract and headings
+\definecolor{keys1}{rgb}{0.0, 0.29, 0.33}
+\definecolor{keys2}{rgb}{0.25, 0.7, 0.55}
+\definecolor{keys3}{rgb}{0.1, 0.3, 0.4}
+\definecolor{keys4}{rgb}{0.21, 0.46, 0.53}
+\definecolor{strings}{rgb}{0.0, 0.47, 0.44}
+\definecolor{comments}{rgb}{0.4, 0.4, 0.5}
+\definecolor{terminaltext}{rgb}{1,1,1}
+\definecolor{terminalbackground}{rgb}{0.2,0.2,0.3}
 
 %----------------------------------------------------------------------------------------
 %	BLOCKS
@@ -136,10 +134,10 @@
 %	ABSTRACT
 %----------------------------------------------------------------------------------------
 
-\Abstract{Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Ut purus elit, vestibulum ut, placerat ac, adipiscing vitae, felis. Curabitur dictum gravida mauris. Nam arcu libero, nonummy eget, consectetuer id, vulputate a, magna. Donec vehicula augue eu neque. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Mauris ut leo. Cras viverra metus rhoncus sem. Nulla et lectus vestibulum urna fringilla ultrices. Phasellus eu tellus sit amet tortor gravida placerat. Integer sapien est, iaculis in, pretium quis, viverra ac, nunc. Praesent eget sem vel leo ultrices bibendum. Aenean faucibus. Morbi dolor nulla, malesuada eu, pulvinar at, mollis ac, nulla. Curabitur auctor semper nulla. Donec varius orci eget risus. Duis nibh mi, congue eu, accumsan eleifend, sagittis quis, diam. Duis eget orci sit amet orci dignissim rutrum.}
+\Abstract{As cryptographic protocols become both more complicated and more critical by the day, we must find a way to systematically verify message exchanges without the added burden of manual proving. To solve this issue, multiple theorem provers have been proposed in the last years, each one with its flaws and advantages. In this paper, we deal with the Tamarin prover, an automated tool that exploits multiset rewriting rules and guarded fragments of temporal logic to model cryptographic protocols and check their security properties. After an initial introduction to the topic as a whole, we dig deeper into the tool from a user's perspective and show how a simple key exchange protocol (the symmetric Needham-Schroeder protocol) can be modeled within a logic theory. This example will allows us to show how easily some message exchanges can be formalized within this prover; on the other hand, it will also demonstrate how the unbounded nature of this tools will require us to take some further assumptions on the protocol in order to avoid non-termination.}
 
 %----------------------------------------------------------------------------------------
-
+\renewcommand*{\ttdefault}{qcr}
 \begin{document}
 
 \maketitle % Output the title and abstract box
@@ -156,7 +154,11 @@
 
 \addcontentsline{toc}{section}{Introduction} % Adds this section to the table of contents
 
-Cryptographic protocols are becoming more ubiquitous and complicated by the day, thus increasing the probability of possible wrong engineering choices that may lead to inconsistencies and vulnerabilities. To ensure that a certain protocol is secure, two main formal checking models have been proposed: the \textit{standard model} (also known as the \textit{computational model}) and the \textit{symbolic model}. In this thesis we will undertake the symbolic verification of a messaging protocol, so now we will focus on the latter.
+\epigraph{Security protocols are three-line programs that people still manage to get wrong}{Roger M. Needham}
+
+As computing becomes more obiquitous and distributed, we need an ever-increasing amount of cryptographic protocols to allow different parties to share information in a confidential, authenticated and integral way. New communication protocols are being deployed by the day, but most of them have at least some hidden flaw that, once found, can compromise the security of the communication, with potentially catastrophic effects. To avoid such a disaster, our best defense is to actually verify said protocols in some formal model, that will ensure us that, at least within the assumptions of the model itself, the exchange can not be exploited maliciously. Writing these proof by hand is often a cumbersome, long and error-prone process, thus in the last years computer scientists and mathematicians have instead started relying on automated tools that can carry on the demonstration for them. In this essay, we will take a closer look at one of such tools (the Tamarin prover \cite{tamarin}), by presenting its syntax, strengths, limitations and a practical example of modelization.
+
+The essay is structured as follows: in section \ref{sec:SymbolicModel} we will briefly introduce one of such formal verification models, in section \ref{sec:TamarinOverview} we will give an introduction to the Tamarin prover from a user's perspective, while in the following section we will show how such tool can be used for real-world formal verification by modeling the Needham-Schroeder Symmetric protocol. Finally, in section \ref{sec:conclusions} we will summarize the results of this paper.
 
 \section{The symbolic model}\label{sec:SymbolicModel}
 
@@ -195,12 +197,12 @@ The use of algebraic terms within the Dolev Yao model allows for simple abstract
 
 In order to streamline the proof of security properties belonging to a certain protocol, multiple automatic tools were proposed \cite{SoK}. These softwares, in order to prove security goals, have to compute the set of terms that an attacker is able to deduce while the protocol is executing, although since this set can possibly be infinite, the general problem suffers of both undecidability and infinite state space. To convince ourselves that this is the case, we just need to think about the fact that we can have an infinite number of sessions for each protocol, each one with different nonces and messages of unlimited size. Without bounding at least two of these sources of infinity, termination can not be guaranteed by any tool in this category.
 
-\begin{figure}[ht]
+\begin{figure*}[t]
     \centering
     \captionsetup{justification=centering, margin=1cm}
     \includegraphics[width=0.8\textwidth]{Figures/undecidability.png}
     \caption{Decidability in symbolic verification. Image taken by N. Vitacolonna's presentation \cite{PresentazioneVitacolonna}}
-\end{figure}
+\end{figure*}
 
 
 In particular, as shown by N. Durgin et al. \cite{ComplexityOfBoundedSecurity}, by restricting different sources we can ensure to reduce insecurity to different complexity classes:
@@ -212,7 +214,7 @@ In particular, as shown by N. Durgin et al. \cite{ComplexityOfBoundedSecurity}, 
 
 Alternatively to bounding the sources of infinity, some software address undecidability by requiring human input (for example, Tamarin Prover \cite{tamarinIntroduction} features an interactive mode that allows the user to decide which security goals prioritize based on intermediate constraint systems), returning inconclusive results (for example, ProverIf \cite{proverifIntroduction} may return an invalid attack trace) or even allowing non-termination.
 
-\section{Tamarin Prover Overview}
+\section{Tamarin Prover Overview}\label{sec:TamarinOverview}
 
 The automatic tool we used to complete the experimentation for this thesis is Tamarin Prover (which from now on we will call Tamarin for the sake of semplicity). We will now do a quick overview of its syntax, semantics and internal functioning; please refer to S. Meier's \cite{meierThesis} and B. Schmidt's \cite{schmidtThesis} PhD thesis and their introductory paper \cite{TamarinFoundations} for further information about the theoretical foundations regarding this tool, as long as its official manual \cite{tamarinManual} to resolve any doubts about its use.
 
@@ -320,7 +322,7 @@ Normally, unification modulo theories is undecidable \cite{unificationUndecidabi
     A subterm convergent theory is an equational theory that is convergent and, for each equation $e: L \rightarrow R, e \in E$, $R$ is either ground and in normal form or a proper subterm of $L$.
 \end{definition}
 
-Tamarin uses equational theories to model algebraically the cryptographic primitives, such as symmetrical/asymmetrical encryption/decryption, hashing, signing, pair construction/deconstruction, elevation to power, etc... 10 built-in theories are provided to allow the user to easily formalize cryptographic protocols:
+Tamarin uses equational theories to model algebraically the cryptographic primitives, such as symmetrical/asymmetrical encryption/decryption, hashing, signing, pair construction/deconstruction, elevation to power, and more. 10 built-in theories are provided to allow the user to easily formalize most cryptographic protocols:
 
 \begin{enumerate}
     \item \lstinline|hashing|
@@ -410,7 +412,7 @@ Since protocol verification is an inherently undecidable problem, Tamarin provid
 
 As explained before, Tamarin elaborates the dependencies graph related to a theory before beginning constraint solving. Since the prover uses an untyped system, in certain cases it is not able to deduce the source of one or more facts, causing partial deconstructions. As explained by V. Cortier \cite{autosources}, for example, this situation occurs whenever the same message has to travel across the network multiple times. To mitigate this issue, Tamarin allows to define a lemma with the additional tag \lstinline|[sources]|, which is automatically proved during the precomputation phase and allows to declare the origin of one or more messages.
 
-An example of this type of lemma, along with its explanation, will be provided in section \ref{subsec:E2ESanityCheck}
+An example of this type of lemma, along with its explanation, will be provided in section \ref{subsec:termination}
 
 Note that V. Cortier, S. Dealune and J. Dreier proposed an algorithm for automatic source lemma generation \cite{autosources} that has already been integrated in Tamarin (run the program with the additional \lstinline|--auto-sources| tag to execute the extension), but sometimes it leads to non-termination during the precomputation phase.
 
@@ -420,7 +422,17 @@ During constraint-solving, Tamarin uses its built-in \textit{smart} heuristic (r
 
 By knowing how to manually guide the search (for example after doing some practice with the built-in interactive mode), we can code (in any programming language of choice) an external \textit{oracle}, which will be automatically run by the prover to determine the right priority objective to solve within a list of current goals. This user-defined software receives the name of the lemma and the indexed goal list (sorted by the smart heuristic) as input, and returns the re-ranked list (or, alternatively, only its first element) as output. Note that oracles are generally stateless: for each step of the proof, the program is executed from scratch, with only the name of the considered lemma and the list of current security goals as input.
 
-Examples of oracles will be introduced in sections \ref{sec:E2ESecProp} and \ref{subsec:AddressingPartialDeconstructions}.
+\subsubsection{Interactive mode}
+
+The Tamarin interactive mode is a powerful feature that enables users to guide the proof search process and interactively inspect the demonstration as it is being constructed. When using the interactive mode, users can provide hints and guidance to the Tamarin prover, which can significantly speed up the proof search process and help to identify any potential issues or vulnerabilities in the security protocol being analyzed. For example, by interleaving automatic steps and manual selection of goals to solve, the user can understand if the tool is entering an infine loop of computation or not by monitoring wheter recursive structures of terms are being produced or not. Furthermore, by guiding the proof, the consumer can easily guess how to build an effective oracle to speed up lenghty proofs. Additionally, the interactive mode provides a valuable opportunity to gain a deeper understanding of how the Tamarin prover works and how it constructs proofs for security protocols. An example of Tamarin in action in interactive mode is displayed in figure \ref{fig:interactive}.
+
+\begin{figure*}
+    \centering
+    \captionsetup{justification=centering, margin=1cm}
+    \includegraphics[width=0.8\textwidth]{Figures/gui.png}
+    \label{fig:interactive}
+    \caption{Tamarin's interactive mode}
+\end{figure*}
 
 \subsubsection{Restrictions}
 
@@ -438,9 +450,16 @@ The Needham-Schroeder protocol is used to establish a shared symmetric key betwe
 
 In the Needham-Schroeder protocol, when one party (Alice) wants to communicate securely with another party (Bob), she sends a request to the KDC for a session key to use in the communication. The KDC then generates a new session key and sends it to Alice encrypted using Bob's public key. Alice can then decrypt the session key using her shared secret with the KDC, and use it to communicate with Bob.
 
-The protocol also includes a mechanism for mutual authentication, which ensures that each party is who they claim to be. When Alice receives the session key from the KDC, she sends a message to Bob that includes the session key and a nonce (a random number). Bob then encrypts the nonce with the session key and sends it back to Alice. Alice can then decrypt the message and verify that the nonce matches the one she sent to Bob. This process ensures that both parties have successfully authenticated each other, and they can begin communicating securely using the session key.
+The protocol also includes a mechanism for mutual authentication, which ensures that each party is who they claim to be. When Alice receives the session key from the KDC, she sends a message to Bob that includes the session key and a nonce (a random number). Bob then encrypts the nonce with the session key and sends it back to Alice. Alice can then decrypt the message and verify that the nonce matches the one she sent to Bob. This process ensures that both parties have successfully authenticated each other, and they can begin communicating securely using the session key. The exchange is summarized in diagram \ref{fig:NS}.
 
-\include{needhamschroeder.tex}
+\begin{figure}[h]
+    \centering
+    \captionsetup{justification=centering, margin=1cm}
+    \includegraphics[width=0.45\textwidth]{Figures/NS.png}
+    \label{fig:NS}
+    \caption{Needham-Schroeder Symmetric protocol}
+\end{figure}
+%\include{needhamschroeder.tex}
 
 While the Needham-Schroeder protocol is widely used in computer security, it is not without its flaws. One issue is the potential for a "replay attack," where an attacker intercepts and reuses a previously transmitted message to gain access to the network. Another issue is the reliance on a trusted third party, which can be a single point of failure if compromised.
 
@@ -456,7 +475,7 @@ Formalizing the Needham-Schroeder exchange in Tamarin is quite straightforward t
 
 The clients (Alice and Bob) and the server are initialised with the shared secrets through the following rule:
 
-\begin{lstlisting}
+\begin{lstlisting}[language=Tamarin]
 rule Initialise_Client :
     [
         Fr(~k)
@@ -470,7 +489,7 @@ rule Initialise_Client :
 
 Note that since we do not have any particular reason to believe that identities are private, we must formalize them as public names known to the attacker. To avoid that the same client gets instantiated twice with two different keys, we exploit the \lstinline|ClientInitialised| action-fact in the following restriction:
 
-\begin{lstlisting}
+\begin{lstlisting}[language=Tamarin]
 restriction EachClientCanBeInitialisedOnce :
     "All client key1 key2 #t1 #t2 .
         ClientInitialised(client, key1) @ #t1 &
@@ -482,7 +501,7 @@ restriction EachClientCanBeInitialisedOnce :
 
 The first message sent by Alice to initiate the protocol is easily modelled through the following rule (and restriction):
 
-\begin{lstlisting}
+\begin{lstlisting}[language=Tamarin]
 rule Alice_sends_request :
     [
         !Client(alice, ka),
@@ -512,7 +531,7 @@ There are multiple elements that we should analyze within this snippet:
 
 Similarly, the role of the server in the exchange can be modelled through a single rule:
 
-\begin{lstlisting}
+\begin{lstlisting}[language=Tamarin]
 rule Server_answers_request :
     let
         message_to_bob = senc(<~sk, alice>, kb)
@@ -538,7 +557,7 @@ Here we exploit the symbolic function primitive \lstinline|senc| included in the
 
 Here we formalize the message sent from Alice to Bob containing the shared secret key generated by the server.
 
-\begin{lstlisting}
+\begin{lstlisting}[language=Tamarin]
 rule Alice_receives_answer :
     let
         message_to_bob = senc(<sk1, alice>, k)
@@ -568,7 +587,7 @@ Again, the \lstinline|AliceReceivesAnswer| and |AliceSendsToBob| action-facts wi
 
 Now we can model the challenge of Bob to Alice:
 
-\begin{lstlisting}
+\begin{lstlisting}[language=Tamarin]
 rule Bob_responds_to_Alice :
     let
         message_from_alice = senc(<sk, alice>, kb)
@@ -596,7 +615,7 @@ Following the structure of the previous rules, we can see that the formalization
 
 We still need to formalize the last exchange. In order to model the answer to Bob's challenge, we need to define a custom function to have the predecessor function at our disposal within the theory: the following snippet will provide both such definition (that, due to Tamarin's syntax will be kept at the top of the file) and the subsequent rule for formalizing this step of the protocol.
 
-\begin{lstlisting}
+\begin{lstlisting}[language=Tamarin]
 function: pred/1
 
 rule Alice_receives_challenge :
@@ -626,7 +645,7 @@ Note that within the premises of this rule we consume the fact \lstinline|Exchan
 
 The last protocol rule enable us to formalize the establishment of the session from Bob's perspective:
 
-\begin{lstlisting}
+\begin{lstlisting}[language=Tamarin]
 rule Bob_receives_challenge_answer :
     let
         received_nonce = senc(pred(nonce), sk)
@@ -650,20 +669,20 @@ Note the use of pattern matching to enforce the fact that Alice (or the attacker
 
 Soon we will provide an example of a possible attack to the protocol, but to do so we first need to give to the attacker the capability of deducing a previously used key from the network:
 
-\begin{lstlisting}
+\begin{lstlisting}[language=Tamarin]
 rule Secret_reveal :
     [ !Session(client1, client2, sk) ]
     --[ SecretReveal(sk) ]->
     [ Out(sk) ]
 \end{lstlisting}
 
-\subsubsection{Termination and properties}
+\subsubsection{Termination and properties}\label{subsec:termination}
 
 \paragraph{Enforcing termination}
 
 In the previous paragraphs we introduced multiple action-facts aimed at aiding termination: such elements will now be part of a single, global source lemma:
 
-\begin{lstlisting}
+\begin{lstlisting}[language=Tamarin]
 lemma types [sources] :
     "(All #t sk kb message .
         BobReceivesFromAlice(message, sk, kb) @ #t ==>
@@ -679,19 +698,21 @@ lemma types [sources] :
     (All #t sk encnonce nonce .
         AliceReceivesNonce(encnonce, nonce, sk) @ #t ==>
         (Ex #t1 . BobSendsNonce(encnonce) @ #t1)
-        | (Ex #t1 . KU(sk) @ #t1 & KU(nonce) @ #t1))
+        | (Ex #t1 . KU(sk) @ #t1 & KU(nonce) @ #t1)
+        | (Ex #t1 . KU(encnonce) @ #t1))
     &
     (All #t sk encnonce nonce .
         BobReceivesNonce(encnonce, nonce, sk) @ #t ==>
         (Ex #t1 . AliceSendsNonce(encnonce) @ #t1)
-        | (Ex #t1 . KU(sk) @ #t1 & KU(nonce) @ #t1))"
+        | (Ex #t1 . KU(sk) @ #t1 & KU(nonce) @ #t1)
+        | (Ex #t1 . KU(encnonce) @ #t1))"
 \end{lstlisting}
 
 Such lemma is automatically proved by Tamarin during the precomputation phase and its statement is later on used in the proofs of the other properties to reduce drastically the number of possible sources for some facts (and, thus, sometimes allowing or even speeding-up termination).
 
 Unfortunately, we need to add another restriction to the theory to enforce termination:
 
-\begin{lstlisting}
+\begin{lstlisting}[language=Tamarin]
 restriction NoSendingPrivateKeys :
     "All client key #t .
         ClientInitialised(client, key) @ #t
@@ -704,7 +725,7 @@ This snippet is crucial since it allows Tamarin to get rid of all the possible a
 
 The first thing we need to check is wheter our formalization of the protocol allows for a successful run of the exchange. This can be verified through and \lstinline|exists-trace| lemma:
 
-\begin{lstlisting}
+\begin{lstlisting}[language=Tamarin]
 lemma Sanity :
     exists-trace
     "Ex alice bob sk #t1 #t2 .
@@ -716,7 +737,7 @@ Tamarin quickly auto-verifies this snippet and provides a valid trace modeling a
 
 We can then proceed with the most important property of a key-exchange protocol: confidentiality
 
-\begin{lstlisting}
+\begin{lstlisting}[language=Tamarin]
 lemma Confidentiality :
     "(All alice bob key #t1 #t2 .
         SecretEstablished(alice, bob, key) @ #t1 &
@@ -734,7 +755,7 @@ In 1981 \cite{timestampfix}, Denning and Sacco found a vulnerability in the prot
 
 It's easy to find a valid attack trace within our model:
 
-\begin{lstlisting}
+\begin{lstlisting}[language=Tamarin]
 lemma Attack :
     exists-trace
     "Ex alice bob key #t #t1 . 
@@ -745,13 +766,20 @@ lemma Attack :
             SecretEstablished(bob, alice, key) @ #t2 & #t < #t2)"
 \end{lstlisting}
 
-In the same paper in which the authors explained the issue, they also proposed a simple solution to such problem: incorporating timestamps. The server (which we can assume is not malicious because otherwise we would always find trivial attacks since it is responsible to distribute the keys) includes temporal information in the message sent to Alice: $S \to A: \{N_A, B, Sk, \{Sk, A\}_{K_B} \}_{K_A}$ becomes $S \to A: \{N_A, B, Sk, \{Sk, \textrm{timestamp}, A\}_{K_B} \}_{K_A}$ and, as a consequence, Alice sends to Bob the encrypted message $A \to B: \{Sk, \textrm{timestamp}, A\}_{K_B}$. Bob will thus be able to check whether the timestamp is recent or not and, assuming a decent time synchronization between the parties and that the attacker is not able to compromise the password instantly, will discard replayed messages.
+In the same paper in which the authors explained the issue, they also proposed a simple solution to such problem: incorporating timestamps. The server (which we can assume is not malicious because otherwise we would always find trivial attacks since it is responsible to distribute the keys) includes temporal information in the message sent to Alice: $S \to A: \{N_A, B, Sk, \{Sk, A\}_{K_B} \}_{K_A}$ becomes $S \to A: \{N_A, B, Sk, \{Sk, \textrm{timestamp}, A\}_{K_B} \}_{K_A}$ and, as a consequence, Alice sends to Bob the encrypted message $A \to B: \{Sk, \textrm{timestamp}, A\}_{K_B}$. Bob will thus be able to check whether the timestamp is recent or not and, assuming a decent time synchronization between the parties and that the attacker is not able to compromise the password instantly, will discard replayed messages. The fixed exchange is summarized in table \ref{fig:NS_fixed}
 
-\include{needhamschroederfixed.tex}
+\begin{figure}[h]
+    \centering
+    \captionsetup{justification=centering, margin=1cm}
+    \includegraphics[width=0.45\textwidth]{Figures/NS_fixed.png}
+    \label{fig:NS_fixed}
+    \caption{Needham-Schroeder protocol with added timestamps}
+\end{figure}
+%\include{needhamschroederfixed.tex}
 
 To model this version of the protocol we must change the rules that formalize the intermediate exchanges to include such timestamps:
 
-\begin{lstlisting}
+\begin{lstlisting}[language=Tamarin]
 rule Server_answers_request :
     let
         message_to_bob = senc(<~sk, ~timestamp, alice>, kb)
@@ -772,7 +800,7 @@ rule Server_answers_request :
     ]
 \end{lstlisting}
 
-\begin{lstlisting}
+\begin{lstlisting}[language=Tamarin]
 rule Alice_receives_answer :
     let
         message_to_bob = senc(<sk1, timestamp, alice>, k)
@@ -793,7 +821,7 @@ rule Alice_receives_answer :
     ]
 \end{lstlisting}
 
-\begin{lstlisting}
+\begin{lstlisting}[language=Tamarin]
 rule Bob_responds_to_Alice :
     let
         message_from_alice = senc(<sk, timestamp, alice>, kb)
@@ -817,7 +845,7 @@ rule Bob_responds_to_Alice :
 
 We also must introduce a new restriction that models the checking of the timestamp by Bob:
 
-\begin{lstlisting}
+\begin{lstlisting}[language=Tamarin]
 restriction CheckingTimestamps :
     "All alice bob sk timestamp #t1 #t2 .
         SecretEstablishedWithTimestamp(bob, alice, sk, timestamp) @ #t1 &
@@ -827,7 +855,138 @@ restriction CheckingTimestamps :
 
 We can see now that Tamarin when run on the \lstinline|Attack| lemma is not able now to provide any valid trace, thus confirming that this attacks was solved.
 
-\section{Conclusions}
+\subsubsection{Perfomance metrics}
+
+By running Tamarin on the files that contain the theories formalizing the protocol in the two forms, we will obtain the evaluation of the formulas modeling the security properties. Assuming that we want to analyze the theory of the unfixed Needham-Schroeder protocol contained in \lstinline|./NS.spthy|, we will obtain the following output:
+
+\begin{lstlisting}[language=Terminal]
+>>> tamarin-prover NS.spthy
+
+================================================
+summary of summaries:
+
+analyzed: NS.spthy
+
+  types (all-traces): verified (45 steps)
+  Sanity (exists-trace): verified (15 steps)
+  Confidentiality (all-traces): verified (64 steps)
+  Attack (exists-trace): verified (18 steps)
+
+================================================
+\end{lstlisting}
+
+Similarly, by analyzing the formalization of the fixed protocol contained within file \lstinline|./NS_fixed.spthy|, the tool provides the following result:
+
+\begin{lstlisting}[language=Terminal]
+>>> tamarin-prover NS_fixed.spthy
+
+================================================
+summary of summaries:
+
+analyzed: NS_fixed.spthy
+
+  types (all-traces): verified (130 steps)
+  Sanity (exists-trace): verified (15 steps)
+  Confidentiality (all-traces): verified (19 steps)
+  Attack (exists-trace): falsified - no trace found (294 steps)
+
+================================================
+\end{lstlisting}
+
+In order to gain some insight on the tool's performance, we can measure the time and space resources required by a series of executions of the prover on the single lemmas and calculate some statistics on it. Automating such procedure is pretty straightforward in any modern programming language, and in our case we chose to use Python along to GNU's \lstinline|time| command line utility \cite{GNUtime}:
+
+\begin{lstlisting}
+import subprocess, re, json
+from statistics import mean, stdev
+
+def runTamarin(filename, lemmaName) :
+    command = f'gtime tamarin-prover {filename}.spthy --prove={lemmaName}'
+    process = subprocess.run(command.split(), stdout=subprocess.PIPE, stderr=subprocess.PIPE, universal_newlines=True)
+    gtimeResults = process.stderr.split('\n')[-3].split()
+    time = list(map(int, re.split('\:|\.', gtimeResults[2][:-7])))
+    milliseconds = (time[0] * 60 * 1000) + (time[1] * 1000) + (time[2] * 10)
+    maxMemory = int(gtimeResults[-1][:-13])
+    return milliseconds, maxMemory
+
+FILES = ['NS', 'NS_fixed']
+LEMMAS = ['types', 'Sanity', 'Confidentiality', 'Attack']
+N_ITERATIONS = 100
+
+results = {}
+
+for file in FILES :
+    for lemma in LEMMAS :
+        times = []
+        memories = []
+        for i in range(N_ITERATIONS) :
+            print(f'Lemma: {lemma} | Iteration: {i+1}/{N_ITERATIONS}')
+            newTime, newMemory = runTamarin(file, LEMMAS[0])
+            times.append(newTime)
+            memories.append(newMemory)
+        results[lemma] = {}
+        results[lemma]['maxTime'] = max(times)
+        results[lemma]['maxMemory'] = max(memories)
+        results[lemma]['minTime'] = min(times)
+        results[lemma]['minMemory'] = min(memories)
+        results[lemma]['avgTime'] = mean(times)
+        results[lemma]['avgMemory'] = mean(memories)
+        results[lemma]['stdevTime'] = stdev(times)
+        results[lemma]['stdevMemory'] = stdev(memories)
+    with open(f'benchmarks_{file}.json', 'w') as f:
+        json.dump(results, f)
+\end{lstlisting}
+
+The script described above measures the resources used to prove each lemma during 100 different iterations. Note that each iteration requires a precomputation-phase overhead, which could be easily amortized by computing all the lemmas in the same execution. The results of our experimentation as described in tables \ref{tab:tableNS} and \ref{tab:tableNSFixed}.
+
+\begin{table*}
+    \centering
+    \resizebox{0.8\textwidth}{!}{
+    {\renewcommand{\arraystretch}{1.5}%
+    \begin{tabular}{@{}lcccccccccc@{}}
+        \toprule
+        \multicolumn{1}{c}{} & \multicolumn{1}{c}{} & \multicolumn{4}{c}{Duration [ms]} & \multicolumn{4}{c}{Peak RAM usage [kB]}\\
+        \cmidrule(rl){4-7} \cmidrule(rl){8-11}
+        Lemma & \# of steps & Mean & Max & Min & Deviation & Mean & Max & Min & Deviation \\
+        \midrule
+        types & 123 & 697 & 770 & 660 & 15.09 & 46697 & 51248 & 44976 & 1295.62\\
+        Sanity & 15 & 701 & 800 & 670 & 18.20 & 46973 & 50208 & 44016 & 1316.64\\
+        Confidentiality & 98 & 706 & 770 & 660 & 14.75 & 46957 & 50224 & 43984 & 1357.73\\
+        Attack & 19 & 745 & 800 & 710 & 16.60 & 46702 & 51232 & 44992 & 1340.96\\
+        \bottomrule
+        \end{tabular}
+    }}
+    \caption{Tamarin's performances during the verification of the Needham Schoroeder Symmetric protocol}
+    \label{tab:tableNS}
+\end{table*}
+
+\begin{table*}
+    \centering
+    \resizebox{0.8\textwidth}{!}{
+    {\renewcommand{\arraystretch}{1.5}%
+    \begin{tabular}{@{}lcccccccccc@{}}
+        \toprule
+        \multicolumn{1}{c}{} & \multicolumn{1}{c}{} & \multicolumn{4}{c}{Duration [ms]} & \multicolumn{4}{c}{Peak RAM usage [kB]}\\
+        \cmidrule(rl){4-7} \cmidrule(rl){8-11}
+        Lemma & \# of steps & Mean & Max & Min & Deviation & Mean & Max & Min & Deviation \\
+        \midrule
+        types & 130 & 912 & 1000 & 850 & 37.11 & 61134 & 63504 & 58352 & 875.15\\
+        Sanity & 15 & 935 & 990 & 870 & 24.51 & 61155 & 62528 & 58288 & 912.24\\
+        Confidentiality & 19 & 953 & 1040 & 900 & 28.58 & 61132 & 62496 & 59360 & 761.72\\
+        Attack & 294 & 989 & 1510 & 890 & 86.09 & 61195 & 64528 & 59376 & 786.25\\
+        \bottomrule
+        \end{tabular}
+    }}
+    \caption{Tamarin's performances during the verification of the Needham Schoroeder Symmetric protocol after fixing}
+    \label{tab:tableNSFixed}
+\end{table*}
+
+As we can see, with this toy-protocol example, Tamarin is able to prove all the properties in the blink of an eye. Of course, when considering more complex formalizations with additional rules and bigger equational theories involved (such as the \lstinline|diffie-hellman| or the \lstinline|xor| built-ins), the proving process becomes more time-consuming (and often non-terminating). For example, in the reference GitHub repository \cite{github} for this paper it is also possible to find a Tamarin formalization of the X3DH exchange proposed by Marlinspike and Perrin \cite{x3dh} that, despite its brevity, manages to get the prover stuck during the precomputation phase due to the high number of Diffie Hellman exchanges required in the protocol.
+
+\section{Conclusions}\label{sec:conclusions}
+
+In this essay we managed to present the Tamarin prover with a top-down approach: starting from a general introduction to the formal checking context background (in particular the symbolic model for protocol verification), we introduced the famous theorem prover by quickly explaining its syntax and usage. In order to provide a more concrete point of view on the matter, we also presented the Needham Schroeder Symmetric protocol and formalized its message exchange in Tamarin semantics. Then, we used the tool to prove some of its security properties and showed how it could be subject to a simple replay attack. After showing a potential fix to the problem, we proved that the proposed modification did, in fact, eliminated the attack. Finally, we provided some performance metrics on the tool.
+
+The topic of automated formal verification of protocols is currently an area of active research within the symbolic artificial intelligence field. As computer scientists, this allows us to go through a less cumbersome verification process when checking protocols for correctness, while as users this provides us a better sense of trust with regards to the security features of the application we are using, since their exchanges are more easily formalized and verified against attackers.
 
 %----------------------------------------------------------------------------------------
 %	ACKNOWLEDGEMENTS

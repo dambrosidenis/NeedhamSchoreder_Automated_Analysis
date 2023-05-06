@@ -37,7 +37,7 @@
 \RequirePackage{amsmath, amsfonts, amssymb}
 \RequirePackage{graphicx}
 \graphicspath{{Figures/}{./}} % Specifies where to look for included images (trailing slash required)
-\RequirePackage{xcolor}
+%\RequirePackage{xcolor}
 \RequirePackage{booktabs}
 \RequirePackage{lastpage} % Number of pages in the document
 
@@ -266,4 +266,58 @@
 	\addcontentsline{toc}{section}{\refname}%
 	\oldbibliography{#1}%
 	\setlength\itemsep{0pt}%
+}
+
+%----------------------------------------------------------------------------------------
+%	CODE LISTINGS
+%----------------------------------------------------------------------------------------
+
+\usepackage{inconsolata}
+\usepackage{listings}
+
+\lstset{
+  xleftmargin=10pt,
+  xrightmargin=0pt,
+  framexleftmargin=0pt,
+  framexrightmargin=0pt,
+  basicstyle={\fontsize{8pt}{10pt}\ttfamily},
+  columns=flexible,
+  keepspaces=true,
+  showstringspaces=false,
+  commentstyle= \color{comments},
+  stringstyle= \color{strings},
+  breaklines=true,
+  postbreak=\mbox{$\hookrightarrow$\space}
+}
+
+\lstdefinelanguage{Tamarin}{
+  classoffset   = 1,
+  morekeywords  = {rule, lemma, restriction},
+  keywordstyle  = \bfseries\color{keys1},
+  classoffset   = 2,
+  morekeywords  = {let, in},
+  keywordstyle  = \color{keys2},
+  classoffset   = 3,
+  morekeywords  = {Fr, In, Out, K, KU},
+  keywordstyle  = \bfseries\color{keys3},
+  classoffset   = 4,
+  morekeywords  = {senc, aenc, h, pk, sign, All, Ex, not},
+  keywordstyle  = \bfseries\color{keys4},
+  classoffset   = 0,
+  morecomment=[l]{//},
+  morecomment=[s]{/*}{*/},
+  morestring=[b]',
+  sensitive=true,
+  numbers=left,
+  numbersep=10pt,
+  numberstyle={\tiny\selectfont\color[rgb]{0.5,0.5,0.5}},
+}
+
+\lstdefinelanguage{Terminal}{
+  framexleftmargin=3pt,
+  framexrightmargin=3pt,
+  framextopmargin=3pt,
+  framexbottommargin=3pt,
+  backgroundcolor=\color{terminalbackground},
+  basicstyle={\fontsize{8pt}{10pt}\ttfamily\color{terminaltext}},
 }

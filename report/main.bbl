@@ -1,75 +1,105 @@
-\begin{thebibliography}{MBP19}
+\newcommand{\etalchar}[1]{$^{#1}$}
+\begin{thebibliography}{SMCB12}
 
-\bibitem[AC]{satmc}
+\bibitem[AC04]{satmc}
 A.~Armando and L.~Compagna.
 \newblock Satmc: A sat-based model checker for security protocols.
-\newblock volume 3229, pages 730--733, 09.
+\newblock In {\em Logics in Artificial Intelligence}, volume 3229, pages
+  730--733. Springer Berlin Heidelberg, Sep 2004.
+
+\bibitem[BBB{\etalchar{+}}19]{SoK}
+M.~Barbosa, G.~Barthe, K.~Bhargavan, B.~Blanchet, C.~Cremers, K.~Liao, and
+  B.~Parno.
+\newblock Sok: Computer-aided cryptography.
+\newblock Cryptology ePrint Archive, Paper 2019/1393, 2019.
+
+\bibitem[BDS15]{tamarinObsEquivalences}
+D.~Basin, J.~Dreier, and R.~Sasse.
+\newblock Automated symbolic proofs of observational equivalence.
+\newblock In {\em Proceedings of the 22nd ACM SIGSAC Conference on Computer and
+  Communications Security}, pages 1144--1155, Oct 2015.
 
 \bibitem[Bla16]{proverifIntroduction}
 B.~Blanchet.
 \newblock Modeling and verifying security protocols with the applied pi
   calculus and proverif.
-\newblock {\em Foundations and Trends in Privacy and Security}, 1:1--135, 10
+\newblock {\em Foundations and Trends in Privacy and Security}, 1:1--135, Oct
   2016.
 
-\bibitem[Bru]{BBSecurityProtocolVerification}
+\bibitem[BMV05]{ofmc}
+D.~Basin, S.~Mödersheim, and L.~Vigano.
+\newblock Ofmc: A symbolic model checker for security protocols.
+\newblock {\em International Journal of Information Security}, 4:181--208, Jan
+  2005.
+
+\bibitem[Bru12]{BBSecurityProtocolVerification}
 B.~Bruno.
 \newblock Security protocol verification: Symbolic and computational models.
 \newblock In Pierpaolo Degano and Joshua~D. Guttman, editors, {\em Principles
-  of Security and Trust}, pages 3--29, Berlin, Heidelberg. Springer Berlin
-  Heidelberg.
-
-\bibitem[BSB12]{TamarinFoundations}
-C.~Cremers B.~Schmidt, S.~Meier and D.~Basin.
-\newblock Automated analysis of diffie-hellman protocols and advanced security
-  properties.
-\newblock In {\em 2012 IEEE 25th Computer Security Foundations Symposium},
-  pages 78--94, 2012.
+  of Security and Trust}, pages 3--29, Berlin, Heidelberg, 2012. Springer
+  Berlin Heidelberg.
 
 \bibitem[CD09]{traceObservableProperties}
 V.~Cortier and S.~Delaune.
 \newblock A method for proving observational equivalence.
-\newblock pages 266--276, 07 2009.
+\newblock In {\em 2009 22nd IEEE Computer Security Foundations Symposium},
+  pages 266--276, Jul 2009.
 
-\bibitem[DBS]{tamarinObsEquivalences}
-J.~Dreier D.~Basin and R.~Sasse.
-\newblock Automated symbolic proofs of observational equivalence.
-\newblock pages 1144--1155, 10.
+\bibitem[CDD20]{autosources}
+V.~Cortier, S.~Delaune, and J.~Dreier.
+\newblock {\em Automatic Generation of Sources Lemmas in Tamarin: Towards
+  Automatic Proofs of Security Protocols}, pages 3--22.
+\newblock Springer International Publishing, Sep 2020.
 
-\bibitem[DBV05]{ofmc}
-S.~Mödersheim D.~Basin and L.~Vigano.
-\newblock Ofmc: A symbolic model checker for security protocols.
-\newblock {\em International Journal of Information Security}, 4:181--208, 01
-  2005.
+\bibitem[D'A23]{github}
+D.~D'Ambrosi.
+\newblock Symbolic verification of security protocols with tamarin.
+\newblock \url{https://github.com/dambrosidenis/Computer-Network-Security}, May
+  2023.
+\newblock Accessed: 2023-05-05.
+
+\bibitem[DHRS18]{xorCompleteness}
+J.~Dreier, L.~Hirschi, S.~Radomirovic, and R.~Sasse.
+\newblock Automated unbounded verification of stateful cryptographic protocols
+  with exclusive or.
+\newblock In {\em 2018 IEEE 31st Computer Security Foundations Symposium
+  (CSF)}, pages 359--373, Jul 2018.
+
+\bibitem[DLM04]{ComplexityOfBoundedSecurity}
+N~Durgin, P.~Lincoln, and J.~Mitchell.
+\newblock Multiset rewriting and the complexity of bounded security protocols.
+\newblock {\em Journal of Computer Security}, 12:247--311, Feb 2004.
+
+\bibitem[DS81]{timestampfix}
+D.~Denning and G.~Sacco.
+\newblock Timestamps in key distribution protocols.
+\newblock {\em Commun. ACM}, 24:533--536, Aug 1981.
 
 \bibitem[DY83]{DolevYao}
 D.~Dolev and A.~Yao.
 \newblock On the security of public key protocols.
 \newblock {\em IEEE Transactions on Information Theory}, 29(2):198--208, 1983.
 
-\bibitem[git]{github}
-
-
-\bibitem[JDS]{xorCompleteness}
-S.~Radomirovic J.~Dreier, L.~Hirschi and R.~Sasse.
-\newblock Automated unbounded verification of stateful cryptographic protocols
-  with exclusive or.
-\newblock pages 359--373, 07.
-
-\bibitem[MBP19]{SoK}
-K.~Bhargavan B. Blanchet C. Cremers K.~Liao M.~Barbosa, G.~Barthe and B.~Parno.
-\newblock Sok: Computer-aided cryptography.
-\newblock Cryptology ePrint Archive, Paper 2019/1393, 2019.
+\bibitem[GNU]{GNUtime}
+GNU.
+\newblock time(1) - linux man page.
+\newblock \url{https://linux.die.net/man/1/time}.
 
 \bibitem[Mei13]{meierThesis}
 S.~Meier.
 \newblock {\em Advancing automated security protocol verification}.
 \newblock PhD thesis, ETH, 2013.
 
-\bibitem[NDM]{ComplexityOfBoundedSecurity}
-P.~Lincoln N.~Durgin and J.~Mitchell.
-\newblock Multiset rewriting and the complexity of bounded security protocols.
-\newblock {\em Journal of Computer Security}, 12:247--311, 02.
+\bibitem[MP16]{x3dh}
+M.~Marlinspike and T.~Perrin.
+\newblock The x3dh key agreement protocol.
+\newblock {\em Open Whisper Systems}, 283:10, 2016.
+
+\bibitem[MSCB13]{tamarinIntroduction}
+S.~Meier, B.~Schmidt, C.~Cremers, and D.~Basin.
+\newblock The tamarin prover for the symbolic analysis of security protocols.
+\newblock In {\em Computer Aided Verification}, volume 8044, pages 696--701,
+  Jul 2013.
 
 \bibitem[NS78]{needhamschroeder}
 Roger~M. Needham and Michael~D. Schroeder.
@@ -80,17 +110,25 @@ Roger~M. Needham and Michael~D. Schroeder.
 B.~Schmidt.
 \newblock {\em Formal analysis of key exchange protocols and physical
   protocols}.
-\newblock PhD thesis, ETH", 2012.
+\newblock PhD thesis, ETH, 2012.
 
-\bibitem[SMB]{tamarinIntroduction}
-C.~Cremers S.~Meier, B.~Schmidt and D.~Basin.
-\newblock The tamarin prover for the symbolic analysis of security protocols.
-\newblock volume 8044, pages 696--701, 07.
+\bibitem[SMCB12]{TamarinFoundations}
+B.~Schmidt, S.~Meier, C.~Cremers, and D.~Basin.
+\newblock Automated analysis of diffie-hellman protocols and advanced security
+  properties.
+\newblock In {\em 2012 IEEE 25th Computer Security Foundations Symposium},
+  pages 78--94, 2012.
 
 \bibitem[SS89]{unificationUndecidability}
 M.~Schmidt-Schauss.
 \newblock Unification in permutative equational theories is undecidable.
 \newblock {\em Journal of Symbolic Computation}, 8(4):415--421, 1989.
+
+\bibitem[Tea13]{tamarin}
+The~Tamarin Team.
+\newblock Tamarin prover.
+\newblock \url{https://tamarin-prover.github.io}, 2013.
+\newblock Accessed: 2023-05-05.
 
 \bibitem[Tea22]{tamarinManual}
 The~Tamarin Team.
@@ -100,13 +138,8 @@ The~Tamarin Team.
 \bibitem[Tur06]{clAtse}
 M.~Turuani.
 \newblock The cl-atse protocol analyser.
-\newblock volume 4098, pages 277--286, 08 2006.
-
-\bibitem[VCD]{autosources}
-S.~Delaune V.~Cortier and J.~Dreier.
-\newblock {\em Automatic Generation of Sources Lemmas in Tamarin: Towards
-  Automatic Proofs of Security Protocols}, pages 3--22.
-\newblock 09.
+\newblock In {\em Term Rewriting and Applications, Lecture Notes in Computer
+  Science}, volume 4098, pages 277--286, Aug 2006.
 
 \bibitem[Vit21]{PresentazioneVitacolonna}
 N.~Vitacolonna.

@@ -1,0 +1,21 @@
+lemma types [sources] :
+    "(All #t sk kb message .
+        BobReceivesFromAlice(message, sk, kb) @ #t ==>
+        (Ex #t1 . AliceSendsToBob(message) @ #t1)
+        | (Ex #t1 . KU(sk) @ #t1 & KU(kb) @ #t1))
+    &
+    (All #t sk ka message nonce message_bob . 
+        AliceReceivesAnswer(message, nonce, message_bob, sk, ka) @ #t ==>
+        (Ex #t1 . ServerSendsToAlice(message) @ #t1)
+        | (Ex #t1 . KU(sk) @ #t1 & KU(ka) @ #t1
+            & KU(nonce) @ #t1 & KU(message_bob) @ #t1))
+    &
+    (All #t sk encnonce nonce .
+        AliceReceivesNonce(encnonce, nonce, sk) @ #t ==>
+        (Ex #t1 . BobSendsNonce(encnonce) @ #t1)
+        | (Ex #t1 . KU(sk) @ #t1 & KU(nonce) @ #t1))
+    &
+    (All #t sk encnonce nonce .
+        BobReceivesNonce(encnonce, nonce, sk) @ #t ==>
+        (Ex #t1 . AliceSendsNonce(encnonce) @ #t1)
+        | (Ex #t1 . KU(sk) @ #t1 & KU(nonce) @ #t1))"
