@@ -20,15 +20,18 @@
 \providecommand\HyField@AuxAddToFields[1]{}
 \providecommand\HyField@AuxAddToCoFields[2]{}
 \citation{tamarin}
-\citation{DolevYao}
+\citation{goldwasser}
+\citation{rivest}
+\citation{yao}
 \providecommand \oddpage@label [2]{}
 \babel@aux{english}{}
 \@writefile{toc}{\contentsline {section}{Introduction}{1}{Doc-Start}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {1}The symbolic model}{1}{section.1}\protected@file@percent }
-\newlabel{sec:SymbolicModel}{{1}{1}{The symbolic model}{section.1}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {1}The Dolev Yao model}{1}{section.1}\protected@file@percent }
+\newlabel{sec:SymbolicModel}{{1}{1}{The Dolev Yao model}{section.1}{}}
+\citation{DolevYao}
 \citation{BBSecurityProtocolVerification}
 \citation{SoK}
-\citation{SoK}
+\citation{undecidability}
 \citation{PresentazioneVitacolonna}
 \citation{PresentazioneVitacolonna}
 \citation{ComplexityOfBoundedSecurity}
@@ -37,31 +40,34 @@
 \citation{satmc}
 \citation{tamarinIntroduction}
 \citation{proverifIntroduction}
+\newlabel{eq:SymmetricEncryptionIdentity}{{1}{2}{The Dolev Yao model}{equation.1.1}{}}
+\newlabel{eq:AsymmetricEncryptionIdentity}{{2}{2}{The Dolev Yao model}{equation.1.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.1}Computational limits of the symbolic model}{2}{subsection.1.1}\protected@file@percent }
 \citation{meierThesis}
 \citation{schmidtThesis}
 \citation{TamarinFoundations}
 \citation{tamarinManual}
-\newlabel{eq:SymmetricEncryptionIdentity}{{1}{2}{The symbolic model}{equation.1.1}{}}
-\newlabel{eq:AsymmetricEncryptionIdentity}{{2}{2}{The symbolic model}{equation.1.2}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {1.1}Limits of the symbolic model}{2}{subsection.1.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {2}Tamarin Prover Overview}{2}{section.2}\protected@file@percent }
-\newlabel{sec:TamarinOverview}{{2}{2}{Tamarin Prover Overview}{section.2}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.1}Basic definitions}{2}{subsection.2.1}\protected@file@percent }
-\pgfsyspdfmark {pgfid2}{20642008}{4195529}
 \@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Decidability in symbolic verification. Image taken by N. Vitacolonna's presentation \cite  {PresentazioneVitacolonna}\relax }}{3}{figure.caption.1}\protected@file@percent }
-\newlabel{eq:StateEvolution}{{3}{3}{Basic definitions}{equation.2.3}{}}
-\pgfsyspdfmark {pgfid3}{3729359}{15329310}
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.2}Term algebra}{3}{subsection.2.2}\protected@file@percent }
-\pgfsyspdfmark {pgfid5}{20642008}{4732137}
+\@writefile{toc}{\contentsline {section}{\numberline {2}Tamarin Prover Overview}{3}{section.2}\protected@file@percent }
+\newlabel{sec:TamarinOverview}{{2}{3}{Tamarin Prover Overview}{section.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.1}Basic definitions}{3}{subsection.2.1}\protected@file@percent }
+\pgfsyspdfmark {pgfid2}{20642008}{20340153}
+\newlabel{eq:StateEvolution}{{3}{4}{Basic definitions}{equation.2.3}{}}
+\pgfsyspdfmark {pgfid3}{3729359}{38332397}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.2}Term algebra}{4}{subsection.2.2}\protected@file@percent }
+\pgfsyspdfmark {pgfid5}{20642008}{44728360}
+\pgfsyspdfmark {pgfid7}{20642008}{34141498}
+\pgfsyspdfmark {pgfid9}{20642008}{24734284}
+\pgfsyspdfmark {pgfid11}{20642008}{17577254}
+\pgfsyspdfmark {pgfid13}{20642008}{4195529}
 \citation{unificationUndecidability}
-\pgfsyspdfmark {pgfid7}{3729359}{38152800}
-\pgfsyspdfmark {pgfid9}{3729359}{28940617}
-\pgfsyspdfmark {pgfid11}{3729359}{21978617}
-\pgfsyspdfmark {pgfid13}{3729359}{7803641}
-\pgfsyspdfmark {pgfid15}{20642008}{33456168}
-\pgfsyspdfmark {pgfid17}{20642008}{26972944}
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.3}Default facts and rules}{4}{subsection.2.3}\protected@file@percent }
-\newlabel{subsec:DefaultFacts}{{2.3}{4}{Default facts and rules}{subsection.2.3}{}}
+\pgfsyspdfmark {pgfid14}{3729359}{45983425}
+\pgfsyspdfmark {pgfid16}{3729359}{27834376}
+\pgfsyspdfmark {pgfid18}{3729359}{21680696}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.3}Default facts and rules}{5}{subsection.2.3}\protected@file@percent }
+\newlabel{subsec:DefaultFacts}{{2.3}{5}{Default facts and rules}{subsection.2.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.4}Trace properties}{5}{subsection.2.4}\protected@file@percent }
+\newlabel{subsec:TraceProperties}{{2.4}{5}{Trace properties}{subsection.2.4}{}}
 \citation{schmidtThesis}
 \citation{meierThesis}
 \citation{schmidtThesis}
@@ -70,64 +76,65 @@
 \citation{tamarinManual}
 \citation{tamarinObsEquivalences}
 \citation{traceObservableProperties}
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.4}Trace properties}{5}{subsection.2.4}\protected@file@percent }
-\newlabel{subsec:TraceProperties}{{2.4}{5}{Trace properties}{subsection.2.4}{}}
-\pgfsyspdfmark {pgfid19}{20642008}{35923443}
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.5}Observational equivalence properties}{5}{subsection.2.5}\protected@file@percent }
-\newlabel{subsec:ObsEqProperties}{{2.5}{5}{Observational equivalence properties}{subsection.2.5}{}}
-\pgfsyspdfmark {pgfid21}{20642008}{14325460}
-\pgfsyspdfmark {pgfid23}{20642008}{4195529}
 \citation{tamarinObsEquivalences}
 \citation{autosources}
 \citation{autosources}
 \citation{tamarinManual}
-\citation{needhamschroeder}
-\pgfsyspdfmark {pgfid24}{3729359}{46726280}
+\pgfsyspdfmark {pgfid20}{3729359}{31065744}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.5}Observational equivalence properties}{6}{subsection.2.5}\protected@file@percent }
+\newlabel{subsec:ObsEqProperties}{{2.5}{6}{Observational equivalence properties}{subsection.2.5}{}}
+\pgfsyspdfmark {pgfid22}{3729359}{9447675}
+\pgfsyspdfmark {pgfid24}{20642008}{41582632}
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.6}Aiding termination}{6}{subsection.2.6}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {2.6.1}Source lemmas}{6}{subsubsection.2.6.1}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {2.6.2}Oracles}{6}{subsubsection.2.6.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.6.3}Interactive mode}{6}{subsubsection.2.6.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.6.4}Restrictions}{6}{subsubsection.2.6.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.6.5}Re-use lemmas}{6}{subsubsection.2.6.5}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {3}The Needham-Schroeder Protocol}{6}{section.3}\protected@file@percent }
+\citation{needhamschroeder}
 \citation{github}
-\providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
-\newlabel{fig:interactive}{{\caption@xref {fig:interactive}{ on input line 433}}{7}{Interactive mode}{figure.caption.2}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Tamarin's interactive mode\relax }}{7}{figure.caption.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.6.3}Interactive mode}{7}{subsubsection.2.6.3}\protected@file@percent }
+\newlabel{subsec:tamarinGui}{{2.6.3}{7}{Interactive mode}{subsubsection.2.6.3}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.6.4}Restrictions}{7}{subsubsection.2.6.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.6.5}Re-use lemmas}{7}{subsubsection.2.6.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {3}The Needham-Schroeder Protocol}{7}{section.3}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Tamarin Formalization}{7}{subsection.3.1}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {3.1.1}The protocol}{7}{subsubsection.3.1.1}\protected@file@percent }
 \@writefile{toc}{\contentsline {paragraph}{Initialisation}{7}{paragraph*.4}\protected@file@percent }
-\newlabel{fig:NS}{{\caption@xref {fig:NS}{ on input line 459}}{8}{The Needham-Schroeder Protocol}{figure.caption.3}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Needham-Schroeder Symmetric protocol\relax }}{8}{figure.caption.3}\protected@file@percent }
+\providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
+\newlabel{fig:interactive}{{\caption@xref {fig:interactive}{ on input line 438}}{8}{Interactive mode}{figure.caption.2}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Tamarin's interactive mode\relax }}{8}{figure.caption.2}\protected@file@percent }
 \@writefile{toc}{\contentsline {paragraph}{$A \to S: A,B,N_A$}{8}{paragraph*.5}\protected@file@percent }
 \@writefile{toc}{\contentsline {paragraph}{$S \to A: \{N_A, B, Sk, \{Sk, A\}_{K_B} \}_{K_A}$}{8}{paragraph*.6}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{$A \to B: \{Sk, A\}_{K_B}$}{8}{paragraph*.7}\protected@file@percent }
+\newlabel{fig:NS}{{\caption@xref {fig:NS}{ on input line 464}}{9}{The Needham-Schroeder Protocol}{figure.caption.3}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Needham-Schroeder Symmetric protocol\relax }}{9}{figure.caption.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{$A \to B: \{Sk, A\}_{K_B}$}{9}{paragraph*.7}\protected@file@percent }
 \@writefile{toc}{\contentsline {paragraph}{$B \to A: \{N_B\}_{Sk}$}{9}{paragraph*.8}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{$A \to B: \{N_B - 1\}$}{9}{paragraph*.9}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Conclusion}{9}{paragraph*.10}\protected@file@percent }
-\citation{timestampfix}
+\@writefile{toc}{\contentsline {paragraph}{$A \to B: \{N_B - 1\}$}{10}{paragraph*.9}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Conclusion}{10}{paragraph*.10}\protected@file@percent }
 \@writefile{toc}{\contentsline {paragraph}{Modelling the attacker}{10}{paragraph*.11}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {3.1.2}Termination and properties}{10}{subsubsection.3.1.2}\protected@file@percent }
 \newlabel{subsec:termination}{{3.1.2}{10}{Termination and properties}{subsubsection.3.1.2}{}}
 \@writefile{toc}{\contentsline {paragraph}{Enforcing termination}{10}{paragraph*.12}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Properties}{10}{paragraph*.13}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{The attack}{10}{paragraph*.14}\protected@file@percent }
-\newlabel{fig:NS_fixed}{{\caption@xref {fig:NS_fixed}{ on input line 775}}{11}{The attack}{figure.caption.15}{}}
+\citation{timestampfix}
+\@writefile{toc}{\contentsline {paragraph}{Properties}{11}{paragraph*.13}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{The attack}{11}{paragraph*.14}\protected@file@percent }
+\newlabel{fig:NS_fixed}{{\caption@xref {fig:NS_fixed}{ on input line 780}}{11}{The attack}{figure.caption.15}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Needham-Schroeder protocol with added timestamps\relax }}{11}{figure.caption.15}\protected@file@percent }
 \citation{GNUtime}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.1.3}Perfomance metrics}{12}{subsubsection.3.1.3}\protected@file@percent }
 \citation{github}
 \citation{x3dh}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.1.3}Perfomance metrics}{12}{subsubsection.3.1.3}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Tamarin's performances during the verification of the Needham Schoroeder Symmetric protocol\relax }}{13}{table.caption.16}\protected@file@percent }
-\newlabel{tab:tableNS}{{1}{13}{Tamarin's performances during the verification of the Needham Schoroeder Symmetric protocol\relax }{table.caption.16}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces Tamarin's performances during the verification of the Needham Schoroeder Symmetric protocol after fixing\relax }}{13}{table.caption.17}\protected@file@percent }
-\newlabel{tab:tableNSFixed}{{2}{13}{Tamarin's performances during the verification of the Needham Schoroeder Symmetric protocol after fixing\relax }{table.caption.17}{}}
 \bibstyle{alpha}
 \bibdata{references.bib}
 \bibcite{satmc}{AC04}
 \bibcite{SoK}{BBB{$^{+}$}19}
 \bibcite{tamarinObsEquivalences}{BDS15}
 \bibcite{proverifIntroduction}{Bla16}
+\@writefile{toc}{\contentsline {section}{\numberline {4}Conclusions}{13}{section.4}\protected@file@percent }
+\newlabel{sec:conclusions}{{4}{13}{Conclusions}{section.4}{}}
+\@writefile{toc}{\contentsline {section}{References}{13}{section*.18}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Tamarin's performances during the verification of the Needham Schoroeder Symmetric protocol\relax }}{14}{table.caption.16}\protected@file@percent }
+\newlabel{tab:tableNS}{{1}{14}{Tamarin's performances during the verification of the Needham Schoroeder Symmetric protocol\relax }{table.caption.16}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces Tamarin's performances during the verification of the Needham Schoroeder Symmetric protocol after fixing\relax }}{14}{table.caption.17}\protected@file@percent }
+\newlabel{tab:tableNSFixed}{{2}{14}{Tamarin's performances during the verification of the Needham Schoroeder Symmetric protocol after fixing\relax }{table.caption.17}{}}
 \bibcite{ofmc}{BMV05}
 \bibcite{BBSecurityProtocolVerification}{Bru12}
 \bibcite{traceObservableProperties}{CD09}
@@ -144,9 +151,6 @@
 \bibcite{needhamschroeder}{NS78}
 \bibcite{schmidtThesis}{Sch12}
 \bibcite{TamarinFoundations}{SMCB12}
-\@writefile{toc}{\contentsline {section}{\numberline {4}Conclusions}{14}{section.4}\protected@file@percent }
-\newlabel{sec:conclusions}{{4}{14}{Conclusions}{section.4}{}}
-\@writefile{toc}{\contentsline {section}{References}{14}{section*.18}\protected@file@percent }
 \bibcite{unificationUndecidability}{SS89}
 \bibcite{tamarin}{Tea13}
 \bibcite{tamarinManual}{Tea22}

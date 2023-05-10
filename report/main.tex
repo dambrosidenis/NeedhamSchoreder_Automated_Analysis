@@ -160,42 +160,46 @@ As computing becomes more obiquitous and distributed, we need an ever-increasing
 
 The essay is structured as follows: in section \ref{sec:SymbolicModel} we will briefly introduce one of such formal verification models, in section \ref{sec:TamarinOverview} we will give an introduction to the Tamarin prover from a user's perspective, while in the following section we will show how such tool can be used for real-world formal verification by modeling the Needham-Schroeder Symmetric protocol. Finally, in section \ref{sec:conclusions} we will summarize the results of this paper.
 
-\section{The symbolic model}\label{sec:SymbolicModel}
+\section{The Dolev Yao model}\label{sec:SymbolicModel}
 
-Known also as the \textit{Dolev Yao} model, the symbolic model abstracts from cryptography by substituting real-world cryptographic operations with term-algebras \cite{DolevYao}. Encryption schemes are formalized through binary isomorphisms within $\{0,1\}*$: given a symmetrical key $k$ and the relevant pair of cryptographic encryption and decryption primitives $\textrm{senc}_k$ and $\textrm{sdec}_k$, symmetrical cryptography is defined through the following identity:
+When dealing with the verification of internet protocols, two (main) paradigms are used to formally prove the security properties of both new and established message exchanges: the computational and the symbolic models. The first, initially introduced by Goldwasser, Micali \cite{goldwasser}, Rivest \cite{rivest}, Yao \cite{yao} and others, treats messages as bitstrings, cryptographic primitives as endomorphisms mapping objects in the space of bitstrings and the adversary as a probabilistic Turing machine. Within this model, given a security parameter (such as an encryption key) and a property (formula) that needs to be verified, the adversary must find a polynomial-time algorithm with respect to the size of the parameter that makes the formula false. If the probability of such procedure to work is negligible, then the property is considered as proved. This model manages to resemble real-world cryptography pretty closely, but specifing and verifying its theories can easily become a tedious and lengthy process.
+
+At the cost of accuracy, the symbolic model (also known as the Dolev-Yao model \cite{DolevYao}) abstracts from real-world cryptography operations by substituting actual crypto primitives with term-algebras. Encryption schemes are easily formalized through as binary isomorphisms: for example, given a secret key $k$ and the relevant pair of cryptographic encryption and decryption function symbols $\textrm{senc}_k$, $\textrm{sdec}_k$ and $1$, symmetrical cryptography is defined through the following identity:
 
 \begin{equation}\label{eq:SymmetricEncryptionIdentity}
     \textrm{sdec}_k\ \textrm{senc}_k = 1
 \end{equation}
 
-Only the entities that are in possess of $k$ are able to encrypt or decrypt any message with it \cite{BBSecurityProtocolVerification}: this assumption is known as perfect cryptography. Furthermore, given a message $M$ and its image $\textrm{senc}_k\ M$, we assume that it is impossible for an attacker who does not know $k$ to:
+Only the entities that are in possess of $k$ are able to encrypt or decrypt any message with it \cite{BBSecurityProtocolVerification}: this hypothesis is known as \textit{perfect cryptography}.
 
-\begin{itemize}
-    \item guess or bruteforce $k$;
-    \item manipulate $\textrm{senc}_k\ M$
-    \item infer any information about $M$ from $\textrm{senc}_k\ M$.
-\end{itemize}
-
-Similarly to equation \ref{eq:SymmetricEncryptionIdentity}, asymmetric encryption and signing are modeled through the following identity:
+Similarly to equation \ref{eq:SymmetricEncryptionIdentity}, asymmetric encryption is modeled through the following identity:
 
 \begin{equation}\label{eq:AsymmetricEncryptionIdentity}
     \textrm{adec}_{pr}\ \textrm{aenc}_{pub} = \textrm{adec}_{pub}\ \textrm{aenc}_{pr} = 1
 \end{equation}
 
-In this case, we do not consider a single key used for both encryption and decryption $k$, but instead an entangled pair of keys $pr$ and $pub$. The assumptions for cryptography are the same as above.
+In this case, we do not consider a single key used for both encryption and decryption $k$, but instead an entangled pair of keys $pr$ and $pub$.
 
-A protocol is modeled as a series of formal terms (messages) exchanged by abstract machines (clients) through an attacker-controlled network. We assume that any connection can be eavesdropped by a malevolent agent that is also able to intercept, modify, forge and drop messages on the fly, with the only exception of the encryption constraints previously described. After formalizing a protocol, its security goals can be expressed as \cite{SoK}:
+Given a message $M$ and its image $\textrm{senc}_k\ M$ (or, $\textrm{aenc}_{pub}\ M$), we assume that it is impossible for an attacker who does not know $k$ (or $pr$) to:
+
+\begin{itemize}
+    \item guess or bruteforce $k$ (or $pr$);
+    \item manipulate $\textrm{senc}_k\ M$ (or $\textrm{aenc}_{pub}\ M$)
+    \item infer any information about $M$ from $\textrm{senc}_k\ M$ (or $\textrm{aenc}_{pub}\ M$).
+\end{itemize}
+
+This set of hypotheses represents both the strength and weakness of this paradigm: from a modeling point of view, the abstractions introduced effectlively strip down protocols leaving only their cryptographic primitives, thus allowing for far easier formalization and verification processes. Long and complex message exchanges between multiple parties are manageable within this model and, as we will shortly show, various provers have been proposed with this purpose during recent years. On the other hand, by simplyfing cryptography down to only algebraic symbols, this model does not take into consideration neither possible bad implementation choices nor real-world attacks regarding the cryptographic primitives actually used. The computational model, by being less abstract, clearly covers a wider spectrum of risk scenarios, but with an non-negligible added complexity and still without being considered a completely inclusive paradigm (we can trivially think about side channel attacks, which are not being included in any threat model by definition).
+
+Coming back to the Dolev-Yao model, a protocol is formalized as a series of algebraic terms (messages) exchanged by abstract machines (clients) through an attacker-controlled network. We assume that any connection can be eavesdropped by a malevolent agent that is also able to intercept, modify, forge and drop messages on the fly (but always following the perfect cryptography constraints described). After formalizing a protocol, its security goals can be expressed as:
 
 \begin{itemize}
     \item Trace properties: invariants that should hold for each possible execution of the protocol;
     \item Observational equivalence properties: properties that an attacker should not be able to distinguish between two different runs of the protocol.
 \end{itemize}
 
-The use of algebraic terms within the Dolev Yao model allows for simple abstractions during formal checking. As opposed to the aforementioned standard model, where bitstrings take the place of terms and perfect cryptography is not an assumption, the symbolic model is less realistic since it is able to guarantee only high-level security goals on the conjecture of flawless implementations of the cryptographic primitives actually used.
+\subsection{Computational limits of the symbolic model}
 
-\subsection{Limits of the symbolic model}
-
-In order to streamline the proof of security properties belonging to a certain protocol, multiple automatic tools were proposed \cite{SoK}. These softwares, in order to prove security goals, have to compute the set of terms that an attacker is able to deduce while the protocol is executing, although since this set can possibly be infinite, the general problem suffers of both undecidability and infinite state space. To convince ourselves that this is the case, we just need to think about the fact that we can have an infinite number of sessions for each protocol, each one with different nonces and messages of unlimited size. Without bounding at least two of these sources of infinity, termination can not be guaranteed by any tool in this category.
+In order to streamline the proof of security properties belonging to a certain protocol, multiple automatic tools were proposed \cite{SoK}. To prove security goals, these softwares have to compute the set of terms that an attacker is able to deduce from the network while (possibly) multiple runs the protocol are executing; since such set can possibly be unbounded, the general problem can easily become undecidable and suffer of infinite state space: we can have an infinite number of sessions for each protocol, each one with different nonces and messages of unlimited size. Without bounding at least two of these sources of infinity, termination can not be guaranteed by any tool in this category \cite{undecidability}.
 
 \begin{figure*}[t]
     \centering
@@ -204,15 +208,16 @@ In order to streamline the proof of security properties belonging to a certain p
     \caption{Decidability in symbolic verification. Image taken by N. Vitacolonna's presentation \cite{PresentazioneVitacolonna}}
 \end{figure*}
 
-
-In particular, as shown by N. Durgin et al. \cite{ComplexityOfBoundedSecurity}, by restricting different sources we can ensure to reduce insecurity to different complexity classes:
+In particular, as shown by N. Durgin et al. \cite{ComplexityOfBoundedSecurity}, by restricting different sources we can ensure to reduce the model checking problem to different complexity classes:
 
 \begin{itemize}
     \item if we limit the number of nonces and messages, we end up with a DEXP-complete problem;
-    \item if we restrict the number of sessions (and thus the number of nonces and messages), the problem will still be affected from infinite state space, but its solution will be NP-complete; this workaround was adopted by a variety of tools such as Cl-AtSe \cite{clAtse}, OFMC \cite{ofmc} and SATMC \cite{satmc}.
+    \item if we restrict the number of sessions (and thus the number of nonces and messages), the problem will still be affected from unbounded state space, but its solution will be NP-complete; this workaround was adopted by a variety of tools such as Cl-AtSe \cite{clAtse}, OFMC \cite{ofmc} and SATMC \cite{satmc}.
 \end{itemize}
 
-Alternatively to bounding the sources of infinity, some software address undecidability by requiring human input (for example, Tamarin Prover \cite{tamarinIntroduction} features an interactive mode that allows the user to decide which security goals prioritize based on intermediate constraint systems), returning inconclusive results (for example, ProverIf \cite{proverifIntroduction} may return an invalid attack trace) or even allowing non-termination.
+Alternatively to bounding the sources of infinity, some software address undecidability by requiring human input (for example, Tamarin Prover \cite{tamarinIntroduction} features an interactive mode that allows the user to decide which security goals prioritize based on intermediate constraint systems, as we will see in \ref{subsec:tamarinGui}), returning inconclusive results (for example, ProverIf \cite{proverifIntroduction} may return an invalid attack trace) or even allowing non-termination.
+
+On top of this, 
 
 \section{Tamarin Prover Overview}\label{sec:TamarinOverview}
 
@@ -422,7 +427,7 @@ During constraint-solving, Tamarin uses its built-in \textit{smart} heuristic (r
 
 By knowing how to manually guide the search (for example after doing some practice with the built-in interactive mode), we can code (in any programming language of choice) an external \textit{oracle}, which will be automatically run by the prover to determine the right priority objective to solve within a list of current goals. This user-defined software receives the name of the lemma and the indexed goal list (sorted by the smart heuristic) as input, and returns the re-ranked list (or, alternatively, only its first element) as output. Note that oracles are generally stateless: for each step of the proof, the program is executed from scratch, with only the name of the considered lemma and the list of current security goals as input.
 
-\subsubsection{Interactive mode}
+\subsubsection{Interactive mode}\label{subsec:tamarinGui}
 
 The Tamarin interactive mode is a powerful feature that enables users to guide the proof search process and interactively inspect the demonstration as it is being constructed. When using the interactive mode, users can provide hints and guidance to the Tamarin prover, which can significantly speed up the proof search process and help to identify any potential issues or vulnerabilities in the security protocol being analyzed. For example, by interleaving automatic steps and manual selection of goals to solve, the user can understand if the tool is entering an infine loop of computation or not by monitoring wheter recursive structures of terms are being produced or not. Furthermore, by guiding the proof, the consumer can easily guess how to build an effective oracle to speed up lenghty proofs. Additionally, the interactive mode provides a valuable opportunity to gain a deeper understanding of how the Tamarin prover works and how it constructs proofs for security protocols. An example of Tamarin in action in interactive mode is displayed in figure \ref{fig:interactive}.
 
