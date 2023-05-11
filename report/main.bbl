@@ -51,6 +51,11 @@ V.~Cortier, S.~Delaune, and J.~Dreier.
   Automatic Proofs of Security Protocols}, pages 3--22.
 \newblock Springer International Publishing, Sep 2020.
 
+\bibitem[CR12]{subtermconvergent}
+Y.~Chevalier and M.~Rusinowitch.
+\newblock Decidability of equivalence of symbolic derivations.
+\newblock {\em Journal of Automated Reasoning}, 48(2):263--292, 2012.
+
 \bibitem[D'A23]{github}
 D.~D'Ambrosi.
 \newblock Symbolic verification of security protocols with tamarin.
@@ -79,6 +84,23 @@ D.~Denning and G.~Sacco.
 D.~Dolev and A.~Yao.
 \newblock On the security of public key protocols.
 \newblock {\em IEEE Transactions on Information Theory}, 29(2):198--208, 1983.
+
+\bibitem[EG83]{undecidability}
+S.~Even and O.~Goldreich.
+\newblock On the security of multi-party ping-pong protocols.
+\newblock In {\em 24th Annual Symposium on Foundations of Computer Science
+  (sfcs 1983)}, pages 34--39, 1983.
+
+\bibitem[GM84]{goldwasser}
+S.~Goldwasser and S.~Micali.
+\newblock Probabilistic encryption.
+\newblock {\em Journal of Computer and System Sciences}, 28(2):270--299, 1984.
+
+\bibitem[GMR88]{rivest}
+S.~Goldwasser, S.~Micali, and R.~L. Rivest.
+\newblock A digital signature scheme secure against adaptive chosen-message
+  attacks.
+\newblock {\em SIAM Journal on Computing}, 17(2):281--308, 1988.
 
 \bibitem[GNU]{GNUtime}
 GNU.
@@ -135,6 +157,11 @@ The~Tamarin Team.
 \newblock {\em Tamarin-Prover Manual: Security Protocol Analysis in the
   Symbolic Model}, 2022.
 
+\bibitem[Tho21]{signdh}
+E.~Thormarker.
+\newblock On using the same key pair for ed25519 and an x25519 based kem.
+\newblock Cryptology ePrint Archive, Paper 2021/509, 2021.
+
 \bibitem[Tur06]{clAtse}
 M.~Turuani.
 \newblock The cl-atse protocol analyser.
@@ -148,5 +175,11 @@ N.~Vitacolonna.
   \url{http://users.dimi.uniud.it/~angelo.montanari/SymbolicVerificationWithTamarin.pdf},
   May 2021.
 \newblock Accessed: 2022-07-30.
+
+\bibitem[Yao82]{yao}
+A.~C. Yao.
+\newblock Theory and application of trapdoor functions.
+\newblock In {\em 23rd Annual Symposium on Foundations of Computer Science
+  (sfcs 1982)}, pages 80--91, 1982.
 
 \end{thebibliography}

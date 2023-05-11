@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.7.15)  11 MAY 2023 12:14
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.7.15)  11 MAY 2023 17:09
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1362,8 +1362,8 @@ Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
  (./main.toc
-LaTeX Font Info:    Trying to load font information for TS1+phv on input line 1
-7.
+LaTeX Font Info:    Trying to load font information for TS1+phv on input line 2
+1.
 
 (/usr/local/texlive/2022/texmf-dist/tex/latex/psnfss/ts1phv.fd
 File: ts1phv.fd 2020/03/25 scalable font definitions for TS1/phv.
@@ -1377,16 +1377,12 @@ Package microtype Info: Loading generic protrusion settings for font family
 \openout5 = `main.toc'.
 
 
-
-LaTeX Warning: Citation `goldwasser' on page 1 undefined on input line 165.
-
-
-LaTeX Warning: Citation `rivest' on page 1 undefined on input line 165.
+Underfull \vbox (badness 4120) has occurred while \output is active []
 
 
-LaTeX Warning: Citation `yao' on page 1 undefined on input line 165.
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[1{/usr/local/texlive/2022/texmf-var/fonts/map/pdftex/updmap/pdftex.map}
+ [1{/usr/local/texlive/2022/texmf-var/fonts/map/pdftex/updmap/pdftex.map}
 
 
 ]
@@ -1402,63 +1398,65 @@ OT1/ptm/m/n/10 (-20) from $[][] \OML/ztmcm/m/it/10 M$ \OT1/ptm/m/n/10 (-20) (or
  $[][] \OML/ztmcm/m/it/10 M$\OT1/ptm/m/n/10 (-20) ). 
  []
 
-
-LaTeX Warning: Citation `undecidability' on page 2 undefined on input line 202.
-
-
-<Figures/undecidability.png, id=151, 1972.36874pt x 1231.60126pt>
+<Figures/undecidability.png, id=167, 1972.36874pt x 1231.60126pt>
 File: Figures/undecidability.png Graphic file (type png)
 <use Figures/undecidability.png>
 Package pdftex.def Info: Figures/undecidability.png  used on input line 207.
 (pdftex.def)             Requested size: 400.38872pt x 249.99925pt.
 [2]
-Package mdframed Info: Not enough space on this page on input line 244.
+Package mdframed Info: Not enough space on this page on input line 231.
  [3 <./Figures/undecidability.png>]
-
-LaTeX Warning: Citation `subtermconvergent' on page 4 undefined on input line 2
-80.
-
-
-Overfull \hbox (9.23473pt too wide) in paragraph at lines 280--281
+Overfull \hbox (9.23473pt too wide) in paragraph at lines 288--289
 []\OT1/ptm/m/n/10 (-20) Normally, uni-fi-ca-tion mod-ulo the-o-ries is un-de-ci
 d-able [[]]:
  []
 
 
-Overfull \hbox (0.42705pt too wide) in paragraph at lines 286--287
+Overfull \hbox (0.42705pt too wide) in paragraph at lines 294--295
 []\OT1/ptm/m/n/10 (-20) A ter-mi-nat-ing the-ory is an equa-tional the-ory whic
 h
  []
 
 [4]
-Overfull \hbox (3.42499pt too wide) in paragraph at lines 322--323
+Overfull \hbox (3.42499pt too wide) in paragraph at lines 332--333
 [][][][][][][][][][][] \OT1/ptm/m/n/10 (-20) the-ory for-mal-izes equa-tion [][
 ]2[][] through
  []
 
+[5]
+Overfull \hbox (0.51686pt too wide) in paragraph at lines 395--396
+[]\OT1/ptm/m/n/10 (-20) Tamarin al-lows pro-to-col (and ad-ver-sary) mod-el-ing
+ through
+ []
 
-Overfull \hbox (3.47673pt too wide) in paragraph at lines 375--376
+
+Overfull \hbox (30.52434pt too wide) detected at line 422
+[]
+ []
+
+
+Overfull \hbox (3.47673pt too wide) in paragraph at lines 440--441
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
 ][][][][][][][][][][][][][][][][][][][][] \OT1/ptm/m/n/10 (-20) al-lows for the
  gen-
  []
 
 
-Overfull \hbox (0.34201pt too wide) in paragraph at lines 376--377
+Overfull \hbox (0.34201pt too wide) in paragraph at lines 441--442
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
 ][][][][][][][][][][][][][][][][][][][][] \OT1/ptm/m/n/10 (-20) al-lows the at-
 tacker
  []
 
 
-Overfull \hbox (5.47668pt too wide) in paragraph at lines 377--378
+Overfull \hbox (5.47668pt too wide) in paragraph at lines 442--443
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
 ][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][]
 [][] \OT1/ptm/m/n/10 (-20) al-lows user
  []
 
-LaTeX Font Info:    Trying to load font information for TS1+qcr on input line 3
-78.
+LaTeX Font Info:    Trying to load font information for TS1+qcr on input line 4
+43.
 (/usr/local/texlive/2022/texmf-dist/tex/latex/tex-gyre/ts1qcr.fd
 File: ts1qcr.fd 2009/09/25 v1.2 font definition file for TS1/qcr
 )
@@ -1466,122 +1464,123 @@ Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             `qcr' (encoding: TS1).
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
- [5]
-Package mdframed Info: Not enough space on this page on input line 423.
-Package mdframed Info: Not enough space on this page on input line 423.
  [6]
+Package mdframed Info: Not enough space on this page on input line 479.
+ [7]
 
-Package caption Warning: \label without proper reference on input line 453.
+Package caption Warning: \label without proper reference on input line 511.
 See the caption package documentation for explanation.
 
 
-LaTeX Warning: Reference `fig:interactive' on page 7 undefined on input line 44
-7.
+LaTeX Warning: Reference `fig:interactive' on page 8 undefined on input line 51
+1.
 
-<Figures/gui.png, id=272, 1998.46625pt x 1375.1375pt>
+<Figures/gui.png, id=308, 1998.46625pt x 1375.1375pt>
 File: Figures/gui.png Graphic file (type png)
 <use Figures/gui.png>
-Package pdftex.def Info: Figures/gui.png  used on input line 452.
+Package pdftex.def Info: Figures/gui.png  used on input line 516.
 (pdftex.def)             Requested size: 400.38872pt x 275.50523pt.
 
-Overfull \hbox (1.18399pt too wide) in paragraph at lines 459--460
+Overfull \hbox (1.18399pt too wide) in paragraph at lines 523--524
 \OT1/ptm/m/n/10 (-20) Similarly to lem-mas, \OT1/ptm/m/it/10 (-20) re-stric-tio
 ns \OT1/ptm/m/n/10 (-20) are spec-i-fied through guarded
  []
 
 
-Package caption Warning: \label without proper reference on input line 479.
+Package caption Warning: \label without proper reference on input line 537.
 See the caption package documentation for explanation.
 
 
-LaTeX Warning: Reference `fig:NS' on page 7 undefined on input line 473.
+LaTeX Warning: Reference `fig:NS' on page 8 undefined on input line 537.
 
-<Figures/NS.png, id=275, 485.815pt x 901.3675pt>
+<Figures/NS.png, id=311, 485.815pt x 901.3675pt>
 File: Figures/NS.png Graphic file (type png)
 <use Figures/NS.png>
-Package pdftex.def Info: Figures/NS.png  used on input line 478.
+Package pdftex.def Info: Figures/NS.png  used on input line 542.
 (pdftex.def)             Requested size: 225.21626pt x 417.85245pt.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[7]
-Overfull \hbox (57.61153pt too wide) in paragraph at lines 545--546
+[8]
+Overfull \hbox (57.61153pt too wide) in paragraph at lines 609--610
 []\OT1/ptm/m/n/10 (-20) The re-stric-tion [][][][][] ex-ploits the []
  []
 
 
-Overfull \hbox (2.09836pt too wide) in paragraph at lines 552--553
+Overfull \hbox (2.09836pt too wide) in paragraph at lines 616--617
 [] []$\OML/ztmcm/m/it/9 S \OMS/ztmcm/m/n/9 ! \OML/ztmcm/m/it/9 A \OT1/ztmcm/m/n
 /9 : \OMS/ztmcm/m/n/9 f\OML/ztmcm/m/it/9 N[]; B; Sk; \OMS/ztmcm/m/n/9 f\OML/ztm
 cm/m/it/9 Sk; A\OMS/ztmcm/m/n/9 g[]g[]$[] \OT1/ptm/m/n/10 (-20) Sim-i-larly, th
 e role of the server
  []
 
-[8 <./Figures/gui.png>]
-Overfull \hbox (1.54906pt too wide) in paragraph at lines 604--605
+[9 <./Figures/gui.png>]
+Overfull \hbox (1.54906pt too wide) in paragraph at lines 668--669
 \OT1/ptm/m/n/10 (-20) Bob| action-facts will be ex-ploited in the fi-nal source
 s lemma,
  []
 
-[9 <./Figures/NS.png>] [10]
+[10 <./Figures/NS.png>] [11]
 
-Package caption Warning: \label without proper reference on input line 795.
+Package caption Warning: \label without proper reference on input line 853.
 See the caption package documentation for explanation.
 
 
-LaTeX Warning: Reference `fig:NS_fixed' on page 11 undefined on input line 789.
+LaTeX Warning: Reference `fig:NS_fixed' on page 12 undefined on input line 853.
 
 
 
-Overfull \hbox (38.31763pt too wide) in paragraph at lines 789--790
+Overfull \hbox (38.31763pt too wide) in paragraph at lines 853--854
 \OT1/ptm/m/n/10 (-20) Al-ice sends to Bob the en-crypted mes-sage $\OML/ztmcm/m
 /it/10 A \OMS/ztmcm/m/n/10 ! \OML/ztmcm/m/it/10 B \OT1/ztmcm/m/n/10 : \OMS/ztmc
 m/m/n/10 f\OML/ztmcm/m/it/10 Sk; []; A\OMS/ztmcm/m/n/10 g[]$\OT1/ptm/m/n/10 (-2
 0) .
  []
 
-<Figures/NS_fixed.png, id=472, 500.87125pt x 903.375pt>
+<Figures/NS_fixed.png, id=501, 500.87125pt x 903.375pt>
 File: Figures/NS_fixed.png Graphic file (type png)
 <use Figures/NS_fixed.png>
-Package pdftex.def Info: Figures/NS_fixed.png  used on input line 794.
+Package pdftex.def Info: Figures/NS_fixed.png  used on input line 858.
 (pdftex.def)             Requested size: 225.21626pt x 406.19795pt.
 
-Underfull \vbox (badness 3009) has occurred while \output is active []
+LaTeX Warning: `h' float specifier changed to `ht'.
 
- [11 <./Figures/NS_fixed.png>] [12] (./main.bbl
+[12] [13 <./Figures/NS_fixed.png>] (./main.bbl
 LaTeX Font Info:    Calculating math sizes for size <7.4> on input line 10.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <5.47603> not available
 (Font)              Font shape `OT1/ptm/b/n' tried instead on input line 10.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <4.44003> not available
 (Font)              Font shape `OT1/ptm/b/n' tried instead on input line 10.
- [13] [14]
-Underfull \hbox (badness 10000) in paragraph at lines 55--60
+ [14] [15]
+Underfull \hbox (badness 10000) in paragraph at lines 60--65
 []\OT1/ptm/m/n/10 (+20) D. D'Ambrosi.  Sym-bolic ver-i-fi-ca-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 55--60
+Underfull \hbox (badness 10000) in paragraph at lines 60--65
 \OT1/ptm/m/n/10 (+20) tion of se-cu-rity pro-to-cols with tamarin.
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 55--60
+Underfull \hbox (badness 10000) in paragraph at lines 60--65
 [][]$\OT1/qcr/m/n/10 https : / / github . com / dambrosidenis /
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 145--151
+Underfull \hbox (badness 10000) in paragraph at lines 172--178
 \OT1/qcr/m/n/10 dimi . uniud . it / []angelo . montanari /
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 145--151
+Underfull \hbox (badness 10000) in paragraph at lines 172--178
 \OT1/qcr/m/n/10 SymbolicVerificationWithTamarin .
  []
 
-) 
+[16]) 
 AED: lastpage setting LastPage
-[15] (./main.aux)
+[17
+
+] (./main.aux)
 
 LaTeX Warning: There were undefined references.
 
@@ -1594,55 +1593,39 @@ Package rerunfilecheck Warning: File `main.out' has changed.
 (rerunfilecheck)                or use package `bookmark'.
 
 Package rerunfilecheck Info: Checksums for `main.out':
-(rerunfilecheck)             Before: 260156BFD1DFE89A7EA9EC5A39A32BEF;3266
-(rerunfilecheck)             After:  9C6D0BF894E618595730F1D907EB39A8;3266.
+(rerunfilecheck)             Before: E7768EBA6C869F057F0DFF33E5E6F95F;3736
+(rerunfilecheck)             After:  2ABD2720726E4D27B7A2DF5A9D92E7A1;3741.
  ) 
 Here is how much of TeX's memory you used:
- 35340 strings out of 478268
- 666294 string characters out of 5846347
- 1627951 words of memory out of 5000000
- 52030 multiletter control sequences out of 15000+600000
- 564458 words of font info for 430 fonts, out of 8000000 for 9000
+ 35392 strings out of 478268
+ 666859 string characters out of 5846347
+ 1631240 words of memory out of 5000000
+ 52041 multiletter control sequences out of 15000+600000
+ 567287 words of font info for 450 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 99i,12n,94p,1122b,1640s stack positions out of 10000i,1000n,20000p,200000b,200000s
-
-pdfTeX warning (dest): name{table.caption.21} has been referenced but does not 
-exist, replaced by a fixed one
-
-
-pdfTeX warning (dest): name{figure.caption.20} has been referenced but does not
- exist, replaced by a fixed one
-
-
-pdfTeX warning (dest): name{figure.caption.7} has been referenced but does not 
-exist, replaced by a fixed one
-
-
-pdfTeX warning (dest): name{section*.23} has been referenced but does not exist
-, replaced by a fixed one
-
-{/usr/local/texlive/2022/texmf-dist/fonts/enc/dvips/tex-gyre/q-rmm.enc}{/usr/lo
-cal/texlive/2022/texmf-dist/fonts/enc/dvips/tex-gyre/q-ts1.enc}{/usr/local/texl
-ive/2022/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/texlive/2022/texmf-
-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2022/texmf-d
-ist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2022/texmf-dis
-t/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2022/texmf-dist
-/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/local/texlive/2022/texmf-
-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/texlive/2022/te
-xmf-dist/fonts/type1/public/tex-gyre/qcrb.pfb></usr/local/texlive/2022/texmf-di
-st/fonts/type1/public/tex-gyre/qcrr.pfb></usr/local/texlive/2022/texmf-dist/fon
-ts/type1/public/rsfs/rsfs10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1
-/urw/helvetic/uhvb8a.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/urw/he
-lvetic/uhvr8a.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/urw/helvetic/
-uhvro8a.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/urw/symbol/usyr.pfb
-></usr/local/texlive/2022/texmf-dist/fonts/type1/urw/symbol/usyr.pfb></usr/loca
-l/texlive/2022/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/
-2022/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2022/texmf
--dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on main.pdf (15 pages, 1038476 bytes).
+ 99i,18n,94p,1122b,2015s stack positions out of 10000i,1000n,20000p,200000b,200000s
+{/usr/local/texlive/2022/texmf-dist/fonts/enc/dvips/tex-gyre/q-rmm.enc}{/usr/
+local/texlive/2022/texmf-dist/fonts/enc/dvips/tex-gyre/q-ts1.enc}{/usr/local/te
+xlive/2022/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/texlive/2022/texm
+f-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2022/texmf
+-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2022/texmf-d
+ist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2022/texmf-di
+st/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/local/texlive/2022/texm
+f-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/texlive/2022/
+texmf-dist/fonts/type1/public/tex-gyre/qcrb.pfb></usr/local/texlive/2022/texmf-
+dist/fonts/type1/public/tex-gyre/qcrr.pfb></usr/local/texlive/2022/texmf-dist/f
+onts/type1/public/rsfs/rsfs10.pfb></usr/local/texlive/2022/texmf-dist/fonts/typ
+e1/urw/helvetic/uhvb8a.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/urw/
+helvetic/uhvr8a.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/urw/helveti
+c/uhvro8a.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/urw/symbol/usyr.p
+fb></usr/local/texlive/2022/texmf-dist/fonts/type1/urw/symbol/usyr.pfb></usr/lo
+cal/texlive/2022/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texliv
+e/2022/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2022/tex
+mf-dist/fonts/type1/urw/times/utmri8a.pfb>
+Output written on main.pdf (17 pages, 1049368 bytes).
 PDF statistics:
- 847 PDF objects out of 1000 (max. 8388607)
- 759 compressed objects within 8 object streams
- 418 named destinations out of 1000 (max. 500000)
- 120009 words of extra memory for PDF output out of 128383 (max. 10000000)
+ 886 PDF objects out of 1000 (max. 8388607)
+ 794 compressed objects within 8 object streams
+ 429 named destinations out of 1000 (max. 500000)
+ 126169 words of extra memory for PDF output out of 128383 (max. 10000000)
 
