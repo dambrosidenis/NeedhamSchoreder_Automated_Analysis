@@ -188,7 +188,7 @@ Given a message $M$ and its image $\textrm{senc}_k\ M$ (or, $\textrm{aenc}_{pub}
     \item infer any information about $M$ from $\textrm{senc}_k\ M$ (or $\textrm{aenc}_{pub}\ M$).
 \end{itemize}
 
-This set of hypotheses represents both the strength and weakness of this paradigm: from a modeling point of view, the abstractions introduced effectlively strip down protocols leaving only their cryptographic primitives, thus allowing for far easier formalization and verification processes. Long and complex message exchanges between multiple parties are manageable within this model and, as we will shortly show, various provers have been proposed with this purpose during recent years. On the other hand, by simplyfing cryptography down to only algebraic symbols, this model does not take into consideration neither possible bad implementation choices nor real-world attacks regarding the cryptographic primitives actually used. The computational model, by being less abstract, clearly covers a wider spectrum of risk scenarios, but with an non-negligible added complexity and still without being considered a completely inclusive paradigm (we can trivially think about side channel attacks, which are not being included in any threat model by definition).
+This set of hypotheses represents both the strength and weakness of this paradigm: from a modeling point of view, the abstractions introduced effectlively strip down protocols leaving only their cryptographic primitives, thus allowing for far easier formalization and verification processes. Long and complex message exchanges between multiple parties are manageable within this model and, as we will soon show, various provers have been proposed with this purpose during recent years. On the other hand, by simplyfing cryptography down to only algebraic symbols, this model does not take into consideration neither possible bad implementation choices nor real-world attacks regarding the cryptographic primitives actually used. The computational model, by being less abstract, clearly covers a wider spectrum of risk scenarios, but with an non-negligible added complexity and still without being considered a completely inclusive paradigm (we can trivially think about side channel attacks, which are not being included in any threat model by definition).
 
 Coming back to the Dolev-Yao model, a protocol is formalized as a series of algebraic terms (messages) exchanged by abstract machines (clients) through an attacker-controlled network. We assume that any connection can be eavesdropped by a malevolent agent that is also able to intercept, modify, forge and drop messages on the fly (but always following the perfect cryptography constraints described). After formalizing a protocol, its security goals can be expressed as:
 
@@ -208,6 +208,7 @@ In order to streamline the proof of security properties belonging to a certain p
     \caption{Decidability in symbolic verification. Image taken by N. Vitacolonna's presentation \cite{PresentazioneVitacolonna}}
 \end{figure*}
 
+
 In particular, as shown by N. Durgin et al. \cite{ComplexityOfBoundedSecurity}, by restricting different sources we can ensure to reduce the model checking problem to different complexity classes:
 
 \begin{itemize}
@@ -217,64 +218,22 @@ In particular, as shown by N. Durgin et al. \cite{ComplexityOfBoundedSecurity}, 
 
 Alternatively to bounding the sources of infinity, some software address undecidability by requiring human input (for example, Tamarin Prover \cite{tamarinIntroduction} features an interactive mode that allows the user to decide which security goals prioritize based on intermediate constraint systems, as we will see in \ref{subsec:tamarinGui}), returning inconclusive results (for example, ProverIf \cite{proverifIntroduction} may return an invalid attack trace) or even allowing non-termination.
 
-On top of this, 
-
 \section{Tamarin Prover Overview}\label{sec:TamarinOverview}
 
-The automatic tool we used to complete the experimentation for this thesis is Tamarin Prover (which from now on we will call Tamarin for the sake of semplicity). We will now do a quick overview of its syntax, semantics and internal functioning; please refer to S. Meier's \cite{meierThesis} and B. Schmidt's \cite{schmidtThesis} PhD thesis and their introductory paper \cite{TamarinFoundations} for further information about the theoretical foundations regarding this tool, as long as its official manual \cite{tamarinManual} to resolve any doubts about its use.
+In 2012, researchers at ETH introduced a new symbolic verification software, the Tamarin prover. Such tool provides an automated search for attacks, advanced protocol analysis techniques, and an interactive theorem proving approach that enables security experts to manually guide the proof process. We will now do a quick overview of its syntax, semantics and internal functioning; please refer to S. Meier's \cite{meierThesis} and B. Schmidt's \cite{schmidtThesis} PhD thesis and their introductory paper \cite{TamarinFoundations} for further information about the theoretical foundations regarding this tool, as long as its official manual \cite{tamarinManual} to solve any doubts about its use.
 
 \subsection{Basic definitions}
 
-Tamarin allows protocol (and adversary) modeling through multiset rewriting rules.
-
-\begin{definition}[Multiset rewriting rule]
-
-Given a multiset $\Gamma_t = \{ F_0, ..., F_n \}$ and a sequence of multisets $trace_t = \langle a_0, ..., a_{t-1} \rangle$ at a time $t$, we can define a rewrite rule as a triple of multisets $RR = \langle L, A, R \rangle$ (written as $RR= L -[ A ] \rightarrow R$) such that:
-
-\begin{itemize}
-    \item we can apply $RR$ to $\Gamma_t$ if there is at least one ground instance (i.e. an instance with no variables) $rr = l -[ a ] \rightarrow r$ of $RR$ so that $l \subseteq^{\#} \Gamma_t$
-    \item applying $rr$ to $\Gamma_t$ yields to a new state $\Gamma_{t+1}$ and an increased trace $trace_{t+1}$ obtained as
-
-\begin{align}
-    \Gamma_{t+1} &= \Gamma_t \setminus^{\#} l \cup^{\#} r \label{eq:StateEvolution}\\
-    trace_{t+1} &= \langle a_0, ..., a_{t-1}, a_t \rangle
-\end{align}
-
-\end{itemize}
-
-in which $\setminus^{\#}$ and $\cup^{\#}$ are the multiset equivalent operations for set difference and union. From now on, we will refer to $L$, $R$ and $A$ as the multisets of \textit{premises}, \textit{conclusions} and \textit{action facts} of a rule (in this order). 
-\end{definition}
-
-Note that within the trace $trace_{t+1}$, $a$ is associated to the time istant $t$: this will be useful later on since security properties will be specified through first order logic guarded formulas. To be precise, a \textit{trace} is the sequence of sets of ground (action) facts that happened during the execution of a series of rewriting rules.
-
-More formally, given a set of rules $P$, all the possible traces generated by executions of P are
-
-\begin{align*}
-    traces(P) = \{ &\langle A_1,...,A_n \rangle | \exists S_1,...,S_n . \varnothing ^{\#} \xrightarrow[]{A_1} S_1 \xrightarrow[]{A_2} ... \xrightarrow[]{A_n} S_n\\
-    & \textrm{and no ground istance of Fresh() is used twice }\}
-\end{align*}
-
-For the purpose of this thesis is also worth mentioning that since in a rewriting rule $L -[ A ] \rightarrow R$ any of the three multisets could be empty, a trace in which all istances of $\varnothing^{\#}$ are removed is called an \textit{observable trace}. 
-
-Within Tamarin, all multisets are composed by facts. Facts feature a precise arity, are named with a starting capital letter and can be either \textit{linear} or \textit{persistent}:
-
-\begin{itemize}
-    \item linear facts can be consumed only once and are useful to model state transitions and ephemeral messages;
-    \item persistent facts can be consumed unlimited times and are optimal to model enduring knowledge (and are prefixed by an exclamation mark). Note that the introduction of persistent facts requires a slight change to equation \ref{eq:StateEvolution}: whereas before all elements of $l$ were removed from $\Gamma_t$, now only the linear facts beloging to $l$ will be subtracted, while persistent facts will never be consumed.
-\end{itemize}
-
-In turn, facts are made up of terms, which can be public (prefixed by a \$), freshly created (prefixed by a \textasciitilde{}) or normal messages (note that public and fresh terms are sub-categories of normal messages).
-
-\subsection{Term algebra}
-
-In order to continue explaining Tamarin's functioning, we have to take a look at the theoretical foundations behind the algebraic terms introduced in \ref{sec:SymbolicModel}.
+As explained in \ref{sec:SymbolicModel}, the Dolev-Yao model formalizes cryptographic messages within a term algebra; thus, in order to introduce Tamarin's syntax, we firsly have to take a look at (some) of the theoretical foundations behind the tool. 
 
 \begin{definition}[Signature]
     A A signature $\Sigma$ is a finite set of functions of defined arity.
 \end{definition}
 
+Signatures are fundamental, since are the building blocks of our theory. As we will soon see, all the algebraic terms we introduced before (for example in equations \ref{eq:SymmetricEncryptionIdentity} and \ref{eq:AsymmetricEncryptionIdentity}) will be expressed as function symbols of fixed arity.
+
 \begin{definition}[$\Sigma$-terms]
-    Given a signature $\Sigma$ and a set of variables $\chi$, with $\Sigma \cap \chi = \varnothing$ we can define the set of $\Sigma$-terms $\mathcal{T}_{\Sigma}(\chi)$ as the minimal set such as
+    G Given a signature $\Sigma$ and a set of variables $\chi$, with $\Sigma \cap \chi = \varnothing$ we can define the set of $\Sigma$-terms $\mathcal{T}_{\Sigma}(\chi)$ as the minimal set such as
 
     \begin{itemize}
         \item $\chi \subseteq \mathcal{T}_{\Sigma}(\chi)$
@@ -282,38 +241,46 @@ In order to continue explaining Tamarin's functioning, we have to take a look at
     \end{itemize}
 
     Note that $f/n$ indicates a function $f$ of arity $n$.
-
 \end{definition}
 
-\begin{definition}[Substitution]
-    Given a signature $\Sigma$ and a set of variables $\chi$, with $\Sigma \cap \chi = \varnothing$, a substitution is a function $\sigma: \chi \rightarrow \mathcal{T}_{\Sigma}(\chi)$.
-    
-    Similarly, given a function $f/n \in \Sigma$, a substitution can be extended to a mapping $\sigma':\mathcal{T}_{\Sigma}(\chi) \rightarrow \mathcal{T}_{\Sigma}(\chi)$ such that
+$\Sigma$-terms allow us to recursively define algebraic terms starting from ground istances of variables. In real life we are able to combine multiple cryptographic primitives in order to build protocol messages: analogously, this set is made up of all the (countably infinite) possible combinations of function applications starting from ground terms.
 
+Clearly, we need now a way to "compare" messages: as we previously explained in equations \ref{eq:SymmetricEncryptionIdentity} and \ref{eq:AsymmetricEncryptionIdentity}, the decryption of the encryption of any message (of course with the correct keys) must match the message itself. Similarly, all the primitives we will introduce must have some mechanism to check whether two terms belonging to a given set $\mathcal{T}_{\Sigma}(\chi)$ match each other or not.
+
+\begin{definition}[Substitution]
+    G Given a signature $\Sigma$ and a set of variables $\chi$, with $\Sigma \cap \chi = \varnothing$, a substitution is a function $\sigma: \chi \rightarrow \mathcal{T}_{\Sigma}(\chi)$.
+\end{definition}
+
+In our case, we do not only want to be able to build (and compare) terms upon ground instances of variables, but also build them upon other terms. As a consequence, we must generalize the definition of substitution:
+    
+\begin{definition}[Mapping]
+    G Given a function $f/n \in \Sigma$, a mapping $\sigma':\mathcal{T}_{\Sigma}(\chi) \rightarrow \mathcal{T}_{\Sigma}(\chi)$ is an extension of a substitution $\sigma: \chi \rightarrow \mathcal{T}_{\Sigma}(\chi)$ such that
     \begin{equation*}
         f(t_1,...,t_n)\sigma' = f(t_1\sigma,...,t_n\sigma)
     \end{equation*}
-
 \end{definition}
 
+As we will soon see, mappings will be crucial for meaningful comparisons between terms. Of course, in our case we will narrow our focus on only sensible mappings that allow us to correctly model the cryptographic primitives needed. Each primitive will have a set of rules that will define its behaviour and such set will be formalized through equations:
+
 \begin{definition}[Equation over $\Sigma$]
-    Given a signature $\Sigma$, a set of variables $\chi$, with $\Sigma \cap \chi = \varnothing$, an equation over $\Sigma$ is a pair of terms $(t,u)$ with $t,u \in \mathcal{T}_{\Sigma}(\chi)$. Note that in this case, the equation would be written $t \simeq u$. In order to break loops while simplyfing terms, equations can be oriented (as $t \rightarrow u$).
+    G Given a signature $\Sigma$, a set of variables $\chi$, with $\Sigma \cap \chi = \varnothing$, an equation over $\Sigma$ is an unordered pair of terms $(t,u)$ with $t,u \in \mathcal{T}_{\Sigma}(\chi)$. Note that in this case, the equation would be written $t \simeq u$. In order to break loops while simplyfing terms, equations can be oriented (as $t \rightarrow u$).
 \end{definition}
 
 By introducing a set of equations $E$ we can create a congruence relation $=_E$ on terms $t$ and, consequently, equivalence classes $[t]_E$. The congruence relationship is known as an \textit{equational theory}. Introducing equational theories allows us to unify terms based on the quotient algebra $\mathcal{T}_{\Sigma}(\chi) /_{=_E}$: two terms $t,u \in \chi \cup \mathcal{T}_{\Sigma}(\chi)$ are equal in modulo $E$ if and only if they belong to the same class:
-
 \begin{equation*}
     t =_E u \iff [t]_E = [u]_E
 \end{equation*}
 
+We will soon see how the use of equational theories enables us to formalize cryptographic primitives, but, before continuing, it is sensible to briefly talk about a decidability issue that regards this aspect of the term algebra.
+
 \begin{definition}[$(\Sigma, E)$-Unification]
-    Given a signature $\Sigma$, a set of variables $\chi$, with $\Sigma \cap \chi = \varnothing$ and an equational theory $E$, two terms $t,u \in \mathcal{T}_{\Sigma}(\chi)$ are $(\Sigma,E)$-unifiable if there is at least a mapping $\sigma$ such that $t\sigma =_E u\sigma$.
+    G Given a signature $\Sigma$, a set of variables $\chi$, with $\Sigma \cap \chi = \varnothing$ and an equational theory $E$, two terms $t,u \in \mathcal{T}_{\Sigma}(\chi)$ are $(\Sigma,E)$-unifiable if there is at least a mapping $\sigma$ such that $t\sigma =_E u\sigma$.
 \end{definition}
 
-Normally, unification modulo theories is undecidable \cite{unificationUndecidability}: thus Tamarin recommends users to only define \textit{subterm convergent theories} to ensure termination, even though the software never actually checks this constraint.
+Normally, unification modulo theories is undecidable \cite{unificationUndecidability}: to overcome this issue Tamarin recommends users to only define \textit{subterm convergent theories} to ensure termination of the unification process \cite{subtermconvergent}. In practice, this constraint is never enforced by the tool, thus users must be careful when introducing custom theories (notice that exploiting only Tamarin's default equations overcomes this issue but may not be sufficient to model all the possible scenarios).
 
 \begin{definition}[Convergent Theory]
-    Before defining what a convergent theory is, we have to define both \textit{terminating} and \textit{confluent} theories:
+    B Before defining what a convergent theory is, we have to define both \textit{terminating} and \textit{confluent} theories:
 
     \begin{itemize}
         \item A terminating theory is an equational theory which ensures that each term has a \textit{normal form} that can be reached through an arbitrary (but finite) number of substitutions.
@@ -327,20 +294,68 @@ Normally, unification modulo theories is undecidable \cite{unificationUndecidabi
     A subterm convergent theory is an equational theory that is convergent and, for each equation $e: L \rightarrow R, e \in E$, $R$ is either ground and in normal form or a proper subterm of $L$.
 \end{definition}
 
-Tamarin uses equational theories to model algebraically the cryptographic primitives, such as symmetrical/asymmetrical encryption/decryption, hashing, signing, pair construction/deconstruction, elevation to power, and more. 10 built-in theories are provided to allow the user to easily formalize most cryptographic protocols:
+By default, Tamarin includes the function symbol \lstinline|*/2|, used in the \textit{AC-equational theory}:
+\begin{align*}
+    x * (y * z) &\simeq (x * y) * z\ \ \textrm{(associativity)}\\
+    x * y &\simeq y * z\ \ \textrm{(commutativity)}
+\end{align*}
+
+This theory clearly models some properties of multiplication. Similarly, the tool provides function symbols (\lstinline|pair/2|, \lstinline|fst/1| and \lstinline|snd/1|) and equations to work with pairs: 
+\begin{align*}
+    fst(pair(x,y)) &\simeq x\\
+    snd(pair(x,y)) &\simeq y\\
+\end{align*}
+
+Other function symbols are shipped within the tool, but must be loaded into a theory through the \lstinline|built-ins| directive:
+
+\paragraph{hashing}
+The \lstinline|hashing| theory defines the symbol \lstinline|h/1| and no equations. This clearly models the one-wayness of an ideal hash function, which cannot be reversed (the only way to determine whether the pre-image of \lstinline|h(x)| is \lstinline|x| is to find \lstinline|x|).
+
+\paragraph{symmetric encryption}
+The \lstinline|symmetric-encryption| theory models equation \ref{eq:SymmetricEncryptionIdentity} in a very natural way: after providing symbols \lstinline|senc/2| and \lstinline|sdec/2|, it defines the equation
+\begin{equation*}
+    sdec(senc(m,k),k) = m
+\end{equation*}
+which enforces the fact that the only way to access an encrypted term is to know the decryption key (perfect cryptography assumptions).
+
+\paragraph{asymmetric encryption}
+Similarly to last paragraph, the \lstinline|asymmetric-encryption| theory formalizes equation \ref{eq:AsymmetricEncryptionIdentity} through symbols \lstinline|pk/1|, \lstinline|aenc/2| and \lstinline|adec/2| and the equation
+\begin{equation*}
+    adec(aenc(m, pk(sk)), sk) = m
+\end{equation*}
+By not providing other equations, this ensures that an attacker is not able neither to decrypt an encrypted message without the private secret, nor to deduce a private key from it corrispondent public counterpart.
+
+\paragraph{signing}
+The \lstinline|signing| theory allows to model digital signing schemes. It introduces symbols \lstinline|sign/2|, \lstinline|verify/3|, \lstinline|pk/1|, \lstinline|true/0| and the equation
+\begin{equation*}
+    verify(sign(m,sk), m, pk(sk)) = true
+\end{equation*}
+Yet again, not providing other equations enforces the fact that the attacker is not able to forge valid signatures without first finding a private key.
+
+\paragraph{diffie hellman}
+Perhaps the most complex built-in theory is the \lstinline|diffie-hellman| one: it defines function symbols \lstinline|inv/1|, \lstinline|1/0|, \lstinline|^/2| and \lstinline|*/2| and the following equations:
+\begin{align*}
+    (x^y)^z  &\simeq x^{(y*z)}\\
+    x^1      &\simeq x\\
+    x*y      &\simeq y*x\\
+    (x*y)*z  &\simeq x*(y*z)\\
+    x*1      &\simeq x\\
+    x*inv(x) &\simeq 1\\
+\end{align*}
+Note that this theory allows to effectively model Diffie Hellman exchanges (both classical and with elliptic curves) while providing the remaining multiplication properties not captured by the AC theory (namely the inverse and the identity).
+
+\paragraph{Other theories}
+There are other built-in theories that can be included within a Tamarin model:
 
 \begin{enumerate}
-    \item \lstinline|hashing|
-    \item \lstinline|asymmetric-encryption|
-    \item \lstinline|signing|
     \item \lstinline|revealing-signing|
-    \item \lstinline|symmetric-encryption|
-    \item \lstinline|diffie-hellman|
     \item \lstinline|bilinear-pairing|
     \item \lstinline|xor|
     \item \lstinline|multiset|
     \item \lstinline|reliable-channel|
 \end{enumerate}
+
+for the sake of brevity we will not introduce them, but we encourage any interested reader into looking at their definitions within the manual \cite{tamarinManual}.
 
 \subsection{Default facts and rules}\label{subsec:DefaultFacts}
 
