@@ -29,6 +29,7 @@
 
 \usepackage{epigraph}
 
+\usepackage{tabularx}
 \usepackage{booktabs}
 \usepackage{multirow}
 \usepackage[table,xcdraw]{xcolor}
@@ -579,8 +580,8 @@ The Tamarin interactive mode is a powerful feature that enables users to guide t
     \centering
     \captionsetup{justification=centering, margin=1cm}
     \includegraphics[width=0.8\textwidth]{Figures/gui.png}
-    \label{fig:interactive}
     \caption{Tamarin's interactive mode}
+    \label{fig:interactive}
 \end{figure*}
 
 \subsubsection{Restrictions}
@@ -1057,96 +1058,106 @@ analyzed: NS_fixed.spthy
 
 In order to gain some insight on the tool's performance, we can measure the time and space resources required by a series of executions of the prover on the single lemmas and calculate some statistics on it. Automating such procedure is pretty straightforward in any modern programming language, and in our case we chose to use Python along to GNU's \lstinline|time| command line utility \cite{GNUtime}:
 
-\begin{lstlisting}
+\begin{table*}[t]
+    \centering
+    \begin{tabularx}{0.85\textwidth}{@{}lcccccccccc@{}}
+        \toprule
+        \multicolumn{1}{c}{} & \multicolumn{1}{c}{} & \multicolumn{4}{c}{Duration [ms]} & \multicolumn{4}{c}{Peak RAM usage [kB]}\\
+        \cmidrule(rl){3-6} \cmidrule(rl){7-10}
+        Lemma & \# of steps & Mean & Max & Min & Deviation & Mean & Max & Min & Deviation \\
+        \midrule
+        types & 123 & 697 & 770 & 660 & 15.09 & 46697 & 51248 & 44976 & 1295.62\\
+        \addlinespace
+        Sanity & 15 & 701 & 800 & 670 & 18.20 & 46973 & 50208 & 44016 & 1316.64\\
+        \addlinespace
+        Confidentiality & 98 & 706 & 770 & 660 & 14.75 & 46957 & 50224 & 43984 & 1357.73\\
+        \addlinespace
+        Attack & 19 & 745 & 800 & 710 & 16.60 & 46702 & 51232 & 44992 & 1340.96\\
+        \bottomrule
+        \end{tabularx}
+    \caption{Tamarin's performances during the verification of the Needham Schoroeder Symmetric protocol}
+    \label{tab:tableNS}
+\end{table*}
+
+\begin{table*}[t]
+    \centering
+    \begin{tabularx}{0.85\textwidth}{@{}lcccccccccc@{}}
+        \toprule
+        \multicolumn{1}{c}{} & \multicolumn{1}{c}{} & \multicolumn{4}{c}{Duration [ms]} & \multicolumn{4}{c}{Peak RAM usage [kB]}\\
+        \cmidrule(rl){3-6} \cmidrule(rl){7-10}
+        Lemma & \# of steps & Mean & Max & Min & Deviation & Mean & Max & Min & Deviation \\
+        \midrule
+        types & 130 & 912 & 1000 & 850 & 37.11 & 61134 & 63504 & 58352 & 875.15\\
+        \addlinespace
+        Sanity & 15 & 935 & 990 & 870 & 24.51 & 61155 & 62528 & 58288 & 912.24\\
+        \addlinespace
+        Confidentiality & 19 & 953 & 1040 & 900 & 28.58 & 61132 & 62496 & 59360 & 761.72\\
+        \addlinespace
+        Attack & 294 & 989 & 1510 & 890 & 86.09 & 61195 & 64528 & 59376 & 786.25\\
+        \bottomrule
+        \end{tabularx}
+    \caption{Tamarin's performances during the verification of the Needham Schoroeder Symmetric protocol after fixing}
+    \label{tab:tableNSFixed}
+\end{table*}
+
+\begin{lstlisting}[language=Python]
 import subprocess, re, json
 from statistics import mean, stdev
 
 def runTamarin(filename, lemmaName) :
     command = f'gtime tamarin-prover {filename}.spthy --prove={lemmaName}'
-    process = subprocess.run(command.split(), stdout=subprocess.PIPE, stderr=subprocess.PIPE, universal_newlines=True)
-    gtimeResults = process.stderr.split('\n')[-3].split()
-    time = list(map(int, re.split('\:|\.', gtimeResults[2][:-7])))
-    milliseconds = (time[0] * 60 * 1000) + (time[1] * 1000) + (time[2] * 10)
-    maxMemory = int(gtimeResults[-1][:-13])
+    process = subprocess.run(
+        command.split(),
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        universal_newlines=True)
+    res = process.stderr.split('\n')[-3].split()
+    time = list(map(
+        int,
+        res.split('\:|\.', res[2][:-7])))
+    milliseconds = (time[0] * 60 * 1000) +
+        (time[1] * 1000) +
+        (time[2] * 10)
+    maxMemory = int(res[-1][:-13])
     return milliseconds, maxMemory
 
 FILES = ['NS', 'NS_fixed']
-LEMMAS = ['types', 'Sanity', 'Confidentiality', 'Attack']
+LEMMAS = [
+    'types',
+    'Sanity',
+    'Confidentiality',
+    'Attack']
 N_ITERATIONS = 100
 
-results = {}
-
+out = {}
 for file in FILES :
     for lemma in LEMMAS :
         times = []
-        memories = []
+        mems = []
         for i in range(N_ITERATIONS) :
-            print(f'Lemma: {lemma} | Iteration: {i+1}/{N_ITERATIONS}')
-            newTime, newMemory = runTamarin(file, LEMMAS[0])
-            times.append(newTime)
-            memories.append(newMemory)
-        results[lemma] = {}
-        results[lemma]['maxTime'] = max(times)
-        results[lemma]['maxMemory'] = max(memories)
-        results[lemma]['minTime'] = min(times)
-        results[lemma]['minMemory'] = min(memories)
-        results[lemma]['avgTime'] = mean(times)
-        results[lemma]['avgMemory'] = mean(memories)
-        results[lemma]['stdevTime'] = stdev(times)
-        results[lemma]['stdevMemory'] = stdev(memories)
-    with open(f'benchmarks_{file}.json', 'w') as f:
-        json.dump(results, f)
+            res = runTamarin(file, LEMMAS[0])
+            times.append(res[0])
+            mems.append(res[1])
+        out[lemma] = {}
+        out[lemma]['maxTime'] = max(times)
+        out[lemma]['maxMemory'] = max(mems)
+        out[lemma]['minTime'] = min(times)
+        out[lemma]['minMemory'] = min(mems)
+        out[lemma]['avgTime'] = mean(times)
+        out[lemma]['avgMemory'] = mean(mems)
+        out[lemma]['stdevTime'] = stdev(times)
+        out[lemma]['stdevMemory'] = stdev(mems)
+    with open(f'output_{file}.json', 'w') as f:
+        json.dump(out, f)
 \end{lstlisting}
 
 The script described above measures the resources used to prove each lemma during 100 different iterations. Note that each iteration requires a precomputation-phase overhead, which could be easily amortized by computing all the lemmas in the same execution. The results of our experimentation as described in tables \ref{tab:tableNS} and \ref{tab:tableNSFixed}.
 
-\begin{table*}
-    \centering
-    \resizebox{0.8\textwidth}{!}{
-    {\renewcommand{\arraystretch}{1.5}%
-    \begin{tabular}{@{}lcccccccccc@{}}
-        \toprule
-        \multicolumn{1}{c}{} & \multicolumn{1}{c}{} & \multicolumn{4}{c}{Duration [ms]} & \multicolumn{4}{c}{Peak RAM usage [kB]}\\
-        \cmidrule(rl){4-7} \cmidrule(rl){8-11}
-        Lemma & \# of steps & Mean & Max & Min & Deviation & Mean & Max & Min & Deviation \\
-        \midrule
-        types & 123 & 697 & 770 & 660 & 15.09 & 46697 & 51248 & 44976 & 1295.62\\
-        Sanity & 15 & 701 & 800 & 670 & 18.20 & 46973 & 50208 & 44016 & 1316.64\\
-        Confidentiality & 98 & 706 & 770 & 660 & 14.75 & 46957 & 50224 & 43984 & 1357.73\\
-        Attack & 19 & 745 & 800 & 710 & 16.60 & 46702 & 51232 & 44992 & 1340.96\\
-        \bottomrule
-        \end{tabular}
-    }}
-    \caption{Tamarin's performances during the verification of the Needham Schoroeder Symmetric protocol}
-    \label{tab:tableNS}
-\end{table*}
-
-\begin{table*}
-    \centering
-    \resizebox{0.8\textwidth}{!}{
-    {\renewcommand{\arraystretch}{1.5}%
-    \begin{tabular}{@{}lcccccccccc@{}}
-        \toprule
-        \multicolumn{1}{c}{} & \multicolumn{1}{c}{} & \multicolumn{4}{c}{Duration [ms]} & \multicolumn{4}{c}{Peak RAM usage [kB]}\\
-        \cmidrule(rl){4-7} \cmidrule(rl){8-11}
-        Lemma & \# of steps & Mean & Max & Min & Deviation & Mean & Max & Min & Deviation \\
-        \midrule
-        types & 130 & 912 & 1000 & 850 & 37.11 & 61134 & 63504 & 58352 & 875.15\\
-        Sanity & 15 & 935 & 990 & 870 & 24.51 & 61155 & 62528 & 58288 & 912.24\\
-        Confidentiality & 19 & 953 & 1040 & 900 & 28.58 & 61132 & 62496 & 59360 & 761.72\\
-        Attack & 294 & 989 & 1510 & 890 & 86.09 & 61195 & 64528 & 59376 & 786.25\\
-        \bottomrule
-        \end{tabular}
-    }}
-    \caption{Tamarin's performances during the verification of the Needham Schoroeder Symmetric protocol after fixing}
-    \label{tab:tableNSFixed}
-\end{table*}
-
-As we can see, with this toy-protocol example, Tamarin is able to prove all the properties in the blink of an eye. Of course, when considering more complex formalizations with additional rules and bigger equational theories involved (such as the \lstinline|diffie-hellman| or the \lstinline|xor| built-ins), the proving process becomes more time-consuming (and often non-terminating). For example, in the reference GitHub repository \cite{github} for this paper it is also possible to find a Tamarin formalization of the X3DH exchange proposed by Marlinspike and Perrin \cite{x3dh} that, despite its brevity, manages to get the prover stuck during the precomputation phase due to the high number of Diffie Hellman exchanges required in the protocol.
+As we can see, with this toy-protocol example, Tamarin is able to prove all the properties in the blink of an eye. Of course, when considering more complex formalizations with additional rules and bigger equational theories involved (such as the \lstinline|diffie-hellman| or the \lstinline|xor| built-ins), the proving process becomes more time-consuming (and often non-terminating). For example, in the reference GitHub repository \cite{github} for this paper it is also possible to find a Tamarin formalization of the X3DH exchange \cite{x3dh} that, despite its brevity, manages to get the prover stuck during the precomputation phase due to the high number of Diffie Hellman exchanges required by the protocol.
 
 \section{Conclusions}\label{sec:conclusions}
 
-In this essay we managed to present the Tamarin prover with a top-down approach: starting from a general introduction to the formal checking context background (in particular the symbolic model for protocol verification), we introduced the famous theorem prover by quickly explaining its syntax and usage. In order to provide a more concrete point of view on the matter, we also presented the Needham Schroeder Symmetric protocol and formalized its message exchange in Tamarin semantics. Then, we used the tool to prove some of its security properties and showed how it could be subject to a simple replay attack. After showing a potential fix to the problem, we proved that the proposed modification did, in fact, eliminated the attack. Finally, we provided some performance metrics on the tool.
+In this essay we managed to present the Tamarin prover with a top-down approach: starting from a general introduction to the formal verification background, we introduced the actual tool by quickly explaining its syntax and usage. In order to provide a more concrete point of view on the matter, we also presented the Needham Schroeder Symmetric protocol and formalized its message exchange in Tamarin semantics. Then, we used the tool to prove some of its security properties and showed how it could be subject to a simple replay attack. After showing a potential fix to the problem, we proved that the proposed modification did, in fact, eliminated the attack. Finally, we provided some performance metrics on the tool.
 
 The topic of automated formal verification of protocols is currently an area of active research within the symbolic artificial intelligence field. As computer scientists, this allows us to go through a less cumbersome verification process when checking protocols for correctness, while as users this provides us a better sense of trust with regards to the security features of the application we are using, since their exchanges are more easily formalized and verified against attackers.
 
