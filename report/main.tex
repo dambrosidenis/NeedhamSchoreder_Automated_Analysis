@@ -165,7 +165,6 @@ The essay is structured as follows: in section \ref{sec:SymbolicModel} we will b
 When dealing with the verification of internet protocols, two (main) paradigms are used to formally prove the security properties of both new and established message exchanges: the computational and the symbolic models. The first, initially introduced by Goldwasser, Micali \cite{goldwasser}, Rivest \cite{rivest}, Yao \cite{yao} and others, treats messages as bitstrings, cryptographic primitives as endomorphisms mapping objects in the space of bitstrings and the adversary as a probabilistic Turing machine. Within this model, given a security parameter (such as an encryption key) and a property (formula) that needs to be verified, the adversary must find a polynomial-time algorithm with respect to the size of the parameter that makes the formula false. If the probability of such procedure to work is negligible, then the property is considered as proved. This model manages to resemble real-world cryptography pretty closely, but specifing and verifying its theories can easily become a tedious and lengthy process.
 
 At the cost of accuracy, the symbolic model (also known as the Dolev-Yao model \cite{DolevYao}) abstracts from real-world cryptography operations by substituting actual crypto primitives with term-algebras. Encryption schemes are easily formalized through as binary isomorphisms: for example, given a secret key $k$ and the relevant pair of cryptographic encryption and decryption function symbols $\textrm{senc}_k$, $\textrm{sdec}_k$ and $1$, symmetrical cryptography is defined through the following identity:
-
 \begin{equation}\label{eq:SymmetricEncryptionIdentity}
     \textrm{sdec}_k\ \textrm{senc}_k = 1
 \end{equation}
@@ -173,7 +172,6 @@ At the cost of accuracy, the symbolic model (also known as the Dolev-Yao model \
 Only the entities that are in possess of $k$ are able to encrypt or decrypt any message with it \cite{BBSecurityProtocolVerification}: this hypothesis is known as \textit{perfect cryptography}.
 
 Similarly to equation \ref{eq:SymmetricEncryptionIdentity}, asymmetric encryption is modeled through the following identity:
-
 \begin{equation}\label{eq:AsymmetricEncryptionIdentity}
     \textrm{adec}_{pr}\ \textrm{aenc}_{pub} = \textrm{adec}_{pub}\ \textrm{aenc}_{pr} = 1
 \end{equation}
@@ -394,46 +392,72 @@ In Tamarin, the execution of a protocol is modeled by the evolution of a multise
 
 Tamarin allows protocol (and adversary) modeling through multiset rewriting rules.
 
-\begin{definition}[Multiset rewriting rule]
+\begin{definition}[Labelled rewriting rule]
 
 Given a multiset $\Gamma_t = \{ F_0, ..., F_n \}$ and a sequence of multisets $trace_t = \langle a_0, ..., a_{t-1} \rangle$ at a time $t$, we can define a rewrite rule as a triple of multisets $RR = \langle L, A, R \rangle$ (written as $RR= L -[ A ] \rightarrow R$) such that:
 
 \begin{itemize}
     \item we can apply $RR$ to $\Gamma_t$ if there is at least one ground instance (i.e. an instance with no variables) $rr = l -[ a ] \rightarrow r$ of $RR$ so that $l \subseteq^{\#} \Gamma_t$
     \item applying $rr$ to $\Gamma_t$ yields to a new state $\Gamma_{t+1}$ and an increased trace $trace_{t+1}$ obtained as
-
-\begin{align}
-    \Gamma_{t+1} &= \Gamma_t \setminus^{\#} l \cup^{\#} r \label{eq:StateEvolution}\\
-    trace_{t+1} &= \langle a_0, ..., a_{t-1}, a_t \rangle
-\end{align}
-
+\begin{align*}
+    \Gamma_{t+1} &= \Gamma_t \setminus^{\#} lin(l) \cup^{\#} r\\
+    trace_{t+1} &= \langle a_0, ..., a_{t-1}, a \rangle
+\end{align*}
 \end{itemize}
+in which $\setminus^{\#}$ and $\cup^{\#}$ are the multiset equivalent operations for set difference and union and $lin(l)$ is the multiset of linear facts belonging to $l$ (notice that persistent facts are never removed from the state). From now on, we will refer to $L$, $R$ and $A$ as the multisets of \textit{premises}, \textit{conclusions} and \textit{action facts} of a rule (in this order). 
 
-in which $\setminus^{\#}$ and $\cup^{\#}$ are the multiset equivalent operations for set difference and union. From now on, we will refer to $L$, $R$ and $A$ as the multisets of \textit{premises}, \textit{conclusions} and \textit{action facts} of a rule (in this order). 
+Note that each rule is labelled by a name $N$, thus can be seen as a pair $(N, RR)$
 \end{definition}
 
-Note that within the trace $trace_{t+1}$, $a$ is associated to the time istant $t$: this will be useful later on since security properties will be specified through first order logic guarded formulas. To be precise, a \textit{trace} is the sequence of sets of ground (action) facts that happened during the execution of a series of rewriting rules.
+Notice the detail about the trace being a sequence and not a set: since security properties will be later on specified as guarded fragments of first order temporal logic on set of traces, the ordering relation present in a sequence allows to define temporal relations between different action facts.
 
-More formally, given a set of rules $P$, all the possible traces generated by executions of P are
+In particular, given a set of rewriting rules $P$, Tamarin will analyze the set of all the possible traces generated by executions of P:
 
+\begin{definition}[Set of possible traces]
+    G Given a set of labelled rewriting rules $P = \{(N_1,RR_1),...,(N_m,RR_m)\}$, we define the set of possible traces generated by $P$ as
+    \begin{align*}
+        traces(P) = \{ &\langle A_1,...,A_n \rangle |\\
+        & \exists S_1,...,S_n . \varnothing ^{\#} \xrightarrow[]{A_1} S_1 \xrightarrow[]{A_2} ... \xrightarrow[]{A_n} S_n\\
+        & \textrm{and no ground istance of } Fresh()\\
+        & \textrm{is used twice }\}
+    \end{align*}
+    where $A_i$ is $RR_i$'s action facts multiset.
+\end{definition}
+
+Furthermore, it is important to note that security properties will be specified on specific types of traces, namely \textit{observable traces}.
+
+\begin{definition}[Observable trace]
+    G Given a trace $tr$, we can compute its relative observable trace $tr_{obs}$ by removing all the empty multisets from it:
+    \begin{equation*}
+        tr_{obs} = \langle A_i | A_i \in tr \land A_i \neq \varnothing^{\#} \rangle
+    \end{equation*}
+\end{definition}
+
+To better understand how such trace (both observable and non) is derived from a protocol's execution, we can take a look at the following example rewriting system:
 \begin{align*}
-    traces(P) = \{ &\langle A_1,...,A_n \rangle | \exists S_1,...,S_n . \varnothing ^{\#} \xrightarrow[]{A_1} S_1 \xrightarrow[]{A_2} ... \xrightarrow[]{A_n} S_n\\
-    & \textrm{and no ground istance of Fresh() is used twice }\}
+    P = \{ &(N_1, \varnothing^{\#}-[\{\{\textrm{Init}(0)\}\}] \rightarrow \{\{A(0)\}\}),\\
+    &(N_2, \{\{A(x)\}\}-[\varnothing^{\#}] \rightarrow \{\{B(x)\}\})\\
+    &(N_3, \{\{B(x)\}\}-[\{\{\textrm{Concl}(x)\}\}] \rightarrow \varnothing^{\#})\}
 \end{align*}
 
-For the purpose of this report is also worth mentioning that since in a rewriting rule $L -[ A ] \rightarrow R$ any of the three multisets could be empty, a trace in which all istances of $\varnothing^{\#}$ are removed is called an \textit{observable trace}. 
+Let us assume we are starting with an empty state $\Gamma_0$ and apply rules $N_1, N_2, N_1, N_3$, in this order. The state would evolve as:
+\begin{align*}
+    \Gamma_0 &= \varnothing^{\#} \setminus^{\#} \varnothing^{\#} \cup^{\#} \{\{A(0)\}\} = \{\{A(0)\}\}\\
+    \Gamma_1 &= \{\{A(0)\}\} \setminus^{\#} \{\{A(0)\}\} \cup^{\#} \{\{B(0)\}\} = \{\{B(0)\}\}\\
+    \Gamma_2 &= \{\{B(0)\}\} \setminus^{\#} \varnothing^{\#} \cup^{\#} \{\{A(0)\}\} = \{\{A(0), B(0)\}\}\\
+    \Gamma_3 &= \{\{A(0), B(0)\}\} \setminus^{\#} \{\{B(0)\}\} \cup^{\#} \varnothing^{\#} = \{\{A(0)\}\}
+\end{align*}
+while the generated trace would be
+\begin{equation*}
+    tr = \langle \{\{\textrm{Init}(0)\}\}, \{\{\varnothing^{\#}\}\}, \{\{\textrm{Init}(0)\}\}, \{\{\textrm{Concl}(0)\}\},\rangle
+\end{equation*}
+and the observable trace
+\begin{equation*}
+    tr_{obs} = \langle \{\{\textrm{Init}(0)\}\}, \{\{\textrm{Init}(0)\}\}, \{\{\textrm{Concl}(0)\}\}\rangle
+\end{equation*}
 
 \subsubsection{Dolev Yao rules}
-Tamarin provides 4 built-in special facts that allow to model the generation and transmission of messages through the network:
-
-\begin{itemize}
-    \item \lstinline|Fr(~msg)| allows to create new messages \lstinline|msg|. Note that each value is freshly generated (let us recall that Tamarin allows an infinite number of nonces), so the same ground value can not appear in two different instances of \lstinline|Fr(~msg)|.
-    \item \lstinline|K(msg)| indicates that the attacker deduced \lstinline|msg| from the network.
-    \item \lstinline|Out(msg)| allows machines to send messages to the network.
-    \item \lstinline|In(msg)| allows machines to query the network for incoming messages.
-\end{itemize}
-
-These facts are defined through default multiset rewriting rules according to Dolev Yao's assumptions:
+Although the above described multiset rule rewriting system can be used for general model checking, Tamarin provides a set of built-in rules to model connections within Dolev-Yao's adversary controlled network:
 
 \begin{itemize}
     \item \lstinline|[] --[]-> [ Fr(~msg) ]| allows for the generation of new fresh values.
@@ -444,9 +468,50 @@ These facts are defined through default multiset rewriting rules according to Do
     \item \lstinline|[ K(x1,...,xn) ] --[]-> [ K(f(x1,...,xn)) ]| allows the attacker to apply $n$-ary functions to arguments he already knows.
 \end{itemize}
 
+Notice that these rule allow us to easily specify security properties about the knowledge of the attacker (for example, confidentiality): if we wanted to ensure that a protocol does not reveal a certain secret \lstinline|sec|, we just need to require that \lstinline|K(sec)| does not appear within any of the multisets of the observable trace.
+
+Tamarin only provides built-in facts for communication over insecure and reliable channels, but if we needed to formalize other types of connections we could use the above rule as a blueprint to define them. For example, to model a confidential channel (thus a connection in which the attacker could send, but not read from messages), one may define the following rules:
+
+\begin{lstlisting}[language=Tamarin]
+rule Send_Over_Confidential_Channel :
+    [ ConfOut(msg) ]
+    --[]->
+    [ ConfIn(msg) ]
+
+rule Attacker_Sends_Over_ConfChannel :
+    [ K(msg) ]
+    --[]->
+    [ ConfIn(msg) ]
+\end{lstlisting}
+
+As we can see, there is no rule that allows the adversary to learn anything from the confidential channel, but he might send any forged message through it. On the other hand, an honest user could employ the \lstinline|ConfOut| and \lstinline|ConfIn| facts to model sending and retrieval on the channel. Possibly, if we wanted, we could also differentiate between channels by augmenting the rules with a connection identifier:
+
+\begin{lstlisting}[language=Tamarin]
+rule Send_Over_Confidential_Channel :
+    [ ConfOut(msg, channel) ]
+    --[]->
+    [ ConfIn(msg, channel) ]
+
+rule Attacker_Sends_Over_ConfChannel :
+    [ K(msg), K(channel) ]
+    --[]->
+    [ ConfIn(msg, channel) ]
+\end{lstlisting}
+
+Similarly, to model an authentic channel (a connection where integrity, but not confidentiality is guaranteed), we could define the following rule:
+
+\begin{lstlisting}[language=Tamarin]
+rule Send_Over_Authentic_Channel :
+    [ AuthOut(msg) ]
+    --[ K(msg) ]->
+    [ AuthIn(msg), K(msg) ]
+\end{lstlisting}
+
+By not including a rule that allows the attacker to produce \lstinline|AuthOut| or \lstinline|AuthIn| facts, we ensure that such channel cannot be polluted with forged messages. Again, we could trivially differentiate between channels or build both confidential and authentic (secure) connections with analogous rules.
+
 \subsection{Trace properties}\label{subsec:TraceProperties}
 
-As previously anticipated, in Tamarin security properties are expressed as guarded fragments of first order logic. The syntactical construct adopted by Tamarin to indicate a property to prove is \lstinline|lemma|. Lemmas can be either of type \lstinline|exists-trace|, which are demonstrated by finding a single valid protocol trace verifing the formula, or \lstinline|all-traces|, which are proved by negating the property and trying to find a counterexample. To specify a lemma, we can combinate the following atoms:
+As previously anticipated, in Tamarin security properties are expressed as guarded fragments of first order logic. The keyword adopted by Tamarin to indicate a property to prove is \lstinline|lemma|. Lemmas can be either of type \lstinline|exists-trace|, which are demonstrated by finding a single valid protocol trace verifing the formula, or \lstinline|all-traces|, which are proved by negating the property and trying to find a counterexample. To specify a lemma, we can combinate the following atoms:
 
 \begin{itemize}
     \item false $\bot$;
@@ -468,7 +533,7 @@ Keeping in consideration that also properties can define sets of traces similarl
     On the contrary, if $P \nvDash \phi$, all traces belonging to $traces(P) / traces(\phi)$ represent valid attacks.
 \end{definition}
 
-Note that property proving is done by Tamarin through \textit{constraint systems} resolving. In turn, these systems are simplified by executing a backwards search within the relative protocol's \textit{dependencies graph} (a graph that, for each fact used by a Tamarin \textit{theory}, describes the list of possible rules usable to obtain it). The theoretical foundations behind property proving are beyond the scope of this thesis, but are explained in detail in \cite{schmidtThesis} \cite{meierThesis}. As end users, we can be satisfied by knowing that Tamarin's verification algorithm, although does not guarantee termination, is both \textit{sound} and \textit{complete} \cite{schmidtThesis} \cite{meierThesis} \cite{xorCompleteness}.
+Note that property proving is done by Tamarin through \textit{constraint systems} resolving. In turn, these systems are simplified by executing a backwards search within the relative protocol's \textit{dependencies graph} (a graph that, for each fact used by a Tamarin \textit{theory}, describes the list of possible rules usable to obtain it). The theoretical foundations behind property proving are beyond the scope of this report, but are explained in detail in \cite{schmidtThesis} \cite{meierThesis}. As end users, we can be satisfied by knowing that Tamarin's verification algorithm, although does not guarantee termination, is both \textit{sound} and \textit{complete} \cite{schmidtThesis} \cite{meierThesis} \cite{xorCompleteness}.
 
 \subsection{Observational equivalence properties}\label{subsec:ObsEqProperties}
 
@@ -508,7 +573,7 @@ By knowing how to manually guide the search (for example after doing some practi
 
 \subsubsection{Interactive mode}\label{subsec:tamarinGui}
 
-The Tamarin interactive mode is a powerful feature that enables users to guide the proof search process and interactively inspect the demonstration as it is being constructed. When using the interactive mode, users can provide hints and guidance to the Tamarin prover, which can significantly speed up the proof search process and help to identify any potential issues or vulnerabilities in the security protocol being analyzed. For example, by interleaving automatic steps and manual selection of goals to solve, the user can understand if the tool is entering an infine loop of computation or not by monitoring wheter recursive structures of terms are being produced or not. Furthermore, by guiding the proof, the consumer can easily guess how to build an effective oracle to speed up lenghty proofs. Additionally, the interactive mode provides a valuable opportunity to gain a deeper understanding of how the Tamarin prover works and how it constructs proofs for security protocols. An example of Tamarin in action in interactive mode is displayed in figure \ref{fig:interactive}.
+The Tamarin interactive mode is a powerful feature that enables users to guide the proof search process and interactively inspect the demonstration as it is being constructed. When using the interactive mode, users can provide hints and guidance to the Tamarin prover, which can significantly speed up the proof search process and help to identify any potential issues or vulnerabilities in the security protocol being analyzed. For example, by interleaving automatic steps and manual selection of goals to solve, the user can understand if the tool is entering an infine loop of computation or not by monitoring wheter recursive structures of terms are being produced or not. Furthermore, by guiding the proof, the user can easily guess how to build an effective oracle to speed up lenghty proofs. Additionally, the interactive mode provides a valuable opportunity to gain a deeper understanding of how the Tamarin prover works and how it constructs proofs for security protocols. An example of Tamarin in action in interactive mode is displayed in figure \ref{fig:interactive}.
 
 \begin{figure*}
     \centering
@@ -520,7 +585,20 @@ The Tamarin interactive mode is a powerful feature that enables users to guide t
 
 \subsubsection{Restrictions}
 
-Similarly to lemmas, \textit{restrictions} are specified through guarded fragments of first order logic. The difference between the two is that while lemmas express properties to prove, a restriction limits the possible traces of a protocol to the executions that verify the specified formula.
+Similarly to lemmas, \textit{restrictions} are specified through guarded fragments of first order logic. The difference between the two is that while lemmas express properties to prove, a restriction limits the possible traces of a protocol to the executions that satisfy the specified formula. An example of restriction use could be to avoid the application of the same rule twice:
+
+\begin{lstlisting}[language=Tamarin]
+rule Generic_rule :
+    [ OldFact(x) ]
+    --[ OnlyOnce() ]->
+    [ NewFact(x) ]
+
+restriction Do_not_repeat :
+    "All #i #j .
+        OnlyOnce() @ #i &
+        OnlyOnce() @ #j
+            ==> #i = #j"
+\end{lstlisting}
 
 \subsubsection{Re-use lemmas}
 

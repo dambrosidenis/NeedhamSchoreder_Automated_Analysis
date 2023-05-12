@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.7.15)  11 MAY 2023 17:09
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.7.15)  12 MAY 2023 12:18
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1387,12 +1387,12 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 
 ]
 LaTeX Font Info:    Trying to load font information for TS1+ptm on input line 1
-86.
+84.
 
 (/usr/local/texlive/2022/texmf-dist/tex/latex/psnfss/ts1ptm.fd
 File: ts1ptm.fd 2001/06/04 font definitions for TS1/ptm.
 )
-Overfull \hbox (14.92299pt too wide) in paragraph at lines 188--189
+Overfull \hbox (14.92299pt too wide) in paragraph at lines 186--187
 []\OT1/ptm/m/n/10 (-20) infer any in-for-ma-tion about $\OML/ztmcm/m/it/10 M$ \
 OT1/ptm/m/n/10 (-20) from $[][] \OML/ztmcm/m/it/10 M$ \OT1/ptm/m/n/10 (-20) (or
  $[][] \OML/ztmcm/m/it/10 M$\OT1/ptm/m/n/10 (-20) ). 
@@ -1401,157 +1401,162 @@ OT1/ptm/m/n/10 (-20) from $[][] \OML/ztmcm/m/it/10 M$ \OT1/ptm/m/n/10 (-20) (or
 <Figures/undecidability.png, id=167, 1972.36874pt x 1231.60126pt>
 File: Figures/undecidability.png Graphic file (type png)
 <use Figures/undecidability.png>
-Package pdftex.def Info: Figures/undecidability.png  used on input line 207.
+Package pdftex.def Info: Figures/undecidability.png  used on input line 205.
 (pdftex.def)             Requested size: 400.38872pt x 249.99925pt.
-[2]
-Package mdframed Info: Not enough space on this page on input line 231.
- [3 <./Figures/undecidability.png>]
-Overfull \hbox (9.23473pt too wide) in paragraph at lines 288--289
+[2] [3 <./Figures/undecidability.png>]
+Overfull \hbox (9.23473pt too wide) in paragraph at lines 286--287
 []\OT1/ptm/m/n/10 (-20) Normally, uni-fi-ca-tion mod-ulo the-o-ries is un-de-ci
 d-able [[]]:
  []
 
 
-Overfull \hbox (0.42705pt too wide) in paragraph at lines 294--295
+Overfull \hbox (0.42705pt too wide) in paragraph at lines 292--293
 []\OT1/ptm/m/n/10 (-20) A ter-mi-nat-ing the-ory is an equa-tional the-ory whic
 h
  []
 
 [4]
-Overfull \hbox (3.42499pt too wide) in paragraph at lines 332--333
+Overfull \hbox (3.42499pt too wide) in paragraph at lines 330--331
 [][][][][][][][][][][] \OT1/ptm/m/n/10 (-20) the-ory for-mal-izes equa-tion [][
 ]2[][] through
  []
 
 [5]
-Overfull \hbox (0.51686pt too wide) in paragraph at lines 395--396
+Overfull \hbox (0.51686pt too wide) in paragraph at lines 393--394
 []\OT1/ptm/m/n/10 (-20) Tamarin al-lows pro-to-col (and ad-ver-sary) mod-el-ing
  through
  []
 
 
-Overfull \hbox (30.52434pt too wide) detected at line 422
-[]
+Overfull \hbox (50.7207pt too wide) in paragraph at lines 417--418
+[]\OT1/ptm/m/n/10 (-20) Given a set of la-belled rewrit-ing rules $\OML/ztmcm/m
+/it/10 P \OT1/ztmcm/m/n/10 = \OMS/ztmcm/m/n/10 f\OT1/ztmcm/m/n/10 (\OML/ztmcm/m
+/it/10 N[]; RR[]\OT1/ztmcm/m/n/10 )\OML/ztmcm/m/it/10 ; :::; \OT1/ztmcm/m/n/10 
+(\OML/ztmcm/m/it/10 N[]; RR[]\OT1/ztmcm/m/n/10 )\OMS/ztmcm/m/n/10 g$\OT1/ptm/m/
+n/10 (-20) ,
  []
 
 
-Overfull \hbox (3.47673pt too wide) in paragraph at lines 440--441
+Overfull \hbox (3.47673pt too wide) in paragraph at lines 464--465
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
 ][][][][][][][][][][][][][][][][][][][][] \OT1/ptm/m/n/10 (-20) al-lows for the
  gen-
  []
 
 
-Overfull \hbox (0.34201pt too wide) in paragraph at lines 441--442
+Overfull \hbox (0.34201pt too wide) in paragraph at lines 465--466
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
 ][][][][][][][][][][][][][][][][][][][][] \OT1/ptm/m/n/10 (-20) al-lows the at-
 tacker
  []
 
 
-Overfull \hbox (5.47668pt too wide) in paragraph at lines 442--443
+Overfull \hbox (5.47668pt too wide) in paragraph at lines 466--467
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
 ][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][]
 [][] \OT1/ptm/m/n/10 (-20) al-lows user
  []
 
+[6]
 LaTeX Font Info:    Trying to load font information for TS1+qcr on input line 4
-43.
-(/usr/local/texlive/2022/texmf-dist/tex/latex/tex-gyre/ts1qcr.fd
+67.
+ (/usr/local/texlive/2022/texmf-dist/tex/latex/tex-gyre/ts1qcr.fd
 File: ts1qcr.fd 2009/09/25 v1.2 font definition file for TS1/qcr
 )
 Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             `qcr' (encoding: TS1).
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
- [6]
-Package mdframed Info: Not enough space on this page on input line 479.
  [7]
 
-Package caption Warning: \label without proper reference on input line 511.
+Package caption Warning: \label without proper reference on input line 582.
 See the caption package documentation for explanation.
 
 
-LaTeX Warning: Reference `fig:interactive' on page 8 undefined on input line 51
-1.
+LaTeX Warning: Reference `fig:interactive' on page 8 undefined on input line 57
+6.
 
-<Figures/gui.png, id=308, 1998.46625pt x 1375.1375pt>
+<Figures/gui.png, id=330, 1998.46625pt x 1375.1375pt>
 File: Figures/gui.png Graphic file (type png)
 <use Figures/gui.png>
-Package pdftex.def Info: Figures/gui.png  used on input line 516.
+Package pdftex.def Info: Figures/gui.png  used on input line 581.
 (pdftex.def)             Requested size: 400.38872pt x 275.50523pt.
 
-Overfull \hbox (1.18399pt too wide) in paragraph at lines 523--524
+Overfull \hbox (1.18399pt too wide) in paragraph at lines 588--589
 \OT1/ptm/m/n/10 (-20) Similarly to lem-mas, \OT1/ptm/m/it/10 (-20) re-stric-tio
 ns \OT1/ptm/m/n/10 (-20) are spec-i-fied through guarded
  []
 
+[8]
 
-Package caption Warning: \label without proper reference on input line 537.
+Package caption Warning: \label without proper reference on input line 621.
 See the caption package documentation for explanation.
 
 
-LaTeX Warning: Reference `fig:NS' on page 8 undefined on input line 537.
+LaTeX Warning: Reference `fig:NS' on page 9 undefined on input line 615.
 
-<Figures/NS.png, id=311, 485.815pt x 901.3675pt>
+<Figures/NS.png, id=344, 485.815pt x 901.3675pt>
 File: Figures/NS.png Graphic file (type png)
 <use Figures/NS.png>
-Package pdftex.def Info: Figures/NS.png  used on input line 542.
+Package pdftex.def Info: Figures/NS.png  used on input line 620.
 (pdftex.def)             Requested size: 225.21626pt x 417.85245pt.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[8]
-Overfull \hbox (57.61153pt too wide) in paragraph at lines 609--610
+
+Underfull \vbox (badness 4193) has occurred while \output is active []
+
+ [9 <./Figures/gui.png>]
+Overfull \hbox (57.61153pt too wide) in paragraph at lines 687--688
 []\OT1/ptm/m/n/10 (-20) The re-stric-tion [][][][][] ex-ploits the []
  []
 
 
-Overfull \hbox (2.09836pt too wide) in paragraph at lines 616--617
+Overfull \hbox (2.09836pt too wide) in paragraph at lines 694--695
 [] []$\OML/ztmcm/m/it/9 S \OMS/ztmcm/m/n/9 ! \OML/ztmcm/m/it/9 A \OT1/ztmcm/m/n
 /9 : \OMS/ztmcm/m/n/9 f\OML/ztmcm/m/it/9 N[]; B; Sk; \OMS/ztmcm/m/n/9 f\OML/ztm
 cm/m/it/9 Sk; A\OMS/ztmcm/m/n/9 g[]g[]$[] \OT1/ptm/m/n/10 (-20) Sim-i-larly, th
 e role of the server
  []
 
-[9 <./Figures/gui.png>]
-Overfull \hbox (1.54906pt too wide) in paragraph at lines 668--669
+[10 <./Figures/NS.png>]
+Overfull \hbox (1.54906pt too wide) in paragraph at lines 746--747
 \OT1/ptm/m/n/10 (-20) Bob| action-facts will be ex-ploited in the fi-nal source
 s lemma,
  []
 
-[10 <./Figures/NS.png>] [11]
+[11] [12]
 
-Package caption Warning: \label without proper reference on input line 853.
+Package caption Warning: \label without proper reference on input line 937.
 See the caption package documentation for explanation.
 
 
-LaTeX Warning: Reference `fig:NS_fixed' on page 12 undefined on input line 853.
+LaTeX Warning: Reference `fig:NS_fixed' on page 13 undefined on input line 931.
 
 
 
-Overfull \hbox (38.31763pt too wide) in paragraph at lines 853--854
+Overfull \hbox (38.31763pt too wide) in paragraph at lines 931--932
 \OT1/ptm/m/n/10 (-20) Al-ice sends to Bob the en-crypted mes-sage $\OML/ztmcm/m
 /it/10 A \OMS/ztmcm/m/n/10 ! \OML/ztmcm/m/it/10 B \OT1/ztmcm/m/n/10 : \OMS/ztmc
 m/m/n/10 f\OML/ztmcm/m/it/10 Sk; []; A\OMS/ztmcm/m/n/10 g[]$\OT1/ptm/m/n/10 (-2
 0) .
  []
 
-<Figures/NS_fixed.png, id=501, 500.87125pt x 903.375pt>
+<Figures/NS_fixed.png, id=559, 500.87125pt x 903.375pt>
 File: Figures/NS_fixed.png Graphic file (type png)
 <use Figures/NS_fixed.png>
-Package pdftex.def Info: Figures/NS_fixed.png  used on input line 858.
+Package pdftex.def Info: Figures/NS_fixed.png  used on input line 936.
 (pdftex.def)             Requested size: 225.21626pt x 406.19795pt.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[12] [13 <./Figures/NS_fixed.png>] (./main.bbl
+[13 <./Figures/NS_fixed.png>] [14] (./main.bbl
 LaTeX Font Info:    Calculating math sizes for size <7.4> on input line 10.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <5.47603> not available
 (Font)              Font shape `OT1/ptm/b/n' tried instead on input line 10.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <4.44003> not available
 (Font)              Font shape `OT1/ptm/b/n' tried instead on input line 10.
- [14] [15]
+
 Underfull \hbox (badness 10000) in paragraph at lines 60--65
 []\OT1/ptm/m/n/10 (+20) D. D'Ambrosi.  Sym-bolic ver-i-fi-ca-
  []
@@ -1566,7 +1571,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 60--65
 [][]$\OT1/qcr/m/n/10 https : / / github . com / dambrosidenis /
  []
 
-
+[15] [16]
 Underfull \hbox (badness 10000) in paragraph at lines 172--178
 \OT1/qcr/m/n/10 dimi . uniud . it / []angelo . montanari /
  []
@@ -1576,34 +1581,23 @@ Underfull \hbox (badness 10000) in paragraph at lines 172--178
 \OT1/qcr/m/n/10 SymbolicVerificationWithTamarin .
  []
 
-[16]) 
+) 
 AED: lastpage setting LastPage
-[17
-
-] (./main.aux)
+[17] (./main.aux)
 
 LaTeX Warning: There were undefined references.
 
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
-
-Package rerunfilecheck Warning: File `main.out' has changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
-
-Package rerunfilecheck Info: Checksums for `main.out':
-(rerunfilecheck)             Before: E7768EBA6C869F057F0DFF33E5E6F95F;3736
-(rerunfilecheck)             After:  2ABD2720726E4D27B7A2DF5A9D92E7A1;3741.
+Package rerunfilecheck Info: File `main.out' has not changed.
+(rerunfilecheck)             Checksum: 2ABD2720726E4D27B7A2DF5A9D92E7A1;3741.
  ) 
 Here is how much of TeX's memory you used:
- 35392 strings out of 478268
- 666859 string characters out of 5846347
- 1631240 words of memory out of 5000000
- 52041 multiletter control sequences out of 15000+600000
+ 35469 strings out of 478268
+ 668209 string characters out of 5846347
+ 1626308 words of memory out of 5000000
+ 52082 multiletter control sequences out of 15000+600000
  567287 words of font info for 450 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 99i,18n,94p,1122b,2015s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 99i,19n,94p,1122b,1975s stack positions out of 10000i,1000n,20000p,200000b,200000s
 {/usr/local/texlive/2022/texmf-dist/fonts/enc/dvips/tex-gyre/q-rmm.enc}{/usr/
 local/texlive/2022/texmf-dist/fonts/enc/dvips/tex-gyre/q-ts1.enc}{/usr/local/te
 xlive/2022/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/texlive/2022/texm
@@ -1622,10 +1616,10 @@ fb></usr/local/texlive/2022/texmf-dist/fonts/type1/urw/symbol/usyr.pfb></usr/lo
 cal/texlive/2022/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texliv
 e/2022/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2022/tex
 mf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on main.pdf (17 pages, 1049368 bytes).
+Output written on main.pdf (17 pages, 1055778 bytes).
 PDF statistics:
- 886 PDF objects out of 1000 (max. 8388607)
- 794 compressed objects within 8 object streams
- 429 named destinations out of 1000 (max. 500000)
+ 934 PDF objects out of 1000 (max. 8388607)
+ 841 compressed objects within 9 object streams
+ 465 named destinations out of 1000 (max. 500000)
  126169 words of extra memory for PDF output out of 128383 (max. 10000000)
 
