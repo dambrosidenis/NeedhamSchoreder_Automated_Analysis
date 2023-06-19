@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.7.15)  19 JUN 2023 12:54
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.7.15)  19 JUN 2023 22:32
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1209,7 +1209,7 @@ LaTeX Font Info:    Font shape `T1/Roboto-LF/regular/n' will be
 [1
 
 {/usr/local/texlive/2022/texmf-var/fonts/map/pdftex/updmap/pdftex.map} <./lib/l
-ayouts/intro_bg.pdf> <./lib/logos/infw.png> <./lib/logos/ufg_black.pdf>]
+ayouts/intro_bg.pdf> <./lib/logos/infw.png> <./lib/logos/ufgw.png>]
 (./main.toc
 LaTeX Font Info:    Font shape `T1/Roboto-LF/m/n' aliased to
 (Font)              `T1/Roboto-LF/regular/n' on input line 7.
@@ -1224,10 +1224,6 @@ LaTeX Font Info:    Font shape `T1/Roboto-LF/b/n' aliased to
 (Font)              `T1/Roboto-LF/bold/n' on input line 120.
 LaTeX Font Info:    Font shape `T1/Roboto-LF/bold/n' will be
 (Font)              scaled to size 17.28pt on input line 120.
-
-Overfull \vbox (34.90773pt too high) detected at line 120
- []
-
 
 Overfull \hbox (45.52718pt too wide) has occurred while \output is active
  [] 
@@ -1245,23 +1241,18 @@ Overfull \hbox (2.96399pt too wide) has occurred while \output is active
 [2
 
  <./lib/layouts/vertical_bg.pdf> <./lib/logos/infw2.png>]
-LaTeX Font Info:    Font shape `T1/Roboto-LF/m/n' aliased to
-(Font)              `T1/Roboto-LF/regular/n' on input line 138.
-LaTeX Font Info:    Font shape `T1/Roboto-LF/regular/n' will be
-(Font)              scaled to size 12.0pt on input line 138.
-LaTeX Font Info:    Font shape `T1/Roboto-LF/b/n' aliased to
-(Font)              `T1/Roboto-LF/bold/n' on input line 138.
-LaTeX Font Info:    Font shape `T1/Roboto-LF/bold/n' will be
-(Font)              scaled to size 12.0pt on input line 138.
-LaTeX Font Info:    Font shape `T1/Roboto-LF/b/n' aliased to
-(Font)              `T1/Roboto-LF/bold/n' on input line 138.
-LaTeX Font Info:    Font shape `T1/Roboto-LF/bold/n' will be
-(Font)              scaled to size 10.95pt on input line 138.
-
 Overfull \hbox (45.52718pt too wide) has occurred while \output is active
  [] 
  []
 
+LaTeX Font Info:    Font shape `T1/Roboto-LF/m/n' aliased to
+(Font)              `T1/Roboto-LF/regular/n' on input line 129.
+LaTeX Font Info:    Font shape `T1/Roboto-LF/regular/n' will be
+(Font)              scaled to size 24.88pt on input line 129.
+LaTeX Font Info:    Font shape `T1/Roboto-LF/b/n' aliased to
+(Font)              `T1/Roboto-LF/bold/n' on input line 129.
+LaTeX Font Info:    Font shape `T1/Roboto-LF/bold/n' will be
+(Font)              scaled to size 24.88pt on input line 129.
 
 Overfull \hbox (2.96399pt too wide) has occurred while \output is active
 [][][][] 
@@ -1269,11 +1260,19 @@ Overfull \hbox (2.96399pt too wide) has occurred while \output is active
 
 [3
 
-]
-LaTeX Font Info:    Font shape `T1/Roboto-LF/m/it' aliased to
-(Font)              `T1/Roboto-LF/regular/it' on input line 155.
-LaTeX Font Info:    Font shape `T1/Roboto-LF/regular/it' will be
-(Font)              scaled to size 10.95pt on input line 155.
+ <./lib/layouts/title_bg.pdf>]
+LaTeX Font Info:    Font shape `T1/Roboto-LF/m/n' aliased to
+(Font)              `T1/Roboto-LF/regular/n' on input line 146.
+LaTeX Font Info:    Font shape `T1/Roboto-LF/regular/n' will be
+(Font)              scaled to size 12.0pt on input line 146.
+LaTeX Font Info:    Font shape `T1/Roboto-LF/b/n' aliased to
+(Font)              `T1/Roboto-LF/bold/n' on input line 146.
+LaTeX Font Info:    Font shape `T1/Roboto-LF/bold/n' will be
+(Font)              scaled to size 12.0pt on input line 146.
+LaTeX Font Info:    Font shape `T1/Roboto-LF/b/n' aliased to
+(Font)              `T1/Roboto-LF/bold/n' on input line 146.
+LaTeX Font Info:    Font shape `T1/Roboto-LF/bold/n' will be
+(Font)              scaled to size 10.95pt on input line 146.
 
 Overfull \hbox (45.52718pt too wide) has occurred while \output is active
  [] 
@@ -1299,6 +1298,11 @@ Overfull \hbox (2.96399pt too wide) has occurred while \output is active
 [5
 
 ]
+LaTeX Font Info:    Font shape `T1/Roboto-LF/m/it' aliased to
+(Font)              `T1/Roboto-LF/regular/it' on input line 170.
+LaTeX Font Info:    Font shape `T1/Roboto-LF/regular/it' will be
+(Font)              scaled to size 10.95pt on input line 170.
+
 Overfull \hbox (45.52718pt too wide) has occurred while \output is active
  [] 
  []
@@ -1323,17 +1327,6 @@ Overfull \hbox (2.96399pt too wide) has occurred while \output is active
 [7
 
 ]
-<images/decidabilitydiagram.png, id=198, 809.0225pt x 624.3325pt>
-File: images/decidabilitydiagram.png Graphic file (type png)
-<use images/decidabilitydiagram.png>
-Package pdftex.def Info: images/decidabilitydiagram.png  used on input line 208
-.
-(pdftex.def)             Requested size: 224.58075pt x 173.30672pt.
-
-Overfull \vbox (4.28839pt too high) detected at line 208
- []
-
-
 Overfull \hbox (45.52718pt too wide) has occurred while \output is active
  [] 
  []
@@ -1345,13 +1338,7 @@ Overfull \hbox (2.96399pt too wide) has occurred while \output is active
 
 [8
 
- <./images/decidabilitydiagram.png>]
-<images/definitions.png, id=206, 880.28876pt x 476.78125pt>
-File: images/definitions.png Graphic file (type png)
-<use images/definitions.png>
-Package pdftex.def Info: images/definitions.png  used on input line 230.
-(pdftex.def)             Requested size: 205.86473pt x 111.49797pt.
-
+]
 Overfull \hbox (45.52718pt too wide) has occurred while \output is active
  [] 
  []
@@ -1363,7 +1350,18 @@ Overfull \hbox (2.96399pt too wide) has occurred while \output is active
 
 [9
 
- <./images/definitions.png>]
+]
+<images/decidabilitydiagram.png, id=187, 809.0225pt x 624.3325pt>
+File: images/decidabilitydiagram.png Graphic file (type png)
+<use images/decidabilitydiagram.png>
+Package pdftex.def Info: images/decidabilitydiagram.png  used on input line 223
+.
+(pdftex.def)             Requested size: 224.58075pt x 173.30672pt.
+
+Overfull \vbox (4.28839pt too high) detected at line 223
+ []
+
+
 Overfull \hbox (45.52718pt too wide) has occurred while \output is active
  [] 
  []
@@ -1375,7 +1373,7 @@ Overfull \hbox (2.96399pt too wide) has occurred while \output is active
 
 [10
 
-]
+ <./images/decidabilitydiagram.png>]
 Overfull \hbox (45.52718pt too wide) has occurred while \output is active
  [] 
  []
@@ -1388,10 +1386,11 @@ Overfull \hbox (2.96399pt too wide) has occurred while \output is active
 [11
 
 ]
-
-LaTeX Warning: Command \textasciicircum invalid in math mode on input line 293.
-
-
+<images/definitions.png, id=198, 880.28876pt x 476.78125pt>
+File: images/definitions.png Graphic file (type png)
+<use images/definitions.png>
+Package pdftex.def Info: images/definitions.png  used on input line 253.
+(pdftex.def)             Requested size: 205.86473pt x 111.49797pt.
 
 Overfull \hbox (45.52718pt too wide) has occurred while \output is active
  [] 
@@ -1404,7 +1403,7 @@ Overfull \hbox (2.96399pt too wide) has occurred while \output is active
 
 [12
 
-]
+ <./images/definitions.png>]
 Overfull \hbox (45.52718pt too wide) has occurred while \output is active
  [] 
  []
@@ -1429,6 +1428,11 @@ Overfull \hbox (2.96399pt too wide) has occurred while \output is active
 [14
 
 ]
+
+LaTeX Warning: Command \textasciicircum invalid in math mode on input line 316.
+
+
+
 Overfull \hbox (45.52718pt too wide) has occurred while \output is active
  [] 
  []
@@ -1453,11 +1457,6 @@ Overfull \hbox (2.96399pt too wide) has occurred while \output is active
 [16
 
 ]
-LaTeX Font Info:    Trying to load font information for T1+cmtt on input line 3
-91.
- (/usr/local/texlive/2022/texmf-dist/tex/latex/base/t1cmtt.fd
-File: t1cmtt.fd 2019/12/16 v2.5j Standard LaTeX font definitions
-)
 Overfull \hbox (45.52718pt too wide) has occurred while \output is active
  [] 
  []
@@ -1470,12 +1469,6 @@ Overfull \hbox (2.96399pt too wide) has occurred while \output is active
 [17
 
 ]
-\openout4 = `main.vrb'.
-
- (./main.vrb
-LaTeX Font Info:    Font shape `T1/cmtt/bx/n' in size <8> not available
-(Font)              Font shape `T1/cmtt/m/n' tried instead on input line 6.
-)
 Overfull \hbox (45.52718pt too wide) has occurred while \output is active
  [] 
  []
@@ -1500,6 +1493,11 @@ Overfull \hbox (2.96399pt too wide) has occurred while \output is active
 [19
 
 ]
+LaTeX Font Info:    Trying to load font information for T1+cmtt on input line 4
+14.
+ (/usr/local/texlive/2022/texmf-dist/tex/latex/base/t1cmtt.fd
+File: t1cmtt.fd 2019/12/16 v2.5j Standard LaTeX font definitions
+)
 Overfull \hbox (45.52718pt too wide) has occurred while \output is active
  [] 
  []
@@ -1512,6 +1510,12 @@ Overfull \hbox (2.96399pt too wide) has occurred while \output is active
 [20
 
 ]
+\openout4 = `main.vrb'.
+
+ (./main.vrb
+LaTeX Font Info:    Font shape `T1/cmtt/bx/n' in size <8> not available
+(Font)              Font shape `T1/cmtt/m/n' tried instead on input line 6.
+)
 Overfull \hbox (45.52718pt too wide) has occurred while \output is active
  [] 
  []
@@ -1524,12 +1528,6 @@ Overfull \hbox (2.96399pt too wide) has occurred while \output is active
 [21
 
 ]
-<images/gui.png, id=282, 1998.46625pt x 1375.1375pt>
-File: images/gui.png Graphic file (type png)
-<use images/gui.png>
-Package pdftex.def Info: images/gui.png  used on input line 502.
-(pdftex.def)             Requested size: 168.43271pt x 115.88844pt.
-
 Overfull \hbox (45.52718pt too wide) has occurred while \output is active
  [] 
  []
@@ -1541,17 +1539,7 @@ Overfull \hbox (2.96399pt too wide) has occurred while \output is active
 
 [22
 
- <./images/gui.png>]
-<images/NS.png, id=288, 485.815pt x 901.3675pt>
-File: images/NS.png Graphic file (type png)
-<use images/NS.png>
-Package pdftex.def Info: images/NS.png  used on input line 512.
-(pdftex.def)             Requested size: 97.31528pt x 180.54538pt.
-
-Overfull \vbox (11.52705pt too high) detected at line 512
- []
-
-
+]
 Overfull \hbox (45.52718pt too wide) has occurred while \output is active
  [] 
  []
@@ -1563,15 +1551,7 @@ Overfull \hbox (2.96399pt too wide) has occurred while \output is active
 
 [23
 
- <./images/NS.png>]
-\openout4 = `main.vrb'.
-
- (./main.vrb
-File: images/NS.png Graphic file (type png)
-<use images/NS.png>
-Package pdftex.def Info: images/NS.png  used on input line 6.
-(pdftex.def)             Requested size: 89.83264pt x 166.66785pt.
-)
+]
 Overfull \hbox (45.52718pt too wide) has occurred while \output is active
  [] 
  []
@@ -1584,14 +1564,12 @@ Overfull \hbox (2.96399pt too wide) has occurred while \output is active
 [24
 
 ]
-\openout4 = `main.vrb'.
+<images/gui.png, id=275, 1998.46625pt x 1375.1375pt>
+File: images/gui.png Graphic file (type png)
+<use images/gui.png>
+Package pdftex.def Info: images/gui.png  used on input line 525.
+(pdftex.def)             Requested size: 168.43271pt x 115.88844pt.
 
- (./main.vrb
-File: images/NS.png Graphic file (type png)
-<use images/NS.png>
-Package pdftex.def Info: images/NS.png  used on input line 6.
-(pdftex.def)             Requested size: 89.83264pt x 166.66785pt.
-)
 Overfull \hbox (45.52718pt too wide) has occurred while \output is active
  [] 
  []
@@ -1603,19 +1581,7 @@ Overfull \hbox (2.96399pt too wide) has occurred while \output is active
 
 [25
 
-]
-\openout4 = `main.vrb'.
-
- (./main.vrb
-File: images/NS.png Graphic file (type png)
-<use images/NS.png>
-Package pdftex.def Info: images/NS.png  used on input line 6.
-(pdftex.def)             Requested size: 89.83264pt x 166.66785pt.
-)
-Overfull \vbox (17.95938pt too high) detected at line 608
- []
-
-
+ <./images/gui.png>]
 Overfull \hbox (45.52718pt too wide) has occurred while \output is active
  [] 
  []
@@ -1628,15 +1594,13 @@ Overfull \hbox (2.96399pt too wide) has occurred while \output is active
 [26
 
 ]
-\openout4 = `main.vrb'.
-
- (./main.vrb
+<images/NS.png, id=286, 485.815pt x 901.3675pt>
 File: images/NS.png Graphic file (type png)
 <use images/NS.png>
-Package pdftex.def Info: images/NS.png  used on input line 6.
-(pdftex.def)             Requested size: 89.83264pt x 166.66785pt.
-)
-Overfull \vbox (16.9024pt too high) detected at line 642
+Package pdftex.def Info: images/NS.png  used on input line 543.
+(pdftex.def)             Requested size: 97.31528pt x 180.54538pt.
+
+Overfull \vbox (11.52705pt too high) detected at line 543
  []
 
 
@@ -1651,7 +1615,7 @@ Overfull \hbox (2.96399pt too wide) has occurred while \output is active
 
 [27
 
-]
+ <./images/NS.png>]
 \openout4 = `main.vrb'.
 
  (./main.vrb
@@ -1660,10 +1624,6 @@ File: images/NS.png Graphic file (type png)
 Package pdftex.def Info: images/NS.png  used on input line 6.
 (pdftex.def)             Requested size: 89.83264pt x 166.66785pt.
 )
-Overfull \vbox (16.9024pt too high) detected at line 676
- []
-
-
 Overfull \hbox (45.52718pt too wide) has occurred while \output is active
  [] 
  []
@@ -1698,8 +1658,13 @@ Overfull \hbox (2.96399pt too wide) has occurred while \output is active
 ]
 \openout4 = `main.vrb'.
 
- (./main.vrb)
-Overfull \vbox (38.18172pt too high) detected at line 741
+ (./main.vrb
+File: images/NS.png Graphic file (type png)
+<use images/NS.png>
+Package pdftex.def Info: images/NS.png  used on input line 6.
+(pdftex.def)             Requested size: 89.83264pt x 166.66785pt.
+)
+Overfull \vbox (8.72324pt too high) detected at line 639
  []
 
 
@@ -1717,7 +1682,16 @@ Overfull \hbox (2.96399pt too wide) has occurred while \output is active
 ]
 \openout4 = `main.vrb'.
 
- (./main.vrb)
+ (./main.vrb
+File: images/NS.png Graphic file (type png)
+<use images/NS.png>
+Package pdftex.def Info: images/NS.png  used on input line 6.
+(pdftex.def)             Requested size: 89.83264pt x 166.66785pt.
+)
+Overfull \vbox (17.95938pt too high) detected at line 671
+ []
+
+
 Overfull \hbox (45.52718pt too wide) has occurred while \output is active
  [] 
  []
@@ -1732,7 +1706,16 @@ Overfull \hbox (2.96399pt too wide) has occurred while \output is active
 ]
 \openout4 = `main.vrb'.
 
- (./main.vrb)
+ (./main.vrb
+File: images/NS.png Graphic file (type png)
+<use images/NS.png>
+Package pdftex.def Info: images/NS.png  used on input line 6.
+(pdftex.def)             Requested size: 89.83264pt x 166.66785pt.
+)
+Overfull \vbox (16.9024pt too high) detected at line 705
+ []
+
+
 Overfull \hbox (45.52718pt too wide) has occurred while \output is active
  [] 
  []
@@ -1747,7 +1730,16 @@ Overfull \hbox (2.96399pt too wide) has occurred while \output is active
 ]
 \openout4 = `main.vrb'.
 
- (./main.vrb)
+ (./main.vrb
+File: images/NS.png Graphic file (type png)
+<use images/NS.png>
+Package pdftex.def Info: images/NS.png  used on input line 6.
+(pdftex.def)             Requested size: 89.83264pt x 166.66785pt.
+)
+Overfull \vbox (16.9024pt too high) detected at line 739
+ []
+
+
 Overfull \hbox (45.52718pt too wide) has occurred while \output is active
  [] 
  []
@@ -1760,11 +1752,14 @@ Overfull \hbox (2.96399pt too wide) has occurred while \output is active
 [33
 
 ]
-LaTeX Font Info:    Font shape `T1/Roboto-LF/m/it' aliased to
-(Font)              `T1/Roboto-LF/regular/it' on input line 839.
-LaTeX Font Info:    Font shape `T1/Roboto-LF/regular/it' will be
-(Font)              scaled to size 9.0pt on input line 839.
+\openout4 = `main.vrb'.
 
+ (./main.vrb
+File: images/NS.png Graphic file (type png)
+<use images/NS.png>
+Package pdftex.def Info: images/NS.png  used on input line 6.
+(pdftex.def)             Requested size: 89.83264pt x 166.66785pt.
+)
 Overfull \hbox (45.52718pt too wide) has occurred while \output is active
  [] 
  []
@@ -1777,6 +1772,13 @@ Overfull \hbox (2.96399pt too wide) has occurred while \output is active
 [34
 
 ]
+\openout4 = `main.vrb'.
+
+ (./main.vrb)
+Overfull \vbox (38.18172pt too high) detected at line 804
+ []
+
+
 Overfull \hbox (45.52718pt too wide) has occurred while \output is active
  [] 
  []
@@ -1789,12 +1791,9 @@ Overfull \hbox (2.96399pt too wide) has occurred while \output is active
 [35
 
 ]
-<readme/layouts.png, id=361, 1075.01625pt x 469.755pt>
-File: readme/layouts.png Graphic file (type png)
-<use readme/layouts.png>
-Package pdftex.def Info: readme/layouts.png  used on input line 884.
-(pdftex.def)             Requested size: 336.86542pt x 147.19948pt.
+\openout4 = `main.vrb'.
 
+ (./main.vrb)
 Overfull \hbox (45.52718pt too wide) has occurred while \output is active
  [] 
  []
@@ -1806,7 +1805,10 @@ Overfull \hbox (2.96399pt too wide) has occurred while \output is active
 
 [36
 
- <./readme/layouts.png>]
+]
+\openout4 = `main.vrb'.
+
+ (./main.vrb)
 Overfull \hbox (45.52718pt too wide) has occurred while \output is active
  [] 
  []
@@ -1819,6 +1821,9 @@ Overfull \hbox (2.96399pt too wide) has occurred while \output is active
 [37
 
 ]
+\openout4 = `main.vrb'.
+
+ (./main.vrb)
 Overfull \hbox (45.52718pt too wide) has occurred while \output is active
  [] 
  []
@@ -1831,18 +1836,20 @@ Overfull \hbox (2.96399pt too wide) has occurred while \output is active
 [38
 
 ]
+<images/NS_fixed.png, id=353, 500.87125pt x 903.375pt>
+File: images/NS_fixed.png Graphic file (type png)
+<use images/NS_fixed.png>
+Package pdftex.def Info: images/NS_fixed.png  used on input line 889.
+(pdftex.def)             Requested size: 97.31528pt x 175.51643pt.
+
+Overfull \vbox (6.49811pt too high) detected at line 889
+ []
+
+
 Overfull \hbox (45.52718pt too wide) has occurred while \output is active
  [] 
  []
 
-LaTeX Font Info:    Font shape `T1/Roboto-LF/m/n' aliased to
-(Font)              `T1/Roboto-LF/regular/n' on input line 955.
-LaTeX Font Info:    Font shape `T1/Roboto-LF/regular/n' will be
-(Font)              scaled to size 24.88pt on input line 955.
-LaTeX Font Info:    Font shape `T1/Roboto-LF/b/n' aliased to
-(Font)              `T1/Roboto-LF/bold/n' on input line 955.
-LaTeX Font Info:    Font shape `T1/Roboto-LF/bold/n' will be
-(Font)              scaled to size 24.88pt on input line 955.
 
 Overfull \hbox (2.96399pt too wide) has occurred while \output is active
 [][][][] 
@@ -1850,7 +1857,20 @@ Overfull \hbox (2.96399pt too wide) has occurred while \output is active
 
 [39
 
- <./lib/layouts/title_bg.pdf>]
+ <./images/NS_fixed.png>]
+\openout4 = `main.vrb'.
+
+ (./main.vrb
+<images/NS_Fixed.png, id=360, 500.87125pt x 903.375pt>
+File: images/NS_Fixed.png Graphic file (type png)
+<use images/NS_Fixed.png>
+Package pdftex.def Info: images/NS_Fixed.png  used on input line 6.
+(pdftex.def)             Requested size: 89.83264pt x 162.02153pt.
+)
+Overfull \vbox (39.9024pt too high) detected at line 922
+ []
+
+
 Overfull \hbox (45.52718pt too wide) has occurred while \output is active
  [] 
  []
@@ -1862,7 +1882,19 @@ Overfull \hbox (2.96399pt too wide) has occurred while \output is active
 
 [40
 
- <./lib/layouts/horizontal_bg.pdf> <./lib/logos/infw2.png>]
+ <./images/NS_Fixed.png>]
+\openout4 = `main.vrb'.
+
+ (./main.vrb
+File: images/NS_Fixed.png Graphic file (type png)
+<use images/NS_Fixed.png>
+Package pdftex.def Info: images/NS_Fixed.png  used on input line 6.
+(pdftex.def)             Requested size: 89.83264pt x 162.02153pt.
+)
+Overfull \vbox (50.19553pt too high) detected at line 955
+ []
+
+
 Overfull \hbox (45.52718pt too wide) has occurred while \output is active
  [] 
  []
@@ -1875,6 +1907,18 @@ Overfull \hbox (2.96399pt too wide) has occurred while \output is active
 [41
 
 ]
+\openout4 = `main.vrb'.
+
+ (./main.vrb
+File: images/NS_Fixed.png Graphic file (type png)
+<use images/NS_Fixed.png>
+Package pdftex.def Info: images/NS_Fixed.png  used on input line 6.
+(pdftex.def)             Requested size: 89.83264pt x 162.02153pt.
+)
+Overfull \vbox (49.13855pt too high) detected at line 989
+ []
+
+
 Overfull \hbox (45.52718pt too wide) has occurred while \output is active
  [] 
  []
@@ -1887,6 +1931,18 @@ Overfull \hbox (2.96399pt too wide) has occurred while \output is active
 [42
 
 ]
+\openout4 = `main.vrb'.
+
+ (./main.vrb
+File: images/NS_Fixed.png Graphic file (type png)
+<use images/NS_Fixed.png>
+Package pdftex.def Info: images/NS_Fixed.png  used on input line 6.
+(pdftex.def)             Requested size: 89.83264pt x 162.02153pt.
+)
+Overfull \vbox (4.60321pt too high) detected at line 1009
+ []
+
+
 Overfull \hbox (45.52718pt too wide) has occurred while \output is active
  [] 
  []
@@ -1899,27 +1955,9 @@ Overfull \hbox (2.96399pt too wide) has occurred while \output is active
 [43
 
 ]
-<lib/logos/infw.png, id=428, 638.385pt x 215.30438pt>
-File: lib/logos/infw.png Graphic file (type png)
-<use lib/logos/infw.png>
-Package pdftex.def Info: lib/logos/infw.png  used on input line 1010.
-(pdftex.def)             Requested size: 84.35669pt x 28.45274pt.
+\openout4 = `main.vrb'.
 
-Overfull \hbox (9.49835pt too wide) in paragraph at lines 1010--1010
- [][] 
- []
-
-<lib/logos/ufgw.png, id=429, 220.57407pt x 81.30376pt>
-File: lib/logos/ufgw.png Graphic file (type png)
-<use lib/logos/ufgw.png>
-Package pdftex.def Info: lib/logos/ufgw.png  used on input line 1010.
-(pdftex.def)             Requested size: 77.19197pt x 28.45274pt.
-
-Overfull \hbox (2.33363pt too wide) in paragraph at lines 1010--1010
- [][] 
- []
-
-
+ (./main.vrb)
 Overfull \hbox (45.52718pt too wide) has occurred while \output is active
  [] 
  []
@@ -1931,7 +1969,10 @@ Overfull \hbox (2.96399pt too wide) has occurred while \output is active
 
 [44
 
- <./lib/logos/infw.png> <./lib/logos/ufgw.png>]
+]
+\openout4 = `main.vrb'.
+
+ (./main.vrb)
 Overfull \hbox (45.52718pt too wide) has occurred while \output is active
  [] 
  []
@@ -1942,6 +1983,42 @@ Overfull \hbox (2.96399pt too wide) has occurred while \output is active
  []
 
 [45
+
+]
+Overfull \hbox (45.52718pt too wide) has occurred while \output is active
+ [] 
+ []
+
+
+Overfull \hbox (2.96399pt too wide) has occurred while \output is active
+[][][][] 
+ []
+
+[46
+
+]
+Overfull \hbox (45.52718pt too wide) has occurred while \output is active
+ [] 
+ []
+
+
+Overfull \hbox (2.96399pt too wide) has occurred while \output is active
+[][][][] 
+ []
+
+[47
+
+]
+Overfull \hbox (45.52718pt too wide) has occurred while \output is active
+ [] 
+ []
+
+
+Overfull \hbox (2.96399pt too wide) has occurred while \output is active
+[][][][] 
+ []
+
+[48
 
 ]
 \tf@nav=\write6
@@ -1955,16 +2032,16 @@ Overfull \hbox (2.96399pt too wide) has occurred while \output is active
 
  (./main.aux)
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: CA1A546A2D09693BB6AB40BD11FC97C8;2672.
+(rerunfilecheck)             Checksum: 056C8C203E7706E0C105A9636F1C6F8B;2110.
  ) 
 Here is how much of TeX's memory you used:
- 30916 strings out of 478268
- 603100 string characters out of 5846347
- 1256702 words of memory out of 5000000
- 48333 multiletter control sequences out of 15000+600000
- 587531 words of font info for 106 fonts, out of 8000000 for 9000
+ 30894 strings out of 478268
+ 602632 string characters out of 5846347
+ 1256598 words of memory out of 5000000
+ 48303 multiletter control sequences out of 15000+600000
+ 581226 words of font info for 99 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 128i,22n,122p,438b,2029s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 128i,22n,122p,435b,2029s stack positions out of 10000i,1000n,20000p,200000b,200000s
 {/usr/local/texlive/2022/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}
 {/usr/local/texlive/2022/texmf-dist/fonts/enc/dvips/roboto/rbto_b5rac7.enc}</us
 r/local/texlive/2022/texmf-dist/fonts/type1/google/roboto/Roboto-Bold.pfb></usr
@@ -1975,26 +2052,23 @@ sr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></us
 r/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/
 local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/lo
 cal/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/loca
-l/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/local/
-texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/te
-xlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texl
-ive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/texlive
-/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/20
-22/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2022/
-texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/local/texlive/2022/tex
-mf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2022/texm
-f-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texlive/2022/texmf-
-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2022/texmf-di
-st/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2022/texmf-dist
-/fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr/local/texlive/2022/texmf-dist/f
-onts/type1/public/amsfonts/symbols/msam10.pfb></usr/local/texlive/2022/texmf-di
-st/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/texlive/2022/texm
-f-dist/fonts/type1/public/cm-super/sfrm1095.pfb></usr/local/texlive/2022/texmf-
-dist/fonts/type1/public/cm-super/sftt0800.pfb>
-Output written on main.pdf (45 pages, 4799380 bytes).
+l/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/
+texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/te
+xlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/texli
+ve/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/
+2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/202
+2/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2022
+/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texlive/2022/t
+exmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2022/tex
+mf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2022/texmf
+-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/local/texlive/2022/t
+exmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/texlive/20
+22/texmf-dist/fonts/type1/public/cm-super/sfrm1095.pfb></usr/local/texlive/2022
+/texmf-dist/fonts/type1/public/cm-super/sftt0800.pfb>
+Output written on main.pdf (48 pages, 4180844 bytes).
 PDF statistics:
- 572 PDF objects out of 1000 (max. 8388607)
- 408 compressed objects within 5 object streams
- 111 named destinations out of 1000 (max. 500000)
- 254 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 524 PDF objects out of 1000 (max. 8388607)
+ 375 compressed objects within 4 object streams
+ 110 named destinations out of 1000 (max. 500000)
+ 209 words of extra memory for PDF output out of 10000 (max. 10000000)
 

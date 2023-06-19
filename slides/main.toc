@@ -1,18 +1,13 @@
 \beamer@sectionintoc {1}{Introduction}{3}{0}{1}
-\beamer@sectionintoc {2}{The Dolev Yao Model}{4}{0}{2}
-\beamer@sectionintoc {3}{Tamarin Prover Overview}{9}{0}{3}
-\beamer@subsectionintoc {3}{1}{Term-algebra}{9}{0}{3}
-\beamer@subsectionintoc {3}{2}{Equational theories in Tamarin}{10}{0}{3}
-\beamer@subsectionintoc {3}{3}{Formalizing protocols as sets of rewriting rules}{14}{0}{3}
-\beamer@subsubsectionintoc {3}{3}{1}{Dolev Yao Rules}{17}{0}{3}
-\beamer@subsectionintoc {3}{4}{Trace Properties}{19}{0}{3}
-\beamer@subsectionintoc {3}{5}{Observational equivalence properties}{21}{0}{3}
-\beamer@subsectionintoc {3}{6}{Aiding termination}{22}{0}{3}
-\beamer@sectionintoc {4}{The Needham-Schroeder Protocol}{23}{0}{4}
-\beamer@sectionintoc {5}{Common presentation elements}{34}{0}{5}
-\beamer@subsectionintoc {5}{1}{Box}{34}{0}{5}
-\beamer@subsectionintoc {5}{2}{Table}{35}{0}{5}
-\beamer@subsectionintoc {5}{3}{Image}{36}{0}{5}
-\beamer@sectionintoc {6}{Changing colors and Layouts}{37}{0}{6}
-\beamer@sectionintoc {7}{Main point layout}{39}{0}{7}
-\beamer@sectionintoc {8}{Thanks example}{44}{0}{8}
+\beamer@sectionintoc {2}{The Dolev Yao Model}{5}{0}{2}
+\beamer@sectionintoc {3}{Tamarin Prover Overview}{11}{0}{3}
+\beamer@subsectionintoc {3}{1}{Term-algebra}{12}{0}{3}
+\beamer@subsectionintoc {3}{2}{Equational theories in Tamarin}{13}{0}{3}
+\beamer@subsectionintoc {3}{3}{Formalizing protocols as sets of rewriting rules}{17}{0}{3}
+\beamer@subsubsectionintoc {3}{3}{1}{Dolev Yao Rules}{20}{0}{3}
+\beamer@subsectionintoc {3}{4}{Trace Properties}{22}{0}{3}
+\beamer@subsectionintoc {3}{5}{Observational equivalence properties}{24}{0}{3}
+\beamer@subsectionintoc {3}{6}{Aiding termination}{25}{0}{3}
+\beamer@sectionintoc {4}{The Needham-Schroeder Protocol}{26}{0}{4}
+\beamer@subsectionintoc {4}{1}{Tamarin's Performance Metrics}{44}{0}{4}
+\beamer@sectionintoc {5}{Conclusions}{46}{0}{5}

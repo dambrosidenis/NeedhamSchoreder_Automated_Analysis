@@ -1,22 +1,25 @@
-\frametitle{The Needham-Schroeder Protocol, continued}
-    \begin{columns}
-    \column{0.5\textwidth}
-    Modelling a long term key reveal:
-    \begin{lstlisting}[language=Tamarin]
-rule Secret_reveal :
-    [ !Session(client1, client2, sk) ]
-    --[ SecretReveal(sk) ]->
-    [ Out(sk) ]\end{lstlisting}
-    \column{0.5\textwidth}
-    The Denning and Sacco attack:
-    \begin{block}{The attack}
-    \begin{lstlisting}[language=Tamarin]
-lemma Attack :
-    exists-trace
-    "Ex alice bob key #t #t1 .
-        SecretConfirmed(alice, bob, key) @ #t &
-        SecretConfirmed(alice, bob, key) @ #t1 &
-        #t < #t1 &
-        not(Ex #t2 .
-            SecretEstablished(bob, alice, key) @ #t2 & #t < #t2)"\end{lstlisting}\end{block}
-    \end{columns}
+\frametitle{Tamarin's Performance metrics, continued}
+    \begin{table}[]
+        \centering
+        \renewcommand{\arraystretch}{1.5}
+        \setlength{\tabcolsep}{10pt}
+        \resizebox{\columnwidth}{!}{%
+        {\rowcolors{2}{}{LightGray!10}
+            \begin{tabular}{@{}lcccccccccc@{}}
+                \toprule
+                \multicolumn{1}{c}{} & \multicolumn{1}{c}{} & \multicolumn{4}{c}{Duration [ms]} & \multicolumn{4}{c}{Peak RAM usage [kB]}\\
+                \cmidrule(rl){3-6} \cmidrule(rl){7-10}
+                Lemma & \# of steps & Mean & Max & Min & Deviation & Mean & Max & Min & Deviation \\
+                \midrule
+                types & 130 & 912 & 1000 & 850 & 37.11 & 61134 & 63504 & 58352 & 875.15\\
+                \addlinespace
+                Sanity & 15 & 935 & 990 & 870 & 24.51 & 61155 & 62528 & 58288 & 912.24\\
+                \addlinespace
+                Confidentiality & 19 & 953 & 1040 & 900 & 28.58 & 61132 & 62496 & 59360 & 761.72\\
+                \addlinespace
+                Attack & 294 & 989 & 1510 & 890 & 86.09 & 61195 & 64528 & 59376 & 786.25\\
+                \bottomrule
+            \end{tabular}
+        }}
+        \caption{Tamarin's performances during the verification of the Needham Schoroeder Symmetric protocol after fixing}
+    \end{table}

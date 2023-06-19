@@ -122,6 +122,14 @@
 
 \section{Introduction}
 
+\setLayout{mainpoint}
+\setBGColor{DarkPurple}
+\begin{frame}{}
+    \frametitle{Introduction}
+\end{frame}
+\setLayout{vertical}
+
+
 \begin{frame}
     \frametitle{Introduction}
 
@@ -138,6 +146,13 @@
 \end{frame}
 
 \section{The Dolev Yao Model}
+
+\setLayout{mainpoint}
+\setBGColor{Ocean}
+\begin{frame}{}
+    \frametitle{The Dolev Yao Model}
+\end{frame}
+\setLayout{vertical}
 
 \begin{frame}
     \frametitle{The Dolev Yao Model}
@@ -208,6 +223,14 @@
 \end{frame}
 
 \section{Tamarin Prover Overview}
+
+\setLayout{mainpoint}
+\setBGColor{DarkOrange}
+\begin{frame}{}
+    \frametitle{Tamarin Prover Overview}
+\end{frame}
+\setLayout{vertical}
+
 \subsection{Term-algebra}
 \begin{frame}
     \frametitle{Term-algebra}
@@ -502,6 +525,14 @@ rule Send_Over_Secure_Channel :
 \end{frame}
 
 \section{The Needham-Schroeder Protocol}
+
+\setLayout{mainpoint}
+\setBGColor{DarkGreen}
+\begin{frame}{}
+    \frametitle{The Needham-Schroeder Protocol}
+\end{frame}
+\setLayout{vertical}
+
 \begin{frame}
     \frametitle{The Needham-Schroeder Protocol}
     \begin{figure}
@@ -571,6 +602,38 @@ rule Alice_sends_request :
 restriction NoSelfCommunication:
     "All client #t .
         RequestToConnect(client, client) @ #t ==> F"\end{lstlisting}
+        \end{block}
+    \end{columns}
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{The Needham-Schroeder Protocol, continued}
+    \begin{columns}
+        \column{.3\textwidth}
+        \begin{figure}
+            \centering
+            \includegraphics[width=.8\textwidth]{images/NS.png}
+        \end{figure}
+        \column{.7\textwidth}
+        \begin{block}{$S \to A: \{N_A, B, Sk, \{Sk, A\}_{K_B} \}_{K_A}$}
+            \begin{lstlisting}[language=Tamarin]
+rule Server_answers_request :
+    let
+        message_to_bob = senc(<~sk, alice>, kb)
+        message_to_alice = senc(<nonce, bob, ~sk, message_to_bob>, ka)
+    in
+    [
+        !Server(alice, ka),
+        !Server(bob, kb),
+        !Client(alice, ka),
+        !Client(bob, kb),
+        In(<alice, bob, nonce>),
+        Fr(~sk)
+    ]
+    --[ ServerSendsToAlice(message_to_alice) ]->
+    [
+        Out(message_to_alice)
+    ]\end{lstlisting}
         \end{block}
     \end{columns}
 \end{frame}
@@ -826,228 +889,206 @@ lemma Attack :
 \end{frame}
 
 \begin{frame}[fragile]
-    \frametitle{The Needham-Schroeder Protocol, continued}
+    \frametitle{The Needham-Schroeder (Fixed) Protocol, continued}
     \begin{columns}
         \column{.3\textwidth}
         \begin{figure}
             \centering
-            \includegraphics[width=.8\textwidth]{images/NS.png}
+            \includegraphics[width=.8\textwidth]{images/NS_Fixed.png}
         \end{figure}
         \column{.7\textwidth}
         \begin{block}{Initialisation}
             \begin{lstlisting}[language=Tamarin]
-rule Initialise_Client :
+rule Server_answers_request :
+    let
+        message_to_bob = senc(<~sk, ~timestamp, alice>, kb)
+        message_to_alice = senc(<nonce, bob, ~sk, message_to_bob>, ka)
+    in
     [
-        Fr(~k)
+        !Server(alice, ka),
+        !Client(alice, ka),
+        !Client(bob, kb),
+        In(<alice, bob, nonce>),
+        Fr(~sk),
+        Fr(~timestamp)
     ]
-    --[ ClientInitialised($A, ~k) ]->
+    --[ ServerSendsToAlice(message_to_alice),
+        Secret(~sk) ]->
     [
-        !Client($A, ~k),
-        !Server($A, ~k$)
+        Out(message_to_alice)
     ]\end{lstlisting}
         \end{block}
-        \begin{block}{}
-        \begin{lstlisting}[language=Tamarin]
-restriction EachClientCanBeInitialisedOnce :
-    "All client key1 key2 #t1 #t2 .
-        ClientInitialised(client, key1) @ #t1 &
-        ClientInitialised(client, key2) @ #t2
+    \end{columns}
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{The Needham-Schroeder (Fixed) Protocol, continued}
+    \begin{columns}
+        \column{.3\textwidth}
+        \begin{figure}
+            \centering
+            \includegraphics[width=.8\textwidth]{images/NS_Fixed.png}
+        \end{figure}
+        \column{.7\textwidth}
+        \begin{block}{$A \to B: \{Sk, A\}_{K_B}$}
+            \begin{lstlisting}[language=Tamarin]
+rule Alice_receives_answer :
+    let
+        message_to_bob = senc(<sk1, timestamp, alice>, k)
+        message_to_alice = senc(<nonce, bob, sk, message_to_bob>, ka)
+    in
+    [
+        !Client(alice, ka),
+        !Client(bob, kb),
+        AliceQueriesServer(alice, bob, nonce),
+        In(message_to_alice)
+    ]
+    --[ AliceReceivesAnswer(message_to_alice, nonce, message_to_bob, sk, ka),
+        AliceSendsToBob(message_to_bob),
+        SecretEstablished(alice, bob, sk) ]->
+    [
+        ExchangeInitiated(alice, bob, sk),
+        Out(message_to_bob)
+    ]\end{lstlisting}
+        \end{block}
+    \end{columns}
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{The Needham-Schroeder (Fixed) Protocol, continued}
+    \begin{columns}
+        \column{.3\textwidth}
+        \begin{figure}
+            \centering
+            \includegraphics[width=.8\textwidth]{images/NS_Fixed.png}
+        \end{figure}
+        \column{.7\textwidth}
+        \begin{block}{$B \to A: \{N_B\}_{Sk}$}
+            \begin{lstlisting}[language=Tamarin]
+rule Bob_responds_to_Alice :
+    let
+        message_from_alice = senc(<sk, timestamp, alice>, kb)
+        encrypted_nonce = senc(~nonce, sk)
+    in
+    [
+        In(message_from_alice),
+        Fr(~nonce),
+        !Client(alice, ka),
+        !Client(bob, kb),
+        !Server(bob, kb)
+    ]
+    --[ BobReceivesFromAlice(message_from_alice, sk, kb),
+        SecretEstablished(bob, alice, sk, timestamp),
+        BobSendsNonce(encrypted_nonce) ]->
+    [
+        SessionPending(bob, alice, ~nonce, sk),
+        Out(encrypted_nonce)
+    ]\end{lstlisting}
+        \end{block}
+    \end{columns}
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{The Needham-Schroeder (Fixed) Protocol, continued}
+    \begin{columns}
+        \column{.3\textwidth}
+        \begin{figure}
+            \centering
+            \includegraphics[width=.8\textwidth]{images/NS_Fixed.png}
+        \end{figure}
+        \column{.7\textwidth}
+        \begin{block}{Checking timestamps}
+            \begin{lstlisting}[language=Tamarin]
+restriction CheckingTimestamps :
+    "All alice bob sk timestamp #t1 #t2 .
+        SecretEstablishedWithTimestamp(bob, alice, sk, timestamp) @ #t1 &
+        SecretEstablishedWithTimestamp(bob, alice, sk, timestamp) @ #t2
             ==> #t1 = #t2"\end{lstlisting}
         \end{block}
     \end{columns}
 \end{frame}
 
-
-%---------------------------------------------------------Slide 2
-\section{Common presentation elements}
-
-\subsection{Box}
-
-\setLayout{vertical}
-\begin{frame}{Example on using box}
-
-    \footnotesize
-    
-    \begin{ex}
-        Em uma versão da linguagem BASIC, o nome de uma variável é uma sequência de um ou dois caracteres alfanuméricos, em que letras maiúsculas e minúsculas não são distinguidas. Além disso, um nome de variável deve começar com uma letra e deve ser diferente das cinco sequências de dois caracteres reservadas para o uso de comandos. Quantos nomes diferentes de variáveis são possíveis nesta versão do BASIC?
-    \end{ex}
-    
-    \begin{block}{Solução}
-        Pela regra da soma, $V=V_1+V_2$. Como as variáveis só podem começar com letras, temos que $V_1=26$. Pela regra do produto, há $26\cdot 36=936$ sequências de tamanho $2$ que comecem com uma letra e terminam com um caracter alfanumérico. Porém, não se deve usar $5$ variáveis reservadas. Assim, $V_2=26\cdot 36-5=931$. Logo, há $V=V_1+V_2 = 26+931=957$ nomes diferentes para variáveis nesta versão do BASIC.
-    \end{block}
-
-\end{frame}
-%---------------------------------------------------------
-
-
-%--------------------------------------------------------- Slide 3
-\subsection{Table}
-
-\begin{frame}{Example on using table}
-
+\subsection{Tamarin's Performance Metrics}
+\begin{frame}[fragile]
+    \frametitle{Tamarin's Performance metrics}
     \begin{table}[]
         \centering
-        \caption{\label{tab:1}Countries and their codes}
-        
         \renewcommand{\arraystretch}{1.5}
         \setlength{\tabcolsep}{10pt}
-        
+        \resizebox{\columnwidth}{!}{%
         {\rowcolors{2}{}{LightGray!10}
-            \begin{tabular}{ p{3cm}p{3cm}p{3cm}  }
-                \toprule 
-                \textbf{Country Name} & \textbf{Code 2} & \textbf{Code 3} \\
+            \begin{tabular}{@{}lcccccccccc@{}}
+                \toprule
+                \multicolumn{1}{c}{} & \multicolumn{1}{c}{} & \multicolumn{4}{c}{Duration [ms]} & \multicolumn{4}{c}{Peak RAM usage [kB]}\\
+                \cmidrule(rl){3-6} \cmidrule(rl){7-10}
+                Lemma & \# of steps & Mean & Max & Min & Deviation & Mean & Max & Min & Deviation \\
                 \midrule
-                Afghanistan & AF &AFG \\
-                Aland Islands & AX   & ALA \\
-                Albania &AL & ALB \\
-                Algeria    &DZ & DZA \\
+                types & 123 & 697 & 770 & 660 & 15.09 & 46697 & 51248 & 44976 & 1295.62\\
+                \addlinespace
+                Sanity & 15 & 701 & 800 & 670 & 18.20 & 46973 & 50208 & 44016 & 1316.64\\
+                \addlinespace
+                Confidentiality & 98 & 706 & 770 & 660 & 14.75 & 46957 & 50224 & 43984 & 1357.73\\
+                \addlinespace
+                Attack & 19 & 745 & 800 & 710 & 16.60 & 46702 & 51232 & 44992 & 1340.96\\
                 \bottomrule
             \end{tabular}
-        }
+        }}
+        \caption{Tamarin's performances during the verification of the Needham Schoroeder Symmetric protocol}
     \end{table}
-    
 \end{frame}
-%---------------------------------------------------------
 
-\subsection{Image}
-
-%--------------------------------------------------------- Slide 4
-\begin{frame}{Example on using image}
-
-    \begin{figure}
+\begin{frame}[fragile]
+    \frametitle{Tamarin's Performance metrics, continued}
+    \begin{table}[]
         \centering
-        \includegraphics[width=.9\textwidth]{readme/layouts.png}
-        \caption{Template's Layouts.}
-        \label{fig:layouts}
-    \end{figure}
-    
+        \renewcommand{\arraystretch}{1.5}
+        \setlength{\tabcolsep}{10pt}
+        \resizebox{\columnwidth}{!}{%
+        {\rowcolors{2}{}{LightGray!10}
+            \begin{tabular}{@{}lcccccccccc@{}}
+                \toprule
+                \multicolumn{1}{c}{} & \multicolumn{1}{c}{} & \multicolumn{4}{c}{Duration [ms]} & \multicolumn{4}{c}{Peak RAM usage [kB]}\\
+                \cmidrule(rl){3-6} \cmidrule(rl){7-10}
+                Lemma & \# of steps & Mean & Max & Min & Deviation & Mean & Max & Min & Deviation \\
+                \midrule
+                types & 130 & 912 & 1000 & 850 & 37.11 & 61134 & 63504 & 58352 & 875.15\\
+                \addlinespace
+                Sanity & 15 & 935 & 990 & 870 & 24.51 & 61155 & 62528 & 58288 & 912.24\\
+                \addlinespace
+                Confidentiality & 19 & 953 & 1040 & 900 & 28.58 & 61132 & 62496 & 59360 & 761.72\\
+                \addlinespace
+                Attack & 294 & 989 & 1510 & 890 & 86.09 & 61195 & 64528 & 59376 & 786.25\\
+                \bottomrule
+            \end{tabular}
+        }}
+        \caption{Tamarin's performances during the verification of the Needham Schoroeder Symmetric protocol after fixing}
+    \end{table}
 \end{frame}
-%---------------------------------------------------------
 
-
-%--------------------------------------------------------- Slide 5
-\section{Changing colors and Layouts}
-
-\setLayout{blank} % Example of changing layout
-\setBGColor{DarkOrange}  %Example of changing background color 
-
-\begin{frame}{Clean layout and two-column text}
-    
-    \begin{columns}
-    
-        \column{0.5\textwidth}
-        This is a text in first column.
-        $$E=mc^2$$
-        $$ 1 + 2 + \cdots + k =  \frac{k \cdot (k + 1)}{2}.$$
-        \begin{itemize}
-        \item First item
-       
-        \item Second item
-        \end{itemize}
-        
-        \column{0.5\textwidth}
-        This text will be in the second column
-        and on a second tought this is a nice looking
-        layout in some cases.
-        
-        \begin{enumerate}
-            \item First
-            \item Second
-        \end{enumerate}
-        
-    \end{columns}
-    
-\end{frame}
-%---------------------------------------------------------
-
-
-%---------------------------------------------------------Slide 6
-%Highlighting text
-\setLayout{vertical}
-\begin{frame}{Sample frame title}
-    
-    In this slide, some important text will be
-    \alert{highlighted} because it's important. Please, don't abuse it.
-    
-    \begin{block}{Remark}
-        Sample text
-    \end{block}
-    
-    \begin{alertblock}{Important theorem}
-        Sample text in alert box
-    \end{alertblock}
-    
-    \begin{examples}
-        Sample text in green box. The title of the block is ``Examples".
-    \end{examples}
-    
-\end{frame}
-%---------------------------------------------------------
-
-
-%---------------------------------------------------------Slide 7
-\section{Main point layout}
-
+\section{Conclusions}
 \setLayout{mainpoint}
-\setBGColor{DarkPurple}
+\setBGColor{LightGray}
 \begin{frame}{}
-    \frametitle{Preliminary Empirical Study}
+    \frametitle{Conclusions}
 \end{frame}
-%-------------------------------------------------------
+\setLayout{vertical}
 
 
-%---------------------------------------------------------Slide 8
-
-\setLayout{horizontal}
 \begin{frame}
-    \frametitle{Sample frame title}
-    This is a text in second frame. For the sake of showing an example.
-    
+    \frametitle{Conclusions}
+    \epigraph{Security protocols are three-line programs that people still manage to get wrong}{Roger M. Needham}
+
+    There are many Tamarin extensions available for modellin various scenarios:
     \begin{itemize}
-        \item<1-> Text visible on slide 1
-        \item<2-> Text visible on slide 2
-        \begin{itemize}
-            \item text subitem
-        \end{itemize}
-        \item<3> Text visible on slides 3
-        \item<4-> Text visible on slide 4
+        \item Social engineering attacks
+        \item Distance-bound protocols
+        \item Global state protocols
+        \item ... any many yet to come
     \end{itemize}
-\end{frame}
-%---------------------------------------------------------
 
-\section{Thanks example}
-%---------------------------------------------------------Slide 9
-\setLayout{blank}
-\begin{frame}
-    
-    \centering
-    \vspace{2cm}
-    
-    \textbf{\Huge Thanks}
-    
-    \ \\
-    
-    \textbf{Doubts and Suggestions}
-    \ \\
-    
-    \text{\footnotesize altinodantas@gmail.com or deuslirio.junior@gmail.com}
-    
-    \vspace{2cm}
-    \begin{figure}
-        \centering
-        \begin{subfigure}{0.2\textwidth}
-            \centering
-            \includegraphics[height=1cm]{lib/logos/infw.png}
-        \end{subfigure}%
-        \qquad 
-        \begin{subfigure}{0.2\textwidth}
-            \centering
-            \includegraphics[height=1cm]{lib/logos/ufgw.png}
-        \end{subfigure}
-      
-    \end{figure}
-    
+    Tools like Tamarin allow us to deploy protocols with additional awareness!
 \end{frame}
+
 
 %---------------------------------------------------------Slide 10
 \setLayout{titlepage}
