@@ -1,0 +1,22 @@
+\frametitle{The Needham-Schroeder Protocol, continued}
+    \begin{columns}
+    \column{0.5\textwidth}
+    Modelling a long term key reveal:
+    \begin{lstlisting}[language=Tamarin]
+rule Secret_reveal :
+    [ !Session(client1, client2, sk) ]
+    --[ SecretReveal(sk) ]->
+    [ Out(sk) ]\end{lstlisting}
+    \column{0.5\textwidth}
+    The Denning and Sacco attack:
+    \begin{block}{The attack}
+    \begin{lstlisting}[language=Tamarin]
+lemma Attack :
+    exists-trace
+    "Ex alice bob key #t #t1 .
+        SecretConfirmed(alice, bob, key) @ #t &
+        SecretConfirmed(alice, bob, key) @ #t1 &
+        #t < #t1 &
+        not(Ex #t2 .
+            SecretEstablished(bob, alice, key) @ #t2 & #t < #t2)"\end{lstlisting}\end{block}
+    \end{columns}
