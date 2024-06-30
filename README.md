@@ -1,2 +1,97 @@
-# Computer-Network-Security
-Repository for my seminar of Computer Network Security at the University of Udine
+# Needham-Schroeder Symmetric Key Protocol Analysis using Tamarin Prover
+
+GitHub repository for the analysis of the Needham-Schroeder Symmetric Key protocol using the Tamarin Prover.
+This repository contains all the necessary files, including the Tamarin Prover code, a detailed article explaining the analysis, and a presentation summarizing the key findings.
+
+## Table of Contents
+
+- [Introduction](#introduction)
+- [Repository Structure](#repository-structure)
+- [Getting Started](#getting-started)
+- [Prerequisites](#prerequisites)
+- [Usage](#usage)
+- [Article](#article)
+- [Presentation](#presentation)
+- [License](#license)
+
+## Introduction
+
+The Needham-Schroeder Symmetric Key protocol is a well-known cryptographic protocol designed for secure communication between two parties using symmetric key encryption. This repository leverages the Tamarin Prover, a state-of-the-art tool for the formal verification of security protocols, to analyze the Needham-Schroeder Symmetric Key protocol. Our goal is to ensure the protocol's security properties and identify any potential vulnerabilities.
+
+## Repository Structure
+
+The repository is organized as follows:
+
+```
+.
+├── article
+│   └── Needham-Schroeder-Analysis.pdf
+├── presentation
+│   └── Needham-Schroeder-Presentation.pdf
+├── tamarin
+│   └── README.md
+├── README.md
+└── LICENSE
+```
+
+- `article/`: Contains the detailed article explaining the analysis.
+- `presentation/`: Contains the presentation summarizing the key findings.
+- `tamarin/`: Contains the Tamarin Prover code and a README specific to the Tamarin files.
+- `README.md`: This README file.
+- `LICENSE`: The license under which this project is distributed.
+
+## Getting Started
+
+To get started with analyzing the Needham-Schroeder Symmetric Key protocol using the Tamarin Prover, follow the steps below.
+
+### Prerequisites
+
+Ensure you have the following installed on your system:
+
+- [Tamarin Prover](https://tamarin-prover.github.io)
+- [LaTeX](https://www.latex-project.org) (optional, for building the article)
+
+### Usage
+
+1. **Clone the Repository:**
+
+   ```bash
+   git clone https://github.com/yourusername/Needham-Schroeder-Tamarin.git
+   cd Needham-Schroeder-Tamarin
+   ```
+
+2. **Navigate to the Tamarin Directory:**
+
+   ```bash
+   cd tamarin
+   ```
+
+3. **Run the Tamarin Prover:**
+
+   ```bash
+   tamarin-prover Needham-Schroeder.spthy
+   ```
+
+4. **Analyze the Results:**
+   The Tamarin Prover will output the analysis results. You can review these results to understand the security properties and any potential vulnerabilities identified in the protocol.
+
+## Article
+
+The detailed article explaining the analysis can be found in the `article/` directory:
+
+- [Needham-Schroeder-Analysis.pdf](article/Needham-Schroeder-Analysis.pdf)
+
+The article provides an in-depth explanation of the Needham-Schroeder Symmetric Key protocol, the methodology used for the analysis, and the results obtained using the Tamarin Prover.
+
+## Presentation
+
+The presentation summarizing the key findings can be found in the `presentation/` directory:
+
+- [Needham-Schroeder-Presentation.pdf](presentation/Needham-Schroeder-Presentation.pdf)
+
+The presentation is a concise overview of the analysis, suitable for sharing with peers or presenting in academic or professional settings.
+
+
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
