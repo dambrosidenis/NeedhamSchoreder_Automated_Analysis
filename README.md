@@ -1,7 +1,7 @@
-# Needham-Schroeder Symmetric Key Protocol Analysis using Tamarin Prover
+# Needham-Schroeder Symmetric Key Protocol Automated Analysis
 
-GitHub repository for the analysis of the Needham-Schroeder Symmetric Key protocol using the Tamarin Prover.
-This repository contains all the necessary files, including the Tamarin Prover code, a detailed article explaining the analysis, and a presentation summarizing the key findings.
+GitHub repository for the security analysis of the Needham-Schroeder Symmetric Key protocol using the Tamarin Prover. All the findings are meant only to confirm the flaws already identified within the literature, as the content if this work was intended as an introductory tutorial to the use of the Tamarin Prover.
+This repository contains all the necessary files, including the Tamarin Prover code, a detailed article explaining the theoretical background behind the analysis and a presentation summarizing the key findings.
 
 ## Table of Contents
 
@@ -16,7 +16,7 @@ This repository contains all the necessary files, including the Tamarin Prover c
 
 ## Introduction
 
-The Needham-Schroeder Symmetric Key protocol is a well-known cryptographic protocol designed for secure communication between two parties using symmetric key encryption. This repository leverages the Tamarin Prover, a state-of-the-art tool for the formal verification of security protocols, to analyze the Needham-Schroeder Symmetric Key protocol. Our goal is to ensure the protocol's security properties and identify any potential vulnerabilities.
+The Needham-Schroeder Symmetric Key protocol is a well-known cryptographic protocol designed for secure communication between two parties using symmetric key encryption. This repository leverages the Tamarin Prover, a state-of-the-art tool for the formal verification of security protocols, to verify the main security properties protocol.
 
 ## Repository Structure
 
@@ -25,12 +25,24 @@ The repository is organized as follows:
 ```
 .
 ├── article
-│   └── Needham-Schroeder-Analysis.pdf
+│   ├── Needham-Schroeder-Analysis.pdf
+│   └── src
+│      ├── main.tex
+│      ├── needhamschroeder.tex
+│      ├── needhamschroederfixed.tex
+│      ├── references.bib
+│      ├── main.tex
+│      ├── sources.sphty
+│      ├── msc.sty
+│      └── SelfArx.cls
 ├── presentation
 │   └── Needham-Schroeder-Presentation.pdf
 ├── tamarin
+│   ├── NS.sphty
+│   ├── NS_fixed.sphty
 │   └── README.md
 ├── README.md
+├── CITATION.cff
 └── LICENSE
 ```
 
@@ -56,7 +68,7 @@ Ensure you have the following installed on your system:
 1. **Clone the Repository:**
 
    ```bash
-   git clone https://github.com/yourusername/Needham-Schroeder-Tamarin.git
+   git clone https://github.com/dambrosidenis/Needham-Schroeder-Tamarin.git
    cd Needham-Schroeder-Tamarin
    ```
 
@@ -69,11 +81,8 @@ Ensure you have the following installed on your system:
 3. **Run the Tamarin Prover:**
 
    ```bash
-   tamarin-prover Needham-Schroeder.spthy
+   tamarin-prover [file].spthy
    ```
-
-4. **Analyze the Results:**
-   The Tamarin Prover will output the analysis results. You can review these results to understand the security properties and any potential vulnerabilities identified in the protocol.
 
 ## Article
 
@@ -81,7 +90,7 @@ The detailed article explaining the analysis can be found in the `article/` dire
 
 - [Needham-Schroeder-Analysis.pdf](article/Needham-Schroeder-Analysis.pdf)
 
-The article provides an in-depth explanation of the Needham-Schroeder Symmetric Key protocol, the methodology used for the analysis, and the results obtained using the Tamarin Prover.
+The article provides an introduction to the Tamarin Prover, an in-depth explanation of the Needham-Schroeder Symmetric Key protocol, the methodology used for the analysis, and the results of the verification. The source files for the article are available at [article/src/](article/src/)
 
 ## Presentation
 
@@ -90,7 +99,6 @@ The presentation summarizing the key findings can be found in the `presentation/
 - [Needham-Schroeder-Presentation.pdf](presentation/Needham-Schroeder-Presentation.pdf)
 
 The presentation is a concise overview of the analysis, suitable for sharing with peers or presenting in academic or professional settings.
-
 
 ## License
 
