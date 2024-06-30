@@ -1,0 +1,179 @@
+theory NeedhamSchroederFixed
+begin
+
+builtins: symmetric-encryption
+functions: pred/1
+
+rule Initialise_Client :
+    [
+        Fr(~k)
+    ]
+    --[ ClientInitialised($A, ~k) ]->
+    [
+        !Client($A, ~k),
+        !Server($A, ~k)
+    ]
+
+rule Alice_sends_request :
+    [
+        !Client(alice, ka),
+        !Client(bob, kb),
+        Fr(~nonce)
+    ]
+    --[ RequestToConnect(alice, bob) ]->
+    [
+        AliceQueriesServer(alice, bob, ~nonce),
+        Out(<alice, bob, ~nonce>)
+    ]
+
+rule Server_answers_request :
+    let
+        message_to_bob = senc(<~sk, ~timestamp, alice>, kb)
+        message_to_alice = senc(<nonce, bob, ~sk, message_to_bob>, ka)
+    in
+    [
+        !Server(alice, ka),
+        !Client(alice, ka),
+        !Client(bob, kb),
+        In(<alice, bob, nonce>),
+        Fr(~sk),
+        Fr(~timestamp)
+    ]
+    --[ ServerSendsToAlice(message_to_alice),
+        Secret(~sk) ]->
+    [
+        Out(message_to_alice)
+    ]
+
+rule Alice_receives_answer :
+    let
+        message_to_alice = senc(<nonce, bob, sk, message_to_bob>, ka)
+    in
+    [
+        !Client(alice, ka),
+        !Client(bob, kb),
+        AliceQueriesServer(alice, bob, nonce),
+        In(message_to_alice)
+    ]
+    --[ AliceReceivesAnswer(message_to_alice, nonce, message_to_bob, sk, ka),
+        AliceSendsToBob(message_to_bob),
+        SecretEstablished(alice, bob, sk) ]->
+    [
+        ExchangeInitiated(alice, bob, sk),
+        Out(message_to_bob)
+    ]
+
+rule Bob_responds_to_Alice :
+    let
+        message_from_alice = senc(<sk, timestamp, alice>, kb)
+        encrypted_nonce = senc(~nonce, sk)
+    in
+    [
+        In(message_from_alice),
+        Fr(~nonce),
+        !Client(alice, ka),
+        !Client(bob, kb),
+        !Server(bob, kb)
+    ]
+    --[ BobReceivesFromAlice(message_from_alice, sk, kb),
+        SecretEstablishedWithTimestamp(bob, alice, sk, timestamp),
+        BobSendsNonce(encrypted_nonce) ]->
+    [
+        SessionPending(bob, alice, ~nonce, sk),
+        Out(encrypted_nonce)
+    ]
+
+rule Alice_receives_challenge :
+    let
+        nonce_received = senc(nonce, sk)
+        nonce_sent = senc(pred(nonce), sk)
+    in
+    [
+        !Client(alice, ka),
+        ExchangeInitiated(alice, bob, sk),
+        !Client(bob, kb),
+        In(nonce_received)
+    ]
+    --[ AliceReceivesNonce(nonce_received, nonce, sk) ,
+        AliceSendsNonce(nonce_sent)]->
+    [
+        !Session(alice, bob, sk),
+        Out(nonce_sent)
+    ]
+
+rule Bob_receives_challenge_answer :
+    let
+        received_nonce = senc(pred(nonce), sk)
+    in
+    [
+        !Client(bob, kb),
+        !Client(alice, ka),
+        SessionPending(bob, alice, nonce, sk),
+        In(received_nonce)
+    ]
+    --[ BobReceivesNonce(received_nonce, nonce, sk),
+        SecretConfirmed(alice, bob, sk) ]->
+    [
+        !Session(bob, alice, sk)
+    ]
+
+rule Secret_reveal :
+    [ !Session(client1, client2, sk) ]
+    --[ SecretReveal(sk) ]->
+    [ Out(sk) ]
+
+restriction NoSelfComunication:
+    "All client #t . RequestToConnect(client, client) @ #t ==> F"
+
+restriction EachClientCanBeInitialisedOnce :
+    "All client key1 key2 #t1 #t2 . ClientInitialised(client, key1) @ #t1 & ClientInitialised(client, key2) @ #t2
+        ==> #t1 = #t2"
+
+restriction NoSendingPrivateKeys :
+    "All client key #t . ClientInitialised(client, key) @ #t ==> not(Ex #t1 . KU(key) @ #t1)"
+
+restriction CheckingTimestamps :
+    "All alice bob sk timestamp #t1 #t2 .
+        SecretEstablishedWithTimestamp(bob, alice, sk, timestamp) @ #t1 &
+        SecretEstablishedWithTimestamp(bob, alice, sk, timestamp) @ #t2
+            ==> #t1 = #t2"
+
+lemma types [sources] :
+    "(All #t sk kb message . BobReceivesFromAlice(message, sk, kb) @ #t ==>
+    (Ex #t1 . AliceSendsToBob(message) @ #t1)
+    | (Ex #t1 . KU(sk) @ #t1 & KU(kb) @ #t1))
+    &
+    (All #t sk ka message nonce message_bob . AliceReceivesAnswer(message, nonce, message_bob, sk, ka) @ #t ==>
+        (Ex #t1 . ServerSendsToAlice(message) @ #t1)
+        | (Ex #t1 . KU(sk) @ #t1 & KU(ka) @ #t1 & KU(nonce) @ #t1 & KU(message_bob) @ #t1))
+    &
+    (All #t sk encnonce nonce . AliceReceivesNonce(encnonce, nonce, sk) @ #t ==>
+        (Ex #t1 . BobSendsNonce(encnonce) @ #t1)
+        | (Ex #t1 . KU(sk) @ #t1 & KU(nonce) @ #t1))
+    &
+    (All #t sk encnonce nonce . BobReceivesNonce(encnonce, nonce, sk) @ #t ==>
+        (Ex #t1 . AliceSendsNonce(encnonce) @ #t1)
+        | (Ex #t1 . KU(sk) @ #t1 & KU(nonce) @ #t1))"
+
+
+lemma Sanity :
+    exists-trace
+    "Ex alice bob sk #t1 #t2 . SecretEstablished(alice, bob, sk) @ #t2 & SecretConfirmed(alice, bob, sk) @ #t1"
+
+lemma Confidentiality :
+    "(All alice bob key #t1 #t2 .
+        SecretEstablished(alice, bob, key) @ #t1 &
+        SecretConfirmed(alice, bob, key) @ #t2 &
+        not(Ex #t3 . SecretReveal(key) @ #t3)
+        ==>
+            not(Ex #t3 . KU(key) @ #t3))"
+
+lemma Attack :
+    exists-trace
+    "Ex alice bob key #t #t1 . 
+        SecretConfirmed(alice, bob, key) @ #t &
+        SecretConfirmed(alice, bob, key) @ #t1 &
+        #t < #t1 &
+        not(Ex #t2 . SecretEstablished(alice, bob, key) @ #t2 & #t < #t2)"
+
+end

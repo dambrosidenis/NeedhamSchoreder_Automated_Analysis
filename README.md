@@ -1,17 +1,16 @@
 # Needham-Schroeder Symmetric Key Protocol Automated Analysis
 
 GitHub repository for the security analysis of the Needham-Schroeder Symmetric Key protocol using the Tamarin Prover. All the findings are meant only to confirm the flaws already identified within the literature, as the content if this work was intended as an introductory tutorial to the use of the Tamarin Prover.
-This repository contains all the necessary files, including the Tamarin Prover code, a detailed article explaining the theoretical background behind the analysis and a presentation summarizing the key findings.
+This repository contains all the necessary files, including the Tamarin Prover code and a detailed article explaining the theoretical background behind the analysis.
 
 ## Table of Contents
 
 - [Introduction](#introduction)
 - [Repository Structure](#repository-structure)
 - [Getting Started](#getting-started)
-- [Prerequisites](#prerequisites)
-- [Usage](#usage)
+   - [Prerequisites](#prerequisites)
+   - [Usage](#usage)
 - [Article](#article)
-- [Presentation](#presentation)
 - [License](#license)
 
 ## Introduction
@@ -27,19 +26,10 @@ The repository is organized as follows:
 ├── article
 │   ├── Needham-Schroeder-Analysis.pdf
 │   └── src
-│      ├── main.tex
-│      ├── needhamschroeder.tex
-│      ├── needhamschroederfixed.tex
-│      ├── references.bib
-│      ├── main.tex
-│      ├── sources.sphty
-│      ├── msc.sty
-│      └── SelfArx.cls
-├── presentation
-│   └── Needham-Schroeder-Presentation.pdf
 ├── tamarin
 │   ├── NS.sphty
 │   ├── NS_fixed.sphty
+│   ├── XD3H.sphty
 │   └── README.md
 ├── README.md
 ├── CITATION.cff
@@ -47,7 +37,6 @@ The repository is organized as follows:
 ```
 
 - `article/`: Contains the detailed article introducing Tamarin and explaining the analysis. Also contains the source code to compile the article.
-- `presentation/`: Contains the presentation summarizing the key findings.
 - `tamarin/`: Contains the Tamarin Prover code and a README specific to the Tamarin files.
 - `README.md`: This README file.
 - `CITATION.cff`: Metadata to correctly cite this work.
@@ -92,14 +81,6 @@ The detailed article explaining the analysis can be found in the `article/` dire
 - [Needham-Schroeder-Analysis.pdf](article/Needham-Schroeder-Analysis.pdf)
 
 The article provides an introduction to the Tamarin Prover, an in-depth explanation of the Needham-Schroeder Symmetric Key protocol, the methodology used for the analysis, and the results of the verification. The source files for the article are available at [article/src/](article/src/)
-
-## Presentation
-
-The presentation summarizing the key findings can be found in the `presentation/` directory:
-
-- [Needham-Schroeder-Presentation.pdf](presentation/Needham-Schroeder-Presentation.pdf)
-
-The presentation is a concise overview of the analysis, suitable for sharing with peers or presenting in academic or professional settings.
 
 ## License
 
