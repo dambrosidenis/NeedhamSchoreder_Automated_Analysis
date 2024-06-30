@@ -46,10 +46,11 @@ The repository is organized as follows:
 └── LICENSE
 ```
 
-- `article/`: Contains the detailed article explaining the analysis.
+- `article/`: Contains the detailed article introducing Tamarin and explaining the analysis. Also contains the source code to compile the article.
 - `presentation/`: Contains the presentation summarizing the key findings.
 - `tamarin/`: Contains the Tamarin Prover code and a README specific to the Tamarin files.
 - `README.md`: This README file.
+- `CITATION.cff`: Metadata to correctly cite this work.
 - `LICENSE`: The license under which this project is distributed.
 
 ## Getting Started
