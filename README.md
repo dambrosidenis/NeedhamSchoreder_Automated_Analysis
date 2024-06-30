@@ -58,7 +58,7 @@ Ensure you have the following installed on your system:
 1. **Clone the Repository:**
 
    ```bash
-   git clone https://github.com/dambrosidenis/Needham-Schroeder-Tamarin.git
+   git clone https://github.com/dambrosidenis/NeedhamSchoreder_Automated_Analysis.git
    cd Needham-Schroeder-Tamarin
    ```
 
@@ -71,7 +71,7 @@ Ensure you have the following installed on your system:
 3. **Run the Tamarin Prover:**
 
    ```bash
-   tamarin-prover [file].spthy
+   tamarin-prover [file].spthy --prove
    ```
 
 ## Article
@@ -91,7 +91,7 @@ If you use this work in your research, please cite it as follows:
    author = {D'Ambrosi, Denis},
    month = apr,
    title = {{Needham-Schroeder Symmetric Key Protocol Automated Analysis}},
-   url = {https://github.com/dambrosidenis/NeedhamSchroeder_Automated_Analysis},
+   url = {https://github.com/dambrosidenis/NeedhamSchoreder_Automated_Analysis},
    version = {1.0.0},
    year = {2023}
 }
