@@ -82,6 +82,21 @@ The detailed article explaining the analysis can be found in the `article/` dire
 
 The article provides an introduction to the Tamarin Prover, an in-depth explanation of the Needham-Schroeder Symmetric Key protocol, the methodology used for the analysis, and the results of the verification. The source files for the article are available at [article/src/](article/src/)
 
+## Citation
+
+If you use this work in your research, please cite it as follows:
+
+```
+@software{D_Ambrosi_Needham-Schroeder_Symmetric_Key_2023,
+   author = {D'Ambrosi, Denis},
+   month = apr,
+   title = {{Needham-Schroeder Symmetric Key Protocol Automated Analysis}},
+   url = {https://github.com/dambrosidenis/NeedhamSchroeder_Automated_Analysis},
+   version = {1.0.0},
+   year = {2023}
+}
+```
+
 ## License
 
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
