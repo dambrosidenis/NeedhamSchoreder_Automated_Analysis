@@ -1,6 +1,6 @@
 # Needham-Schroeder Symmetric Key Protocol Automated Analysis
 
-GitHub repository for the security analysis of the Needham-Schroeder Symmetric Key protocol using the Tamarin Prover. All the findings are meant only to confirm the flaws already identified within the literature, as the content if this work was intended as an introductory tutorial to the use of the Tamarin Prover.
+GitHub repository for the security analysis of the Needham-Schroeder Symmetric Key protocol using the Tamarin Prover. All the findings are meant only to confirm the flaws already identified within the literature, as the content of this work was intended as an introductory tutorial to the use of the Tamarin Prover.
 This repository contains all the necessary files, including the Tamarin Prover code and a detailed article explaining the theoretical background behind the analysis.
 
 ## Table of Contents
